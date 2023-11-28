@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from '../User/Login';
-import Register from '../User/Register'; // Assuming User is your register component
+import Register from '../User/Register'; 
+import Subject from '../Subjects/Subjects'
+import Proctor from '../Proctor/Proctor';
 
 const Navbar = () => {
   return (
@@ -14,19 +16,25 @@ const Navbar = () => {
               Attendance Management System
             </Link>
           </div>
-          <div className="d-flex">
-            <Link to='/login' className='btn btn-light mx-2'>
-              Login
-            </Link>
-            <Link to='/register' className='btn btn-light mx-2'>
+          <div className="ml-auto">
+          <Link to='/register' className='btn btn-light mx-2'>
               Register
             </Link>
+            <Link to='/login' className='btn btn-light mx-2'>
+              Login
+            </Link> 
+            <Link to='/subjects' className='btn btn-light mx-2'>
+            Subjects</Link>
+            <Link to='/proctor' className='btn btn-light mx-2'>
+            Proctor</Link>
           </div>
         </nav>
         <Routes>
           <Route path='/' element={<Login />} />
-          <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/subjects' element={<Subject/>}/>
+          <Route path='/proctor' element={<Proctor/>}/>
         </Routes>
       </Router>
     </div>
