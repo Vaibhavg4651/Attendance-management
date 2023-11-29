@@ -33,9 +33,9 @@ if path.isfile(dotenv_file):
 SECRET_KEY = getenv('DJANGO_SECRET_KEY' , get_random_secret_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 
 # Application definition
@@ -91,8 +91,12 @@ WSGI_APPLICATION = 'attendance_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': getenv('DJANGO_DB_NAME', 'attendance'),
+        'USER': getenv('DJANGO_DB_USER', 'vaibhavg4651'),
+        'PASSWORD': getenv('DJANGO_DB_PASSWORD', 'Zodi'),
+        'HOST': getenv('DJANGO_DB_HOST', 'localhost'),
+        'PORT': getenv('DJANGO_DB_PORT', '5432'),
     }
 }
 
@@ -137,3 +141,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'api.authentications.CustomTokenAuthentication',
+    ]
+}
+
+AUTH_TOKEN_NAME = 'attendance_management_auth_token'
+
+CORS_ALLOWED_ORIGINS = getenv('CORS_ALLOWED_ORIGINS', 'http://127.0.0.1:3000,http://localhost:3000').split(',')
+
+AUTH_USER_MODEL = "api.UserAccount"
