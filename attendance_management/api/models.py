@@ -29,6 +29,19 @@ class UserAccountManager(BaseUserManager):
         return user
         
 
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('user_type', 'admin')
+        user = self.model(
+            email=self.normalize_email(email),
+            password=password,
+            **extra_fields,
+        )
+        user.is_admin = True
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
+
 
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
@@ -40,6 +53,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     user_type_choices = [
         ('faculty', 'Faculty'),
         ('proctor', 'Proctor'),
+        ('admin', 'Admin')
     ]
 
     password = models.CharField(max_length=255)
@@ -49,6 +63,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = UserAccountManager()
     USERNAME_FIELD ="EID"

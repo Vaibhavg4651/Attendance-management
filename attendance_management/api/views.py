@@ -15,12 +15,10 @@ def Login(request):
         userloged = user.objects.get(EID=request.data['EID'])
         if request.data['password'] != userloged.password:
             return Response({'message':"Wrong password"}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({"id": userloged.id , "email":userloged.email}, status=status.HTTP_200_OK)
+        return Response({"id": userloged.id , "email":userloged.email , "user_type": request.data["user_type"]}, status=status.HTTP_200_OK)
     except user.DoesNotExist:
-            # If the user does not exist, return a custom error respons
             return Response({"detail": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
-            # Handle other exceptions (e.g., authentication failure) as needed
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
    
 
@@ -34,4 +32,16 @@ def Signup(request):
         return Response(serializer.data , status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# Update Password API  /user/updatepassword
 
+@api_view(['PATCH'])
+def UpdatePassword(request):
+    try:
+        userloged = user.objects.get(EID=request.data['EID'])
+        userloged.password = request.data['newpassword']
+        userloged.save()
+        return Response({"id": userloged.id , "email":userloged.email , "user_type": request.data["user_type"]}, status=status.HTTP_200_OK)
+    except user.DoesNotExist:
+            return Response({"detail": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
