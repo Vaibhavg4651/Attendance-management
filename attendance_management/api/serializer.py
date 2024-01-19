@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import UserAccount as user
+from .models import Branch
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,4 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
             'password': {'write_only': True, 'min_length': 8}
         }
 
+class BranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Branch
+        fields = ('BranchID', 'BranchName', 'ClassName')
 
