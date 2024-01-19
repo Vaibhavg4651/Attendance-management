@@ -1,0 +1,79 @@
+{
+    "Year": {
+        "First" : {
+            "CSE" : {
+                "theory": {
+                    
+                },
+                "lab":{}
+            },
+            "IT" : {
+                "theory": {},
+                "lab":{}
+            },
+            "ECE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "EE" : {
+                "theory": {},
+                "lab":{}
+            }
+        },
+        "Second" : {
+            "CSE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "IT" : {
+                "theory": {},
+                "lab":{}
+            },
+            "ECE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "EE" : {
+                "theory": {},
+                "lab":{}
+            }
+        },
+        "Third" : {
+            "CSE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "IT" : {
+                "theory": {},
+                "lab":{}
+            },
+            "ECE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "EE" : {
+                "theory": {},
+                "lab":{}
+            }
+        },
+        "Fourth" : {
+            "CSE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "IT" : {
+                "theory": {},
+                "lab":{}
+            },
+            "ECE" : {
+                "theory": {},
+                "lab":{}
+            },
+            "EE" : {
+                "theory": {},
+                "lab":{}
+            }
+        }
+    }
+    
+}
