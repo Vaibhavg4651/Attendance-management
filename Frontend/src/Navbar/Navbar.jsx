@@ -4,6 +4,7 @@ import Login from '../User/Login';
 import Register from '../User/Register'; 
 import Subject from '../Subjects/Subjects'
 import Proctor from '../Proctor/Proctor';
+import MarkAttendance from '../MarkAttendance/MarkAttendance';
 
 const Navbar = () => {
   return (
@@ -27,6 +28,8 @@ const Navbar = () => {
             Subjects</Link>
             <Link to='/proctor' className='btn btn-light mx-2'>
             Proctor</Link>
+            <Link to='/attendance' className='btn btn-light mx-2'>
+            Attendance</Link>
           </div>
         </nav>
         <Routes>
@@ -35,6 +38,7 @@ const Navbar = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/subjects' element={<Subject/>}/>
           <Route path='/proctor' element={<Proctor/>}/>
+          <Route path='/attendance' element={<MarkAttendance/>}/>
         </Routes>
       </Router>
     </div>

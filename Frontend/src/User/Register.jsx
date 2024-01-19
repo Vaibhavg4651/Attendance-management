@@ -81,10 +81,7 @@ const Register = () => {
               </div>
             </div>
             <div className="inputs">
-            <div className="input">
-              <img src={email_icon} alt="" />
-              <input type="email" placeholder="Enter your email" />
-            </div>
+            
               <div className="input">
                 <img src={password_icon} alt="" />
                 <input type="password" placeholder="Enter your password" />
@@ -98,8 +95,8 @@ const Register = () => {
         {selectedRole === "2" && (
           <div className="inputs">
             <div className="input">
-              <img src={email_icon} alt="" />
-              <input type="email" placeholder="Enter your email" />
+              <img src={user_icon} alt="" />
+              <input type="email" placeholder="Enter your EID" />
             </div>
             <div className="input">
                 <img src={password_icon} alt="" />
@@ -115,7 +112,7 @@ const Register = () => {
         
         <div>
           <div className="d-flex justify-content-center align-items-center">
-            <div className="btn btn-primary mx-2" onClick={handleRegister}>
+            <div className="btn btn-primary mx-1" onClick={handleRegister}>
               Submit
             </div>
           </div>
