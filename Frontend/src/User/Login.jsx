@@ -90,8 +90,8 @@ const Login = () => {
         {selectedRole === "2" && (
           <div className="inputs">
             <div className="input">
-              <img src={email_icon} alt="" />
-              <input type="email" placeholder="Enter your email" />
+              <img src={user_icon} alt="" />
+              <input type="email" placeholder="Enter your EID" />
             </div>
             <div className="input">
                 <img src={password_icon} alt="" />
