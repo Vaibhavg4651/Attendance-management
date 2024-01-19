@@ -92,17 +92,17 @@ const Proctor = () => {
           <table className="table">
             <thead>
               <tr>
+                <th>Class S.No.</th>
                 <th>Enrollment No.</th>
                 <th>Name</th>
-                <th>Class S.No.</th>
               </tr>
             </thead>
             <tbody>
               {studentDetailsList.map((student, index) => (
                 <tr key={index}>
+                  <td>{student.classNo}</td>
                   <td>{student.enrollmentNo}</td>
                   <td>{student.name}</td>
-                  <td>{student.classNo}</td>
                 </tr>
               ))}
             </tbody>
