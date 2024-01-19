@@ -1,51 +1,158 @@
 {
     "Year": {
         "First" : {
-            "CSE" : {
                 "theory": {
-                    
+                    "Applied-Mathematics-1" : "AM-1",
+                    "Applied-Physics-1" : "AP-1",
+                    "Applied-Chemistry" : "AC",
+                    "Manufacturing-Process" : "MP",
+                    "Communication-Skills" : "CS",
+                    "Programming-in-C" : "PIC",
+                    "Environmental-Studies" : "EVS",
+                    "Indian-Constitution" : "IC",
+                    "Human-Values-And-Ethics" : "HVPE",
+                    "Applied-Mathematics-2" : "AM-2",
+                    "Applied-Physics-2" : "AP-2",
+                    "Engineering-Mechanics" : "EM"
                 },
-                "lab":{}
-            },
-            "IT" : {
-                "theory": {},
-                "lab":{}
-            },
-            "ECE" : {
-                "theory": {},
-                "lab":{}
-            },
-            "EE" : {
-                "theory": {},
-                "lab":{}
-            }
+                "tutorial":{
+                    "Electrical-Science" : "ES"
+                },
+                "lab":{
+                    "Applied-Physics-1" : "AP",
+                    "Applied-Chemistry" : "AC",
+                    "Engineering-Graphics" : "EG-1",
+                    "Electrical-Science" : "ES",
+                    "Programming-in-C" : "PIC",
+                    "Environmental-Studies" : "EVS",
+                    "Applied-Physics-2" : "AP-2",
+                    "Engineering-Mechanics" : "EM",
+                    "Engineering-Graphics-2": "EG-2",
+                    "Workshop-Practice" : "WP"
+                }
         },
         "Second" : {
             "CSE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Computational-Methods" : "CM",
+                    "Indian-Knowledge-System" : "IKS",
+                    "Discrete-Mathematics" : "DM",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Data-Structures" : "DS",
+                    "Object-Oriented-Programming" : "OOPS",
+                    "Theory-of-Computation" : "TOC",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Technical-Writing":"TW",
+                    "Circuits-and-Systems" : "CNS",
+                    "Database-Management-Systems" : "DBMS",
+                    "Programming-in-Java" : "JAVA"
+                },
+                "lab":{
+                    "Computational-Methods" : "CM",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Data-Structures" : "DS",
+                    "Object-Oriented-Programming" : "OOPS",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Circuits-and-Systems" : "CNS",
+                    "Database-Management-Systems" : "DBMS",
+                    "Programming-in-Java" : "JAVA"
+                }
             },
             "IT" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Computational-Methods" : "CM",
+                    "Indian-Knowledge-System" : "IKS",
+                    "Discrete-Mathematics" : "DM",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Data-Structures" : "DS",
+                    "Object-Oriented-Programming" : "OOPS",
+                    "Theory-of-Computation" : "TOC",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Technical-Writing":"TW",
+                    "Circuits-and-Systems" : "CNS",
+                    "Database-Management-Systems" : "DBMS",
+                    "Programming-in-Java" : "JAVA"
+                },
+                "lab":{
+                    "Computational-Methods" : "CM",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Data-Structures" : "DS",
+                    "Object-Oriented-Programming" : "OOPS",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Circuits-and-Systems" : "CNS",
+                    "Database-Management-Systems" : "DBMS",
+                    "Programming-in-Java" : "JAVA"
+                }
             },
             "ECE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Computational-Methods" : "CM",
+                    "Indian-Knowledge-System" : "IKS",
+                    "Signals-and-Systems" : "S&S",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Analog-communications" : "A.Comm",
+                    "Analog-Electronics-1" : "AE1",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Technical-Writing":"TW",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Microprocessors-and-Microcontrollers" : "M&M",
+                    "Digital-Communications" : "DC",
+                    "Analog-Electronics-2" : "AE2",
+                    "Electromagnetic-Field-theory":"EFT"
+                },
+                "lab":{
+                    "Computational-Methods" : "CM",
+                    "Signals-and-Systems" : "S&S",
+                    "Digital-Logic-And-Computer-Design" : "DLCD",
+                    "Analog-communications" : "A.Comm",
+                    "Analog-Electronics-1" : "AE1",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Microprocessors-and-Microcontrollers" : "M&M",
+                    "Digital-Communications" : "DC",
+                    "Analog-Electronics-2" : "AE2"
+                }
             },
-            "EE" : {
+            "EEE" : {
                 "theory": {},
                 "lab":{}
             }
         },
         "Third" : {
             "CSE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Economics-for-Engineers" : "EE",
+                    "Compiler-Design" : "CD",
+                    "Operating-Systems" : "OS",
+                    "Computer-Networks" : "CN",
+                    "Softeware-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                },
+                "lab":{
+                    "Compiler-Design" : "CD",
+                    "Operating-Systems" : "OS",
+                    "Computer-Networks" : "CN",
+                    "Softeware-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                }
             },
             "IT" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Economics-for-Engineers" : "EE",
+                    "Compiler-Design" : "CD",
+                    "Operating-Systems" : "OS",
+                    "Computer-Networks" : "CN",
+                    "Softeware-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                },
+                "lab":{
+                    "Economics-for-Engineers" : "EE",
+                    "Compiler-Design" : "CD",
+                    "Operating-Systems" : "OS",
+                    "Computer-Networks" : "CN",
+                    "Softeware-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                }
             },
             "ECE" : {
                 "theory": {},
