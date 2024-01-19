@@ -6,7 +6,7 @@ from django.contrib.auth.models import (
     PermissionsMixin
     )
 
-
+# user acount model
 class UserAccountManager(BaseUserManager):
     def create_user(self, name, email, user_type , password, EID):
         if not email:
@@ -57,7 +57,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     ]
 
     password = models.CharField(max_length=255)
-    EID = models.CharField(max_length=255, unique=True)
+    EID = models.CharField(max_length=255)
 
     user_type = models.CharField(max_length=10, choices=user_type_choices)
 
@@ -67,9 +67,15 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     objects = UserAccountManager()
-    USERNAME_FIELD ="EID"
-    REQUIRED_FIELDS = ["email", "name", "user_type", 'password']
+    USERNAME_FIELD ="id"
+    REQUIRED_FIELDS = ["email", "name", "user_type", 'password', 'EID']
 
     def __str__(self):
         return self
 
+
+#Branch model
+    class Branch(models.Model):
+        BranchID = models.AutoField(primary_key=True)
+        BranchName = models.CharField(max_length=255)
+        ClassName = models.CharField(max_length=255)
