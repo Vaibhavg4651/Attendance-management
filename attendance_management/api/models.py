@@ -79,3 +79,12 @@ class Branch(models.Model):
     BranchID = models.AutoField(primary_key=True)
     BranchName = models.CharField(max_length=255)
     ClassName = models.CharField(max_length=255)
+
+class Proctor(models.Model):
+    ProctorID = models.AutoField(primary_key=True)
+    id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    SemesterNumber = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('id', 'BranchID')
