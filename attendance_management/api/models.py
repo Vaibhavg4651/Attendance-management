@@ -88,3 +88,41 @@ class Proctor(models.Model):
     
     class Meta:
         unique_together = ('id', 'BranchID')
+
+class Subjects(models.Model):
+    SubjectID = models.AutoField(primary_key=True)
+    SubjectName = models.CharField(max_length=255)
+    BranchName = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    SubjectType = models.CharField(max_length=255)
+    year = models.IntegerField()
+
+
+class FacultyTeachingAssignment(models.Model):
+    FacultyID = models.AutoField(primary_key=True)
+    id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    SemesterNumber = models.IntegerField()
+    BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    year = models.IntegerField()
+    room = models.CharField(max_length=255)
+
+
+class Student(models.Model):
+    EnrollmentNumber = models.CharField(max_length=50, primary_key=True, unique=True)
+    BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    ClassSerialNumber = models.IntegerField()
+    Group = models.CharField(max_length=2)
+    StudentName = models.CharField(max_length=255)
+    Batch = models.IntegerField()
+    year = models.IntegerField()
+    
+
+class Attendance(models.Model):
+    AttendanceID = models.AutoField(primary_key=True)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    FacultyID = models.ForeignKey(FacultyTeachingAssignment, on_delete=models.CASCADE)
+    EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
+    Date = models.DateField()
+    AttendanceStatus = models.CharField(max_length=255) # Present or Absent
+    TotalLectures = models.IntegerField()
+    LecturesAttended = models.IntegerField()
