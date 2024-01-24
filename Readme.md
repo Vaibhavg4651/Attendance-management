@@ -1,4 +1,4 @@
-###FRONTEND
+## FRONTEND
 [![React](https://img.shields.io/badge/React-%5E17.0.0-blue)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%5E14.0.0-green)](https://nodejs.org/)
 
@@ -19,8 +19,9 @@ git clone https://github.com/vaibhavg4651/Attendance
 cd Frontend
 npm install
 npm start
+```
 
-###BACKEND
+## BACKEND
 ## Setting Environment Variables
 * Place the .env file where settings.py is located.
 * change the environament variable values according to the above database settings.
