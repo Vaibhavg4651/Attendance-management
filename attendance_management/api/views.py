@@ -50,6 +50,7 @@ def Signup(request):
 def UpdatePassword(request):
     try:
         userloged = user.objects.get(EID=request.data['EID'], user_type=request.data['user_type'])
+        request.data['password'] = make_password(request.data['password'])
         userloged.password = request.data['newpassword']
         userloged.save()
         return Response({"message": "Password updated"}, status=status.HTTP_200_OK)
