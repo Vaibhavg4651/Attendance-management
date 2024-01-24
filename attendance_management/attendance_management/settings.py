@@ -148,6 +148,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 AUTH_TOKEN_NAME = 'attendance_management_auth_token'
 
 CORS_ALLOWED_ORIGINS = getenv('CORS_ALLOWED_ORIGINS', 'http://127.0.0.1:5173,http://localhost:5173').split(',')
