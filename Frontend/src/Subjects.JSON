@@ -98,7 +98,7 @@
                     "Microprocessors-and-Microcontrollers" : "M&M",
                     "Digital-Communications" : "DC",
                     "Analog-Electronics-2" : "AE2",
-                    "Electromagnetic-Field-theory":"EFT"
+                    "Electromagnetic-Field-theory":"EMFT"
                 },
                 "lab":{
                     "Computational-Methods" : "CM",
@@ -114,8 +114,32 @@
                 }
             },
             "EEE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Computational-Methods" : "CM",
+                    "Indian-Knowledge-System" : "IKS",
+                    "Signals-and-Systems" : "S&S",
+                    "Electrical-Machines-1" : "EM1",
+                    "Electrical-Materials" : "EEM",
+                    "Electromagnetic-Field-theory" : "EMFT",
+                    "Electronics-1":"ES1",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Technical-Writing":"TW",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Electrical-Machines-2" : "EM2",
+                    "Power-Systems-1" : "PS1",
+                    "Electronics-2" : "ES2"
+                },
+                "lab":{
+                    "Computational-Methods" : "CM",
+                    "Electrical-Machines-1" : "EM1",
+                    "Electronics-1":"ES1",
+                    "Electrical-Engineering-Workshop":"EWS",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Electrical-Machines-2" : "EM2",
+                    "Power-Systems-1" : "PS1",
+                    "Electronics-2" : "ES2"
+                }
             }
         },
         "Third" : {
@@ -159,8 +183,24 @@
                 "lab":{}
             },
             "EE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Economics-for-Engineers" : "EOE",
+                    "Power-Systems-2" : "PS2",
+                    "Electrical-and-Electronics-Measurements Instruments" : "EEMI",
+                    "Introducetion-to-Control-Systems" : "CS",
+                    "Power-Electronics" : "PE",
+                    "Microprocessors-and-Microcontrollers" : "MPMC",
+                    "Principles-of-Management-for-engineers" : "PME",
+                    "Universal-Human-Values" : "UHV",
+                    "Machine-Learning" : "ML"
+                },
+                "lab":{
+                    "Power-Systems-2" : "PS2",
+                    "Electrical-and-Electronics-Measurements Instruments" : "EEMI",
+                    "Introducetion-to-Control-Systems" : "CS",
+                    "Power-Electronics" : "PE",
+                    "Microprocessors-and-Microcontrollers" : "MPMC"
+                }
             }
         },
         "Fourth" : {
