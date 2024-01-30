@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import UserAccount as user
-from .models import Branch , Proctor
+from .models import Branch , Proctor , Subjects
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,3 +20,7 @@ class ProctorSerializer(serializers.ModelSerializer):
         model = Proctor
         fields = '__all__'
 
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subjects
+        fields = ('SubjectID','SubjectName' ,'BranchName' ,'SubjectType' , 'year', 'Subjectcode')

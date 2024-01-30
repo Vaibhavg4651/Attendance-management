@@ -95,12 +95,13 @@ class Subjects(models.Model):
     BranchName = models.ForeignKey(Branch, on_delete=models.CASCADE)
     SubjectType = models.CharField(max_length=255)
     year = models.IntegerField()
+    Subjectcode = models.CharField(max_length=255)
 
 
 class FacultyTeachingAssignment(models.Model):
     FacultyID = models.AutoField(primary_key=True)
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
-    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)                           
     SemesterNumber = models.IntegerField()
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
     year = models.IntegerField()

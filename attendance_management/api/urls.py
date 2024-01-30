@@ -6,4 +6,5 @@ urlpatterns = [
     path('signup', views.Signup , name="signup"),
     path('updatepassword', views.UpdatePassword , name="updatepassword"),
     # path('addBranch', views.AddBranches , name="branches"),
+    path('addSubjects', views.AddSubjects , name="subjects"),
 ]

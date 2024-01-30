@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializer , BranchSerializer
+from .serializer import UserSerializer , BranchSerializer , SubjectSerializer
 from .models import Branch
 from .models import UserAccount as user 
 
@@ -72,3 +72,16 @@ def UpdatePassword(request):
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #     except Exception as e:
 #         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+# Branch api
+@api_view(['POST'])
+def AddSubjects(request):
+    try:
+        serializer = SubjectSerializer(data=request.data , many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
