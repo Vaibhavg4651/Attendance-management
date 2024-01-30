@@ -100,7 +100,11 @@ class Subjects(models.Model):
     SubjectType = models.CharField(max_length=255)
     year = models.IntegerField()
     Subjectcode = models.CharField(max_length=255)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 933808e (update json)
 
 class FacultyTeachingAssignment(models.Model):
     FacultyID = models.AutoField(primary_key=True)
