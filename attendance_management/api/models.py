@@ -100,8 +100,6 @@ class Subjects(models.Model):
     SubjectType = models.CharField(max_length=255)
     year = models.IntegerField()
     Subjectcode = models.CharField(max_length=255)
-    
-
 
 class FacultyTeachingAssignment(models.Model):
     FacultyID = models.AutoField(primary_key=True)
