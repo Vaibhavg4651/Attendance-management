@@ -11,18 +11,13 @@ const Navbar = () => {
     <div>
       <Router>
         <nav className="navbar navbar-light bg-primary">
-        <div className="container-fluid">
-  <div className="row align-items-center">
-    <div className="col-auto">
-      <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center" />
-    </div>
-    <div className="col mt-3 ml-auto">
-      <h3 className='text-white text-start'>Attendance Management System</h3>
-    </div>
-  </div>
-</div>
-
-          <div className="ml-auto mt-3">
+          <div className="container-fluid">
+            <Link to="/login" className="navbar-brand text-white">
+              <img src="msit.png" alt="" width="30" height="24" className="d-inline-block align-text-top" />
+              Attendance Management System
+            </Link>
+          </div>
+          <div className="ml-auto">
           <Link to='/register' className='btn btn-light mx-2'>
               Register
             </Link>

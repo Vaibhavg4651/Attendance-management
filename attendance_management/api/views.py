@@ -32,7 +32,6 @@ def Login(request):
 
 @api_view(['POST'])
 def Signup(request):
-    
     existing_user = user.objects.filter(EID=request.data['EID'], user_type=request.data['user_type']).first()
     if existing_user:
         return Response({"error": "User with the same EID and user_type already exists."}, status=status.HTTP_400_BAD_REQUEST)
@@ -43,9 +42,7 @@ def Signup(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data , status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Update Password API  /user/updatepassword
 
