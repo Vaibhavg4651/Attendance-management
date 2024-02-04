@@ -149,15 +149,32 @@
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
-                    "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Software-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Programming in Python":"PY",
+                    "Principle of Management for Engineers":"PME",
+                    "Principles of Programming Languages":"PPL",
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Universal human values":"UHE",
+                    "Web Technologies":"WT",
+                    "Software Project Management":"SPM"
+
                 },
                 "lab":{
+                  
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
-                    "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Software-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Programming in Python":"PY",
+                    "Software Project Management":"SPM",
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Web Technologies":"WT"
+                    
+                    
                 }
             },
             "IT" : {
@@ -167,10 +184,16 @@
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
                     "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Artificial Inteliigence":"AI",
+                    "Programming in Python":"PY",
+                    "Web Technologies":"WT",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA"
+
+
                 },
                 "lab":{
-                    "Economics-for-Engineers" : "EE",
+                   
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
@@ -179,8 +202,34 @@
                 }
             },
             "ECE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Digital Signal Processing": "DSP",
+                    "Microelectronics":"ME",
+                    "Control System":"CS",
+                    "Data Communication and Newtworking":"DCN",
+                    "Transmission Lines waveguide and Antenna":"TWA",
+                    "Economics-for-Engineers" : "EE",
+                    "Data-Analysis": "DA",
+                    "Machine-Learning":"ML",    
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Antenna Design and Radiation Systems":"AD&RS",
+                    "Principle of management for engineers":"PME",
+                    "Universal human values":"UHE"
+                },
+                "lab":{
+                    "Digital Signal Processing": "DSP",
+                    "Microelectronics":"ME",
+                    "Control System":"CS",
+                    "Data Communication and Newtworking":"DCN",
+                    "Transmission Lines waveguide and Antenna":"TWA",
+                    "Data-Analysis": "DA",
+                    "Machine-Learning":"ML",    
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Antenna Design and Radiation Systems":"AD&RS"
+                    
+                }
             },
             "EE" : {
                 "theory": {
