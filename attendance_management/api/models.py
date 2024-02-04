@@ -43,7 +43,6 @@ class UserAccountManager(BaseUserManager):
         return user
 
 
-
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)
     email = models.EmailField(
@@ -72,6 +71,11 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self
+    
+    objects = UserAccountManager()
+
+    def get_by_natural_key(self, email):
+        return self.__class__.objects.get(email=email)
 
 
 #Branch model
@@ -92,15 +96,16 @@ class Proctor(models.Model):
 class Subjects(models.Model):
     SubjectID = models.AutoField(primary_key=True)
     SubjectName = models.CharField(max_length=255)
-    BranchName = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    BranchName = models.CharField(max_length=255)
     SubjectType = models.CharField(max_length=255)
     year = models.IntegerField()
-
+    Subjectcode = models.CharField(max_length=255)
+    
 
 class FacultyTeachingAssignment(models.Model):
     FacultyID = models.AutoField(primary_key=True)
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
-    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)                           
     SemesterNumber = models.IntegerField()
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
     year = models.IntegerField()

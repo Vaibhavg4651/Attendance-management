@@ -19,16 +19,16 @@
                     "Electrical-Science" : "ES"
                 },
                 "lab":{
-                    "Applied-Physics-1" : "AP",
+                    "Applied-Physics-1" : "AP-1",
                     "Applied-Chemistry" : "AC",
-                    "Engineering-Graphics" : "EG-1",
+                    "Engineering-Graphics-1" : "EG-1",
                     "Electrical-Science" : "ES",
-                    "Programming-in-C" : "PIC",
+                    "Programming-in-C" : "PIC", 
                     "Environmental-Studies" : "EVS",
                     "Applied-Physics-2" : "AP-2",
                     "Engineering-Mechanics" : "EM",
                     "Engineering-Graphics-2": "EG-2",
-                    "Workshop-Practice" : "WP"
+                    "Workshop-Practice" : "WP" 
                 }
         },
         "Second" : {
@@ -98,7 +98,7 @@
                     "Microprocessors-and-Microcontrollers" : "M&M",
                     "Digital-Communications" : "DC",
                     "Analog-Electronics-2" : "AE2",
-                    "Electromagnetic-Field-theory":"EFT"
+                    "Electromagnetic-Field-theory":"EMFT"
                 },
                 "lab":{
                     "Computational-Methods" : "CM",
@@ -114,8 +114,32 @@
                 }
             },
             "EEE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Computational-Methods" : "CM",
+                    "Indian-Knowledge-System" : "IKS",
+                    "Signals-and-Systems" : "S&S",
+                    "Electrical-Machines-1" : "EM1",
+                    "Electrical-Materials" : "EEM",
+                    "Electromagnetic-Field-theory" : "EMFT",
+                    "Electronics-1":"ES1",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Technical-Writing":"TW",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Electrical-Machines-2" : "EM2",
+                    "Power-Systems-1" : "PS1",
+                    "Electronics-2" : "ES2"
+                },
+                "lab":{
+                    "Computational-Methods" : "CM",
+                    "Electrical-Machines-1" : "EM1",
+                    "Electronics-1":"ES1",
+                    "Electrical-Engineering-Workshop":"EWS",
+                    "Probability-Statistics-and-Linear-Programming" : "PSLP",
+                    "Network-analysis-and-synthesis" : "NAS",
+                    "Electrical-Machines-2" : "EM2",
+                    "Power-Systems-1" : "PS1",
+                    "Electronics-2" : "ES2"
+                }
             }
         },
         "Third" : {
@@ -125,15 +149,32 @@
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
-                    "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Software-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Programming in Python":"PY",
+                    "Principle of Management for Engineers":"PME",
+                    "Principles of Programming Languages":"PPL",
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Universal human values":"UHE",
+                    "Web Technologies":"WT",
+                    "Software Project Management":"SPM"
+
                 },
                 "lab":{
+                  
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
-                    "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Software-Engineering" : "SE",
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Programming in Python":"PY",
+                    "Software Project Management":"SPM",
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Web Technologies":"WT"
+                    
+                    
                 }
             },
             "IT" : {
@@ -143,10 +184,16 @@
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
                     "Softeware-Engineering" : "SE",
-                    "Design-and-Analysis-of-Algorithms" : "ADA"
+                    "Design-and-Analysis-of-Algorithms" : "ADA",
+                    "Artificial Inteliigence":"AI",
+                    "Programming in Python":"PY",
+                    "Web Technologies":"WT",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA"
+
+
                 },
                 "lab":{
-                    "Economics-for-Engineers" : "EE",
+                   
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
@@ -155,12 +202,54 @@
                 }
             },
             "ECE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Digital Signal Processing": "DSP",
+                    "Microelectronics":"ME",
+                    "Control System":"CS",
+                    "Data Communication and Newtworking":"DCN",
+                    "Transmission Lines waveguide and Antenna":"TWA",
+                    "Economics-for-Engineers" : "EE",
+                    "Data-Analysis": "DA",
+                    "Machine-Learning":"ML",    
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Antenna Design and Radiation Systems":"AD&RS",
+                    "Principle of management for engineers":"PME",
+                    "Universal human values":"UHE"
+                },
+                "lab":{
+                    "Digital Signal Processing": "DSP",
+                    "Microelectronics":"ME",
+                    "Control System":"CS",
+                    "Data Communication and Newtworking":"DCN",
+                    "Transmission Lines waveguide and Antenna":"TWA",
+                    "Data-Analysis": "DA",
+                    "Machine-Learning":"ML",    
+                    "Artificial Inteliigence":"AI",
+                    "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
+                    "Antenna Design and Radiation Systems":"AD&RS"
+                    
+                }
             },
             "EE" : {
-                "theory": {},
-                "lab":{}
+                "theory": {
+                    "Economics-for-Engineers" : "EOE",
+                    "Power-Systems-2" : "PS2",
+                    "Electrical-and-Electronics-Measurements Instruments" : "EEMI",
+                    "Introducetion-to-Control-Systems" : "CS",
+                    "Power-Electronics" : "PE",
+                    "Microprocessors-and-Microcontrollers" : "MPMC",
+                    "Principles-of-Management-for-engineers" : "PME",
+                    "Universal-Human-Values" : "UHV",
+                    "Machine-Learning" : "ML"
+                },
+                "lab":{
+                    "Power-Systems-2" : "PS2",
+                    "Electrical-and-Electronics-Measurements Instruments" : "EEMI",
+                    "Introducetion-to-Control-Systems" : "CS",
+                    "Power-Electronics" : "PE",
+                    "Microprocessors-and-Microcontrollers" : "MPMC"
+                }
             }
         },
         "Fourth" : {
