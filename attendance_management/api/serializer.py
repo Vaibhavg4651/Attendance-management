@@ -18,7 +18,7 @@ class BranchSerializer(serializers.ModelSerializer):
 class ProctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proctor
-        fields = '__all__'
+        fields = ('ProctorID', 'id', 'BranchID', 'SemesterNumber')
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:

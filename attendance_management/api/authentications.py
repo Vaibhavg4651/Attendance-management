@@ -1,5 +1,6 @@
 from django.conf import settings
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.exceptions import AuthenticationFailed
 
 class CustomTokenAuthentication(TokenAuthentication):
     def authenticate(self, request):
@@ -8,5 +9,8 @@ class CustomTokenAuthentication(TokenAuthentication):
         if not token:
             return None
         
-        return self.authenticate_credentials(token)
+        try:
+            return super().authenticate_credentials({'key': token})
+        except AuthenticationFailed:
+            return None
 
