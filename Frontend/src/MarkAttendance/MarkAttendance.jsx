@@ -1,5 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState} from 'react';
+// import XLSX from 'xlsx';
+// import {DownloadTableExcel} from 'react-export-table-to-excel'
+import xlsx from 'json-as-xlsx';
 const students=[   
         
         {
@@ -143,10 +146,22 @@ const students=[
           "__11": "Kshitiz"
         },
 ]
+// let xls=require("json-as-xlsx")
+let settings={
+  filename:'Students',
+  // extraLength:5,
+  writeMode:'writeFile',
+  writeOptions:{},
+  RTL:true,
+
+}
 const MarkAttendance = () => {
     const [attendance, setAttendance] = useState({}); 
     const [presentcount,setpresentcount]=useState(0);
     const [absentcount,setabsentcount]=useState(0);
+    // const tableRef = useRef(null);
+
+
     const handleAttendanceChange = (sNo, status) => {
       setAttendance((prevAttendance) =>{
         const updatedAttendance={
@@ -177,13 +192,30 @@ const MarkAttendance = () => {
     setabsentcount(absentStudents);
   };
     
-  
+ const downloadExcel=()=>{
+  try {
+    if (students && students.length > 0) {
+      xlsx(students, settings);
+    } else {
+      console.error('Error generating Excel file: No data to export.');
+    }
+  } catch (error) {
+    console.error('Error generating Excel file:', error);
+  }
+ }
     return (
       <div className="mt-4">
-        <h4>Student Attendance List</h4>
+        <h4 >Student Attendance List</h4>
           <h5>Batch: CSE-1 5th sem
           Subject: Compiler Design 
           Room no : 401</h5>
+<div className='d-flex justify-content-center align-items-center'>
+  <button className='btn btn-primary align-items-center'><i className="fa-solid fa-filter"></i>Apply Filters</button>
+  <span className='mx-2'></span>
+ 
+  <button className='btn btn-success ' onClick={downloadExcel}><i className="fa-solid fa-download "></i> Download Excel</button>
+</div>
+
         <table className="table">
           <thead>
             <tr>
@@ -194,13 +226,13 @@ const MarkAttendance = () => {
               
               <button className='btn btn-primary' onClick={() => handleAllAttendance('present')}> Present all</button>
               <br />
-             <h4>Present{' '}</h4> 
+             <h4 className='mt-4'>Present</h4> 
             
             </th>
             <th>
               <button className='btn btn-primary' onClick={() => handleAllAttendance('absent')}>Absent all</button>
               <br />
-              <h4>Absent{' '}</h4>
+              <h4 className='mt-4'>Absent</h4>
            
             </th>
             </tr>
