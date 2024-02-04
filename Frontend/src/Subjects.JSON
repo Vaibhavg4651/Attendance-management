@@ -19,16 +19,16 @@
                     "Electrical-Science" : "ES"
                 },
                 "lab":{
-                    "Applied-Physics-1" : "AP",
+                    "Applied-Physics-1" : "AP-1",
                     "Applied-Chemistry" : "AC",
                     "Engineering-Graphics-1" : "EG-1",
                     "Electrical-Science" : "ES",
-                    "Programming-in-C" : "PIC",
+                    "Programming-in-C" : "PIC", 
                     "Environmental-Studies" : "EVS",
                     "Applied-Physics-2" : "AP-2",
                     "Engineering-Mechanics" : "EM",
                     "Engineering-Graphics-2": "EG-2",
-                    "Workshop-Practice" : "WP"
+                    "Workshop-Practice" : "WP" 
                 }
         },
         "Second" : {
