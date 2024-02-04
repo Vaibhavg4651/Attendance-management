@@ -59,7 +59,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.exceptions.ExceptionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -94,11 +93,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': getenv('DJANGO_DB_NAME', 'attendance'),
-        'USER': getenv('DJANGO_DB_USER', 'postgres'),
-        'PASSWORD': getenv('DJANGO_DB_PASSWORD', 'kshitiz@01'),
+        'USER': getenv('DJANGO_DB_USER', 'vaibhavg4651'),
+        'PASSWORD': getenv('DJANGO_DB_PASSWORD', 'Zodi'),
         'HOST': getenv('DJANGO_DB_HOST', 'localhost'),
         'PORT': getenv('DJANGO_DB_PORT', '5432'),
-
     }
 }
 
