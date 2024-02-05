@@ -105,7 +105,6 @@ const Login = () => {
                   Forgot Password? <span>Click Here!</span>
                 </div>
               </div>
-
               <div>
                 <div className="d-flex justify-content-center align-items-center">
                   <div className="btn btn-primary mb-4" onClick={handleLogin}>

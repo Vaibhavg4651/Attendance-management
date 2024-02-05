@@ -1,3 +1,4 @@
+import xlsx  from 'json-as-xlsx';
 import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 
@@ -11,6 +12,7 @@ const Proctor = () => {
   const [studentDetailsList, setStudentDetailsList] = useState([]);
   const [currentStudentDetails, setCurrentStudentDetails] = useState(initialStudentDetails);
   const [enrollmentError, setEnrollmentError] = useState('');
+  const [excelFile, setExcelFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +43,28 @@ const Proctor = () => {
     setCurrentStudentDetails(initialStudentDetails);
     setEnrollmentError('');
   };
+  const handleFileChange =(e) => {
+    const file = e.target.files[0];
+    setExcelFile(file);
+    // Add logic to handle the uploaded Excel file
+    // You may want to use a library like XLSX.js to parse the Excel file
+    if(file){
+      const reader=new FileReader();
+      reader.onload=(e)=>{
+        try {
+          const data=new Uint8Array(e.target.result);
+          const workbook=xlsx.read(data,{type:'array'})
+          const sheetName = workbook.SheetNames[0]; // Assuming there is only one sheet
+          const sheet = workbook.Sheets[sheetName];
+          const studentfromExcel=xlsx.utils.sheet_to_json(sheet);
+          console.log(studentfromExcel);
+        } catch (error) {
+          console.error('Error parsing Excel file:', error);
+        }
+      }
+      reader.readAsArrayBuffer(file);
+    }
+  };
 
   return (
     <>
@@ -68,7 +92,7 @@ const Proctor = () => {
             name="enrollmentNo"
             value={currentStudentDetails.enrollmentNo}
             onChange={handleInputChange}
-          />
+            />
           {enrollmentError && <div className="text-danger">{enrollmentError}</div>}
         </div>
         <div className="col-md-4">
@@ -80,16 +104,15 @@ const Proctor = () => {
             name="classNo"
             value={currentStudentDetails.classNo}
             onChange={handleInputChange}
-          />
+            />
+
         </div>
-        <div className="col-md-4">
+        <div className="md-4 text-start">
           <button className='btn btn-primary mt-3' onClick={handleAddButtonClick}>
             Add
           </button>
         </div>
-      </div>
-
-      {studentDetailsList.length > 0 && (
+        {studentDetailsList.length > 0 && (
         <div className="mt-4">
           <h3>Entered Student Details:</h3>
           <table className="table">
@@ -114,8 +137,24 @@ const Proctor = () => {
           <button className='btn btn-primary mt-3' onClick={handleNewButtonClick}>
             Add New Student
           </button>
+
         </div>
       )}
+              <h2>Or</h2>
+            <h2>Add Students in Bulk</h2>
+              <p>Upload the excel file of the students
+              <input
+          type="file"
+          style={{width:'20rem'}}
+          className="form-control"
+          id="excelFile"
+          accept=".xlsx, .xls"
+          onChange={handleFileChange}
+        /> </p>  
+                  
+      </div>
+
+      
     </div>
     </>
   );

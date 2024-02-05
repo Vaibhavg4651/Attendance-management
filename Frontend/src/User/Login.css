@@ -59,7 +59,7 @@
     
     }
     .forgot_password span{
-        color: blue;
+        color: rgb(255, 255, 255);
         cursor: pointer;    
     }
     .login-custom{

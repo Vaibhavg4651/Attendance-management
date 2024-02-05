@@ -25,6 +25,8 @@
     "react-router-dom": "^6.19.0",
     "react-toastify": "^10.0.4",
     "redux-persist": "^6.0.0"
+    "read-excel-file": "^5.7.1",
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
