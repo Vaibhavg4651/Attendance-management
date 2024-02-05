@@ -94,7 +94,7 @@ const Login = () => {
 
       <div>
         <div className="d-flex justify-content-center align-items-center">
-          <div className="btn btn-primary mb-4" onClick={handleLogin}>
+          <div className="btn btn-light mb-4" onClick={handleLogin}>
             Submit
           </div>
         </div>
