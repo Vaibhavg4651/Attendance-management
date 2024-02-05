@@ -5,7 +5,6 @@ flex-direction: column;
 margin: auto;
 margin-top: 10px;
 width: 600px;
-background: #fff;
 padding-bottom: 20px;
 }
 .header{
@@ -14,15 +13,15 @@ padding-bottom: 20px;
     align-items: center;
     gap: 2px;
     width: 100%;
-margin-top: 10px;
-margin-bottom: 0px;
-height: 35px;
-
-
+    margin-top: 10px;
+    margin-bottom: 0px;
+    height: 20px;
 }
 .text{
-    color: rgb(0, 0, 0);
-    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    color: #035b96;
+    font-size: 1.75rem;
     font-weight: 700;
 
 }
@@ -72,12 +71,11 @@ height: 35px;
 
 }
 .forgot_password1 span{
-    color: rgb(237, 237, 241);
-    cursor: pointer;
-    
+    color: blue;
+    cursor: pointer; 
 }
 .custom-color{
-    background: linear-gradient(to right, #d4e6f3,#9bcaeb,#59b2f1, #5781e3,#414fc9); 
+    background: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
     border: none;
     border-radius: 10px;
 }

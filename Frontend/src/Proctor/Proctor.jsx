@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../Navbar/Navbar';
 
 const Proctor = () => {
   const initialStudentDetails = {
@@ -42,6 +43,8 @@ const Proctor = () => {
   };
 
   return (
+    <>
+      <Navbar/>
     <div className='container mt-4'>
       <h2>Add Student Details</h2>
       <div className="row g-3">
@@ -114,6 +117,7 @@ const Proctor = () => {
         </div>
       )}
     </div>
+    </>
   );
 }
 

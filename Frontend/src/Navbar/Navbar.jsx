@@ -9,7 +9,6 @@ import MarkAttendance from '../MarkAttendance/MarkAttendance';
 const Navbar = () => {
   return (
     <div>
-      <Router>
         <nav className="navbar navbar-light bg-primary">
         <div className="container-fluid">
   <div className="row align-items-center">
@@ -23,12 +22,6 @@ const Navbar = () => {
 </div>
 
           <div className="ml-auto mt-3">
-          <Link to='/register' className='btn btn-light mx-2'>
-              Register
-            </Link>
-            <Link to='/login' className='btn btn-light mx-2'>
-              Login
-            </Link> 
             <Link to='/subjects' className='btn btn-light mx-2'>
             Subjects</Link>
             <Link to='/proctor' className='btn btn-light mx-2'>
@@ -37,15 +30,6 @@ const Navbar = () => {
             Attendance</Link>
           </div>
         </nav>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/subjects' element={<Subject/>}/>
-          <Route path='/proctor' element={<Proctor/>}/>
-          <Route path='/attendance' element={<MarkAttendance/>}/>
-        </Routes>
-      </Router>
     </div>
   );
 };
