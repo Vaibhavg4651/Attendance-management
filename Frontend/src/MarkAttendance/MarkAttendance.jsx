@@ -159,6 +159,12 @@ const MarkAttendance = () => {
     const [attendance, setAttendance] = useState({}); 
     const [presentcount,setpresentcount]=useState(0);
     const [absentcount,setabsentcount]=useState(0);
+    const [filter,showfilter]=useState(false);
+    const [filteroption,setfilteroptions]=useState({
+      date:'',
+      batch:'',
+      class:'',
+    })
     // const tableRef = useRef(null);
 
 
@@ -210,61 +216,57 @@ const MarkAttendance = () => {
           Subject: Compiler Design 
           Room no : 401</h5>
 <div className='d-flex justify-content-center align-items-center'>
-  <button className='btn btn-primary align-items-center'><i className="fa-solid fa-filter"></i>Apply Filters</button>
+  <button className='btn btn-primary align-items-center'><i className="fa-solid fa-filter" ></i>Apply Filters</button>
   <span className='mx-2'></span>
  
-  <button className='btn btn-success ' onClick={downloadExcel}><i className="fa-solid fa-download "></i> Download Excel</button>
+  <button className='btn btn-success my-4 ' onClick={downloadExcel}><i className="fa-solid fa-download "></i> Download Excel</button>
 </div>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th><h4>S.No.</h4></th>
-              <th><h4>Name</h4></th>
-              <th><h4>Enrollment no.</h4></th>
-              <th>
-              
+<table className="table" style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <thead>
+          <tr style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h5>S.No.</h5></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h5>Name</h5></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h5>Enrollment no.</h5></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}>
+              <br />
               <button className='btn btn-primary' onClick={() => handleAllAttendance('present')}> Present all</button>
-              <br />
-             <h4 className='mt-4'>Present</h4> 
-            
+              <h5 className='mt-2'>Present</h5>
             </th>
-            <th>
+            <th style={{ border: '1px solid white', padding: '10px' }}>
               <button className='btn btn-primary' onClick={() => handleAllAttendance('absent')}>Absent all</button>
-              <br />
-              <h4 className='mt-4'>Absent</h4>
-           
+              <h5 className='mt-2'>Absent</h5>
             </th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((student) => (
+            <tr key={student['']} style={{ border: '1px solid black' }}>
+              <td style={{ border: '1px solid black', padding: '10px' }}>{student['']}</td>
+              <td style={{ border: '1px solid black', padding: '10px' }}>{student['__1']}</td>
+              <td style={{ border: '1px solid black', padding: '10px' }}>{student['__8']}</td>
+              <td style={{ border: '1px solid black', padding: '10px' }}>
+                <input
+                  type="radio"
+                  name={`attendance-${student['']}`}
+                  value="present"
+                  onChange={() => handleAttendanceChange(student[''], 'present')}
+                  checked={attendance[student['']] === 'present'}
+                />
+              </td>
+              <td style={{ border: '1px solid black', padding: '10px' }}>
+                <input
+                  type="radio"
+                  name={`attendance-${student['']}`}
+                  value="absent"
+                  onChange={() => handleAttendanceChange(student[''], 'absent')}
+                  checked={attendance[student['']] === 'absent'}
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {students.map((student) => (
-              <tr key={student['']}>
-                <td>{student['']}</td>
-                <td>{student['__1']}</td>
-                <td>{student['__8']}</td>
-                <td>
-                  <input
-                    type="radio"
-                    name={`attendance-${student['']}`}
-                    value="present"
-                    onChange={() => handleAttendanceChange(student[''], 'present')}
-                    checked={attendance[student['']] === 'present'}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="radio"
-                    name={`attendance-${student['']}`}
-                    value="absent"
-                    onChange={() => handleAttendanceChange(student[''], 'absent')}
-                    checked={attendance[student['']] === 'absent'}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
         <br />
         <br />
         <div className="text-center">
