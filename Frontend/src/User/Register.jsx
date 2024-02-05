@@ -3,6 +3,8 @@ import './Register.css';
 import user_icon from '../assets/person.png';
 import password_icon from '../assets/password.png';
 import axios from 'axios';
+import { useDispatch} from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 // const djangoBackendURL = 'http://127.0.0.1:8000/';
 
@@ -14,8 +16,11 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('select role');
   const [email,setEmail]=useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleRegister = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     if (EID.length !== 9 || !name || !password || !email || role==='select role') {
       setIsRegistrationFailed(true);
       return;
@@ -31,12 +36,11 @@ const Register = () => {
 
     console.log('Sending registration request:', userData);
 
-    axios
+    const res = await axios
       .post(`http://127.0.0.1:8000/api/user/signup`, userData)
       .then((response) => {
         console.log('Registration successful. Response:', response.data);
-        setIsRegistered(true);
-        setIsRegistrationFailed(false);
+        navigate('/');
       })
       .catch((err) => {
         console.error('Registration failed. Error:', err);
@@ -52,10 +56,18 @@ const Register = () => {
             <div className="card-body">
               <div className="header">
                 <div className="text">Register</div>
-                <div className="underline"></div>
+                <p style={{ color: "#8f8f8f" }}>
+                    Already have an account ?&nbsp;
+                    <a href="/">
+                      <strong style={{ color: "#035b96" }}>
+                         Login
+                      </strong>
+                    </a>
+                    &nbsp;here.
+                  </p>
               </div>
               <br />
-              <div className="d-flex flex-column align-items-center">
+              <div className="d-flex flex-column align-items-center" style={{marginTop:"3rem"}}>
                 <select
                   className="form-control mb-3"
                   value={role}
@@ -116,11 +128,11 @@ const Register = () => {
 
         <div>
           <div className="d-flex justify-content-center align-items-center">
-            <div className="btn btn-light mx-1" onClick={handleRegister}>
+            <div className="btn btn-primary mx-1" onClick={handleRegister}>
               Submit
             </div>
           </div>
-          {isRegistered && !isRegistrationFailed && (
+          {/* {isRegistered && !isRegistrationFailed && (
             <div className="success-message">
               <center>
                 <h3>Register Successfully</h3>
@@ -133,7 +145,7 @@ const Register = () => {
                 <h3>Register Unsuccessful. Please fill in all fields</h3>
               </center>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

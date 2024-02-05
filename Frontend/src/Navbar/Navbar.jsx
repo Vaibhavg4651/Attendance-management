@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Login from '../User/Login';
-import Register from '../User/Register'; 
-import Subject from '../Subjects/Subjects'
-import Proctor from '../Proctor/Proctor';
-import MarkAttendance from '../MarkAttendance/MarkAttendance';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Navbar = () => {
+  const id = useSelector((state)=>{return state.user.userid})
+  const role = useSelector((state)=>{return state.user.role})
+  const auth = useSelector((state)=>{return state.user.isAuthenticated})
   return (
     <div>
-      <Router>
         <nav className="navbar navbar-light bg-primary">
         <div className="container-fluid">
   <div className="row align-items-center">
@@ -23,29 +21,13 @@ const Navbar = () => {
 </div>
 
           <div className="ml-auto mt-3">
-          <Link to='/register' className='btn btn-light mx-2'>
-              Register
-            </Link>
-            <Link to='/login' className='btn btn-light mx-2'>
-              Login
-            </Link> 
-            <Link to='/subjects' className='btn btn-light mx-2'>
-            Subjects</Link>
-            <Link to='/proctor' className='btn btn-light mx-2'>
-            Proctor</Link>
+            {role === "faculty"? (<Link to={auth === true ? `/${id}/subjects` : "/login"} className='btn btn-light mx-2'>
+            Subjects</Link> ): null}
+            {role === 'proctor' ? <Link to='/addStudent' className='btn btn-light mx-2'> Add Student</Link> : null}
             <Link to='/attendance' className='btn btn-light mx-2'>
             Attendance</Link>
           </div>
         </nav>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/subjects' element={<Subject/>}/>
-          <Route path='/proctor' element={<Proctor/>}/>
-          <Route path='/attendance' element={<MarkAttendance/>}/>
-        </Routes>
-      </Router>
     </div>
   );
 };
