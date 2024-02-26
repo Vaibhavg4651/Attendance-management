@@ -88,7 +88,7 @@ class Proctor(models.Model):
     ProctorID = models.AutoField(primary_key=True)
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    SemesterNumber = models.IntegerField()
+    SemesterNumber = models.IntegerField(max_length=255)
     
     class Meta:
         unique_together = ('id', 'BranchID')
@@ -99,7 +99,7 @@ class Subjects(models.Model):
     BranchName = models.CharField(max_length=255)
     SubjectType = models.CharField(max_length=255)
     year = models.IntegerField()
-    Subjectcode = models.CharField(max_length=255)
+    Subjectcode = models.CharField(max_length=255)                                             
     
 
 class FacultyTeachingAssignment(models.Model):
@@ -109,7 +109,7 @@ class FacultyTeachingAssignment(models.Model):
     SemesterNumber = models.IntegerField()
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
     year = models.IntegerField()
-    room = models.CharField(max_length=255)
+    room = models.CharField()
 
 
 class Student(models.Model):

@@ -3,8 +3,8 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializer , BranchSerializer , SubjectSerializer
-from .models import Branch
+from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer
+from .models import Branch , Proctor
 from .models import UserAccount as user 
 
 # Create your views here.
@@ -53,7 +53,7 @@ def Signup(request):
 def UpdatePassword(request):
     try:
         userloged = user.objects.get(EID=request.data['EID'], user_type=request.data['user_type'])
-        request.data['password'] = make_password(request.data['password'])
+        request.data['newpassword'] = make_password(request.data['newpassword'])
         userloged.password = request.data['newpassword']
         userloged.save()
         return Response({"message": "Password updated"}, status=status.HTTP_200_OK)
@@ -64,7 +64,7 @@ def UpdatePassword(request):
     
 
 
-# Branch api
+# Branch api /user/addBranch
 # @api_view(['POST'])
 # def AddBranches(request):
 #     try:
@@ -77,11 +77,42 @@ def UpdatePassword(request):
 #         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
-# Branch api
+# Branch api /user/addSubjects
 @api_view(['POST'])
 def AddSubjects(request):
     try:
         serializer = SubjectSerializer(data=request.data , many=True)
+        if serializer.is_valid():
+            serializer.save()                                                           
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+# Proctor api
+@api_view(['POST'])
+def AddProctor(request):
+    try:
+        user_type = user.objects.get(id = request.data['id'])
+        if user_type.user_type != 'proctor':
+            return Response({"detail": "User is not a proctor"}, status=status.HTTP_400_BAD_REQUEST)
+        branch = Branch.objects.get(ClassName=request.data['BranchID'])
+        request.data['BranchID'] = branch.BranchID
+        serializer = ProctorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# Student api
+@api_view(['POST'])
+def AddStudent(request):
+    try:
+        serializer = StudentSerializer(data=request.data , many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data , status=status.HTTP_201_CREATED)
