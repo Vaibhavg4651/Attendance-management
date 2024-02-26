@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 // const djangoBackendURL = 'http://127.0.0.1:8000/';
 
 const Register = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
+  
   const [isRegistrationFailed, setIsRegistrationFailed] = useState(false);
   const [EID, setEid] = useState('');
   const [name, setName] = useState('');
@@ -54,6 +54,7 @@ const Register = () => {
         <div className="col-md-5">
           <div className="card mt-5 custom-color ">
             <div className="card-body">
+            <img src="msit.png" className="d-flex align-items-center mx-auto" width="100" height="100"></img>
               <div className="header">
                 <div className="text">Register</div>
                 <p style={{ color: "#8f8f8f" }}>
@@ -122,10 +123,7 @@ const Register = () => {
             />
           </div>
         </div>
-        <div className="forgot_password1">
-          Forgot Password? <span>Click Here!</span>
-        </div>
-
+        <br />
         <div>
           <div className="d-flex justify-content-center align-items-center">
             <div className="btn btn-primary mx-1" onClick={handleRegister}>

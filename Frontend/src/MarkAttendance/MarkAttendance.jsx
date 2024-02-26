@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState} from 'react';
-// import XLSX from 'xlsx';
-// import {DownloadTableExcel} from 'react-export-table-to-excel'
-import xlsx from 'json-as-xlsx';
+// import xlsx from 'json-as-xlsx';
+import * as XLSX from 'xlsx';
+import ReactToExcel from 'react-html-table-to-excel';
+// impport {useEffect} from 'react-hooks';
 const students=[   
         
         {
@@ -146,15 +147,7 @@ const students=[
           "__11": "Kshitiz"
         },
 ]
-// let xls=require("json-as-xlsx")
-let settings={
-  filename:'Students',
-  // extraLength:5,
-  writeMode:'writeFile',
-  writeOptions:{},
-  RTL:true,
 
-}
 const MarkAttendance = () => {
     const [attendance, setAttendance] = useState({}); 
     const [presentcount,setpresentcount]=useState(0);
@@ -165,8 +158,9 @@ const MarkAttendance = () => {
       batch:'',
       class:'',
     })
-    // const tableRef = useRef(null);
-
+    useEffect(() => {
+      updateCounts(attendance);
+    }, [attendance]);
 
     const handleAttendanceChange = (sNo, status) => {
       setAttendance((prevAttendance) =>{
@@ -178,6 +172,7 @@ const MarkAttendance = () => {
       return updatedAttendance;
     
     });
+   
     };
   
     const handleAllAttendance = (status) => {
@@ -196,46 +191,66 @@ const MarkAttendance = () => {
 
     setpresentcount(presentStudents);
     setabsentcount(absentStudents);
-  };
-    
- const downloadExcel=()=>{
-  try {
-    if (students && students.length > 0) {
-      xlsx(students, settings);
-    } else {
-      console.error('Error generating Excel file: No data to export.');
-    }
-  } catch (error) {
-    console.error('Error generating Excel file:', error);
+  };    
+  const exportToExcel = () => {
+    const data = students.map((student) => ({
+      'S.No.': student[''],
+      Name: student['__1'],
+      'Enrollment no.': student['__8'],
+      Status: attendance[student['']] || 'absent', // default to absent if not marked
+    }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Attendance Sheet');
+    XLSX.writeFile(wb, 'Attendance.xlsx');
   }
- }
-    return (
-      <div className="mt-4">
-        <h4 >Student Attendance List</h4>
+ return (
+      <div className="mt-4 ml-4">
+        <h4>Student Attendance List</h4>
           <h5>Batch: CSE-1 5th sem
           Subject: Compiler Design 
           Room no : 401</h5>
 <div className='d-flex justify-content-center align-items-center'>
   <button className='btn btn-primary align-items-center'><i className="fa-solid fa-filter" ></i>Apply Filters</button>
   <span className='mx-2'></span>
- 
-  <button className='btn btn-success my-4 ' onClick={downloadExcel}><i className="fa-solid fa-download "></i> Download Excel</button>
+  
+  <button className='btn btn-success my-4 '><i className="fa-solid fa-download "></i>
+  <ReactToExcel
+      table="table-to-xls"
+      filename="excelFile"
+      sheet="sheet 1"
+      className="btn btn-success"
+      onClick={exportToExcel}
+      /></button>
 </div>
 
-<table className="table" style={{ borderCollapse: 'collapse', width: '100%' }}>
+    
+<div className="justify-content-end align-items-center">
+    <h5 style={{ display: 'block' }}>Total students present: {presentcount}</h5>
+    <span></span>
+    <h5 style={{ display: 'block' }}>Total students absent: {absentcount}</h5>
+</div>
+
+
+<table className="table"  id="table-to-xls" style={{ borderCollapse: 'collapse', width: '100'}}>
         <thead>
           <tr style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
-            <th style={{ border: '1px solid white', padding: '10px' }}><h5>S.No.</h5></th>
-            <th style={{ border: '1px solid white', padding: '10px' }}><h5>Name</h5></th>
-            <th style={{ border: '1px solid white', padding: '10px' }}><h5>Enrollment no.</h5></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h6>S.No.</h6></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h6>Name</h6></th>
+            <th style={{ border: '1px solid white', padding: '10px' }}><h6>Enrollment no.</h6></th>
             <th style={{ border: '1px solid white', padding: '10px' }}>
-              <br />
-              <button className='btn btn-primary' onClick={() => handleAllAttendance('present')}> Present all</button>
-              <h5 className='mt-2'>Present</h5>
+            <div className="d-flex align-items-center ">
+              <h6>Present</h6>
+              <span className='mx-2'></span>
+              <button className='btn btn-primary' onClick={() => handleAllAttendance('present')} >Present all</button>
+              </div>
             </th>
             <th style={{ border: '1px solid white', padding: '10px' }}>
-              <button className='btn btn-primary' onClick={() => handleAllAttendance('absent')}>Absent all</button>
-              <h5 className='mt-2'>Absent</h5>
+            <div className="d-flex align-items-center ">
+              <h6>Absent</h6>
+              <span className='mx-2'></span>
+              <button className='btn btn-primary' onClick={() => handleAllAttendance('absent')} >Absent all</button>
+              </div>
             </th>
           </tr>
         </thead>
@@ -267,12 +282,10 @@ const MarkAttendance = () => {
           ))}
         </tbody>
       </table>
+     
         <br />
         <br />
-        <div className="text-center">
-        <h4>Total students present: {presentcount}</h4>
-        <h4>Total students absent: {absentcount}</h4>
-        </div>
+       
       </div>
     );
   };
