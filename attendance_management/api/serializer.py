@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import UserAccount as user
-from .models import Branch , Proctor , Subjects
+from .models import Branch , Proctor , Subjects , Student
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,3 +24,9 @@ class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subjects
         fields = ('SubjectID','SubjectName' ,'BranchName' ,'SubjectType' , 'year', 'Subjectcode')
+
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year') 
