@@ -1,6 +1,9 @@
 import xlsx  from 'json-as-xlsx';
 import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
+import {OutTable,ExcelRenderer} from 'react-excel-renderer';
+// import Subjects from '../Subjects/Subjects';
+
 
 const Proctor = () => {
   const initialStudentDetails = {
@@ -12,7 +15,8 @@ const Proctor = () => {
   const [studentDetailsList, setStudentDetailsList] = useState([]);
   const [currentStudentDetails, setCurrentStudentDetails] = useState(initialStudentDetails);
   const [enrollmentError, setEnrollmentError] = useState('');
-  const [excelFile, setExcelFile] = useState(null);
+  const [header, setHeader] = useState([]);
+  const [cols,setCols]=useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,25 +49,15 @@ const Proctor = () => {
   };
   const handleFileChange =(e) => {
     const file = e.target.files[0];
-    setExcelFile(file);
-    // Add logic to handle the uploaded Excel file
-    // You may want to use a library like XLSX.js to parse the Excel file
-    if(file){
-      const reader=new FileReader();
-      reader.onload=(e)=>{
-        try {
-          const data=new Uint8Array(e.target.result);
-          const workbook=xlsx.read(data,{type:'array'})
-          const sheetName = workbook.SheetNames[0]; // Assuming there is only one sheet
-          const sheet = workbook.Sheets[sheetName];
-          const studentfromExcel=xlsx.utils.sheet_to_json(sheet);
-          console.log(studentfromExcel);
-        } catch (error) {
-          console.error('Error parsing Excel file:', error);
-        }
+    ExcelRenderer(file,(err,response)=>{
+      if(err){
+        console.log("Error in display",err);
       }
-      reader.readAsArrayBuffer(file);
-    }
+      else{
+          setHeader(response.rows[0]);
+          setCols(response.rows);
+      }
+    })
   };
 
   return (
@@ -145,17 +139,43 @@ const Proctor = () => {
               <p>Upload the excel file of the students
               <input
           type="file"
-          style={{width:'20rem'}}
+          style={{width:'18rem'}}
           className="form-control"
           id="excelFile"
           accept=".xlsx, .xls"
           onChange={handleFileChange}
-        /> </p>  
-                  
+        /> </p>         
+      </div>
+      <div>
+        <table style={{borderCollapse:'collapse',margin:'10px auto',border:'1px solid black'}}> 
+          <thead>
+            <tr>
+              {header.map((h,i)=>(
+                <th key={i} style={{border:'1px solid black'}}>{h}
+
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {cols.slice(1).map((col,i)=>(
+                <tr key={i}>
+                    {
+                      col.map((c,i)=>(
+                        <td key={i} style={{border:'1px solid black'}}>
+                            {c}
+                        </td>
+                      ))
+                    }
+                </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       
     </div>
+    {/* <Subjects/> */}
     </>
   );
 }

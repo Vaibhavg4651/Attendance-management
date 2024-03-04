@@ -6,6 +6,7 @@
     /* margin-bottom: 20px; */
     width: 500px;
     padding-bottom: 10px;
+    height: 500px;
     }
     .header1{
         display: flex;
@@ -59,14 +60,14 @@
     
     }
     .forgot_password span{
-        color: rgb(255, 255, 255);
+        color: rgb(79, 7, 245);
         cursor: pointer;    
     }
     .login-custom{
         background: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
         border: 1px solid whitesmoke;
         border-radius: 10px;
-        height: 30em;
+        height: 38rem;
     }
     
     .heading{
