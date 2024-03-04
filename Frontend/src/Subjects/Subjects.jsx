@@ -1,64 +1,67 @@
 import React, { useState } from 'react';
-const Subjects = () => {
-  const years=["1st","2nd","3rd","4th"]
-  const semesters = ["1st", "2nd ", "3rd", "4th","5th","6th","7th","8th"];
-  const depts = ["CSE", "IT", "ECE", "EEE"];
-  const types = ["Lecture", "Lab", "Tutorial"];
-  const sub=["Applied mathematics","Applied physics","Applied Chemistry","Engineering Graphics","Manufacturing Process","Indian Constitution","Human Values and Ethics"
-,"Applied mathematics lab","Applied physics lab","Applied Chemistry lab","Engineering Graphics lab"];
-const batch=["CSE-1","CSE-2","CSE-3","IT-1","IT-2","ECE-1","ECE-2","EEE"];
-const room=["401","404","411","406","413"];
+import axios from 'axios';
+const Subjects = async() => {
+  
+  const [branchName, setBranchName] = useState("");
+  const [subjectName, setSubjectName] = useState("");
+  const [subjectCode, setSubjectCode] = useState("");
+  const [subjectType,setSubjectType]=useState("");
+  const [Year, setYear] = useState("");
+  
 
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedSem, setSelectedSem] = useState("");
-  const [selectedDept, setSelectedDept] = useState("");
-  const [selectedType, setSelectedType] = useState("");
-  const [selectedBatch,setSelectedBatch]=useState("");
-  const [selectedRoom,setSelectedRoom]=useState("");
+  const AddSubject = {
+    BranchName: branchName,
+    SubjectName: subjectName,
+    Subjectcode: subjectCode,
+    SubjectType:subjectType,
+    year:Year
+  };
 
-  const handleYearChange = (event) => {
+  console.log('Add Subject request:', AddSubject);
+
+  const res = await axios
+  .post(`http://127.0.0.1:8000/api/user/addSubjects`, AddSubject)
+  .then((response) => {
+    console.log('Add Subject successful. Response:', response.data);
    
-    setSelectedYear(event.target.value);
-    
-    setSelectedDept("");
-    setSelectedType("");
-  };
-  const handleSemChange = (event) => {
-   
-    setSelectedSem(event.target.value);
-    
-    setSelectedDept("");
-    setSelectedType("");
-  };
-
-  const handleDeptChange = (event) => {
-    setSelectedDept(event.target.value);
-   
-    setSelectedType("");
-  };
-
-  const handleTypeChange = (event) => {
-    setSelectedType(event.target.value);
-  };
- const handleBatchChange=(event)=>{
-setSelectedBatch(event.target.value);
- };
- const handleRoomChange=(event)=>{
-setSelectedRoom(event.target.value);
- };
+  })
+  .catch((err) => {
+    console.error('Registration failed. Error:', err);
+  });
   const showSubjects = () => {
-    if (selectedYear&& selectedSem && selectedDept && selectedType === "Lecture" && selectedBatch && selectedRoom) {
+    if (branchName && Year&& subjectType === "Lecture" && subjectName && subjectCode) {
       return [...sub.filter((subject) => !subject.includes("lab")),];
     }
-   else if (selectedYear && selectedSem && selectedDept && selectedType === "Tutorial" && selectedBatch&& selectedRoom ) {
+   else if (branchName && Year && subjectName && subjectCode && subjectType === "Tutorial" ) {
       return [...sub.filter((subject) => !subject.includes("lab")),];
     }
-else if( selectedYear && selectedSem && selectedDept && selectedType === "Lab" && selectedBatch && selectedRoom){
+else if(branchName && Year && subjectName && subjectCode && subjectType === "Lab" ){
     return [...sub.filter((subject) => subject.includes("lab")),];
 
 }
     return [];
   };
+   const handleYearChange = (event) => {
+    setYear(event.target.value);
+  };
+
+  const handleSubjectName = (event) => {
+    setSubjectName(event.target.value);
+  };
+
+  const handleBranchChange = (event) => {
+    setBranchName(event.target.value);
+  };
+
+  const handleSubjectTypeChange = (event) => {
+    setSubjectType(event.target.value);
+  };
+
+  const handleSubjectCodeChange = (event) => {
+    setSubjectCode(event.target.value);
+  };
+
+ 
 
   const subjectsArray = showSubjects();
 
@@ -67,9 +70,9 @@ else if( selectedYear && selectedSem && selectedDept && selectedType === "Lab" &
       <h2 className="mb-4">Subjects</h2>
       <div className="form-group">
         <label htmlFor="yearSelect"><h4>Select Year</h4></label>
-        <select className="form-control" id="yearSelect" value={selectedYear} onChange={handleYearChange}>
+        <select className="form-control" id="yearSelect" value={Year} onChange={handleYearChange}>
           <option value="">Select Year</option>
-          {years.map((year) => (
+          {Year.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
@@ -77,20 +80,20 @@ else if( selectedYear && selectedSem && selectedDept && selectedType === "Lab" &
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="yearSelect"><h4>Select Semester</h4></label>
-        <select className="form-control" id="yearSelect" value={selectedSem} onChange={handleSemChange}>
-          <option value="">Select Semester</option>
-          {semesters.map((semester) => (
-            <option key={semester} value={semester}>
-              {semester}
+        <label htmlFor="yearSelect"><h4>Subject Name</h4></label>
+        <select className="form-control" id="yearSelect" value={subjectName} onChange={handleSubjectName}>
+          <option value="">Select Subject</option>
+          {subjectName.map((subject) => (
+            <option key={subject} value={subject}>
+              {subject}
             </option>
           ))}
         </select>
       </div>
       <div className='form-group'>
-        <label htmlFor="deptSelect"><h4>Select Department</h4></label>
-        <select className="form-control" id="deptSelect" value={selectedDept} onChange={handleDeptChange}>
-          <option value="">Select Department</option>
+        <label htmlFor="deptSelect"><h4>Branch Name</h4></label>
+        <select className="form-control" id="deptSelect" value={branchName} onChange={handleBranchChange}>
+          <option value="">Select Branch</option>
           {depts.map((dept) => (
             <option key={dept} value={dept}>
               {dept}
@@ -100,9 +103,9 @@ else if( selectedYear && selectedSem && selectedDept && selectedType === "Lab" &
       </div>
       <div className='form-group'>
         <label htmlFor="typeSelect"><h4>Select Subject Type</h4></label>
-        <select className='form-control' id="typeSelect" value={selectedType} onChange={handleTypeChange}>
+        <select className='form-control' id="typeSelect" value={subjectType} onChange={handleSubjectTypeChange}>
           <option value="">Select Type</option>
-          {types.map((type) => (
+          {subjectType.map((type) => (
             <option key={type} value={type}>
               {type}
             </option>
@@ -110,30 +113,19 @@ else if( selectedYear && selectedSem && selectedDept && selectedType === "Lab" &
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor='typeSelect'><h4>Select Class</h4></label>
-        <select className='form-control' id='typeSelect' value={selectedBatch} onChange={handleBatchChange}>
-          <option value="">Select Class</option>
-          {batch.map((batch) => (
-            <option key={batch} value={batch}>
-              {batch}
-              </option>
-              ))}
-        </select> 
-      </div>
-      <div className="form-group">
-        <label htmlFor='typeSelect'><h4>Select Room no.</h4></label>
-        <select className='form-control' id='typeSelect' value={selectedRoom} onChange={handleRoomChange}>
-          <option value="">Select Room no.</option>
-          {room.map((room) => (
-            <option key={room} value={room}>
-              {room}
+        <label htmlFor='typeSelect'><h4>Subject Code</h4></label>
+        <select className='form-control' id='typeSelect' value={subjectCode} onChange={handleSubjectCodeChange}>
+          <option value="">Select Code</option>
+          {subjectCode.map((code) => (
+            <option key={code} value={code}>
+              {code}
               </option>
               ))}
         </select> 
       </div>
       {subjectsArray.length > 0 && (
         <div>
-          <h3 className='mt-4'>Subjects for {selectedBatch} {selectedYear} year {selectedSem} semester- {selectedType}</h3>
+          <h3 className='mt-4'>Subjects for {branchName} {Year} year {subjectType}</h3>
           {subjectsArray.map((subject, index) => (
             <div key={index} className="card mt-2">
               <div className="card-body">
