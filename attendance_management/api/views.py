@@ -3,8 +3,8 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer
-from .models import Branch , Proctor
+from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer
+from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment
 from .models import UserAccount as user 
 
 # Create your views here.
@@ -32,18 +32,20 @@ def Login(request):
 
 @api_view(['POST'])
 def Signup(request):
+    try:
+        existing_user = user.objects.filter(EID=request.data['EID'], user_type=request.data['user_type']).first()
+        if existing_user:
+            return Response({"error": "User with the same EID and user_type already exists."}, status=status.HTTP_400_BAD_REQUEST)
     
-    existing_user = user.objects.filter(EID=request.data['EID'], user_type=request.data['user_type']).first()
-    if existing_user:
-        return Response({"error": "User with the same EID and user_type already exists."}, status=status.HTTP_400_BAD_REQUEST)
-    
-    request.data['password'] = make_password(request.data['password'])
+        request.data['password'] = make_password(request.data['password'])
 
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data , status=status.HTTP_201_CREATED)
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     
 
@@ -90,6 +92,15 @@ def AddSubjects(request):
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
+@api_view(['GET'])
+def GetSubjects(request):
+    try:
+        subjects = Subjects.objects.all()
+        serializer = SubjectSerializer(subjects, many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 # Proctor api
 @api_view(['POST'])
 def AddProctor(request):
@@ -106,13 +117,39 @@ def AddProctor(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+# Faculty api
+@api_view(['POST'])
+def AddFaculty(request):
+    try:
+        user_type = user.objects.get(id = request.data['id'])
+        if user_type.user_type != 'faculty':
+            return Response({"detail": "User is not a faculty"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = FacultyTeachingAssignmentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['GET'])
+def GetFaculty(request, id):
+    try:
+        faculty = FacultyTeachingAssignment.objects.filter(id = id)
+        serializer = FacultyTeachingAssignmentSerializer(faculty, many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # Student api
 @api_view(['POST'])
 def AddStudent(request):
     try:
-        serializer = StudentSerializer(data=request.data , many=True)
+        serializer = StudentSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data , status=status.HTTP_201_CREATED)

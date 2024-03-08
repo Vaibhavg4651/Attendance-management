@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import UserAccount as user
-from .models import Branch , Proctor , Subjects , Student
+from .models import Branch , Proctor , Subjects , Student , FacultyTeachingAssignment , Attendance , StudentSubjectAttendance
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,3 +30,20 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year') 
+
+class StudentSubjectAttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentSubjectAttendance
+        fields = ('EnrollmentNumber', 'SubjectID', 'total_lectures', 'attended_lectures')
+
+
+class FacultyTeachingAssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FacultyTeachingAssignment
+        fields = ('FacultyID', 'id', 'SubjectID', 'SemesterNumber', 'Class', 'year', 'room')
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ('AttendanceID', 'SubjectID', 'FacultyID', 'EnrollmentNumber')

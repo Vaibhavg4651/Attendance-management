@@ -76,7 +76,18 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     def get_by_natural_key(self, email):
         return self.__class__.objects.get(email=email)
+    
 
+# login model
+
+class login(models.Model):
+    loginId = models.AutoField(primary_key=True)
+    id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    user_type = models.CharField(max_length=255)
+    BranchName = models.CharField(max_length=255)
+    loginTime = models.DateTimeField()
+    attendanceTime = models.DateTimeField(null=True)
 
 #Branch model
 class Branch(models.Model):
@@ -88,7 +99,7 @@ class Proctor(models.Model):
     ProctorID = models.AutoField(primary_key=True)
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    SemesterNumber = models.IntegerField(max_length=255)
+    SemesterNumber = models.IntegerField()
     
     class Meta:
         unique_together = ('id', 'BranchID')
@@ -107,20 +118,26 @@ class FacultyTeachingAssignment(models.Model):
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)                           
     SemesterNumber = models.IntegerField()
-    BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    Class = models.CharField(default=False)
     year = models.IntegerField()
     room = models.CharField()
 
 
 class Student(models.Model):
-    EnrollmentNumber = models.CharField(max_length=50, primary_key=True, unique=True)
+    EnrollmentNumber = models.BigIntegerField(primary_key=True)
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
     ClassSerialNumber = models.IntegerField()
-    Group = models.CharField(max_length=2)
+    Group = models.CharField()
     StudentName = models.CharField(max_length=255)
     Batch = models.IntegerField()
     year = models.IntegerField()
     
+class StudentSubjectAttendance(models.Model):
+    EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    total_lectures = models.IntegerField(default=0)
+    attended_lectures = models.IntegerField(default=0)
+
 
 class Attendance(models.Model):
     AttendanceID = models.AutoField(primary_key=True)
@@ -129,5 +146,3 @@ class Attendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
     Date = models.DateField()
     AttendanceStatus = models.CharField(max_length=255) # Present or Absent
-    TotalLectures = models.IntegerField()
-    LecturesAttended = models.IntegerField()
