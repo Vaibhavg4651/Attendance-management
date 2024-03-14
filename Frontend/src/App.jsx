@@ -11,6 +11,7 @@ import Faculty from "./Faculty/Faculty";
 import Login from "./User/Login";
 import UpdatePassword from "./User/UpdatePassword";
 import AddProctor from "./Proctor/AddProctor";
+import Filters from "./MarkAttendance/Filters";
 
 function App() {
   const userid = useSelector((state)=>{return state.user.userid})
@@ -25,7 +26,7 @@ const ShowComponent = () => {
     if (role === "faculty") {
       return <Faculty />;
     } else if (role === "proctor") {
-      return <AddProctor />;
+      return <Proctor/>;
     }
   }
    else{
@@ -41,7 +42,8 @@ const ShowComponent = () => {
         <Route exact path="/branch" element={<AddProctor/>}/>
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
-          <Route exact path="/:id/subjects" element={<Subjects/>} />
+        <Route exact path="/:id/subjects" element={<Subjects/>} />
+        <Route exact path="/:id/filters" element={<Filters/>}/>
         </Route>
         </Routes>
       </BrowserRouter>

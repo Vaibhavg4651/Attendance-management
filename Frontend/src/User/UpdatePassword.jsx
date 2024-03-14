@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import './UpdatePassword.css'
+import './UpdatePassword.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 const UpdatePassword = () => {
   const [EID, setEID] = useState('');
   const [userType, setUserType] = useState('');
-  // const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+    const navigate=useNavigate();
 
   const handleUpdatePassword = async () => {
     try {
@@ -19,7 +22,7 @@ const UpdatePassword = () => {
           newpassword: newPassword,
           EID,
           user_type: userType,
-          // password: currentPassword,
+       
         }),
       });
 
@@ -30,18 +33,25 @@ const UpdatePassword = () => {
         console.log('Updated password:',response.data);
         console.log(newPassword);
         setError('');
+        toast.success('Password updated successfully');
+        navigate('/');
       } else {
         setMessage('');
         setError(data.detail);
+        toast.error('Password not updated!');
+        
       }
     } catch (error) {
       console.error('Error updating password:', error);
       setError('An error occurred while updating the password.');
+      toast.error('Password not updated!');
     }
   };
 
   return (
     <div className='container1'>
+      <>
+      <ToastContainer/>
         <div className='row justify-content-center mb-4'>
             <div className='col md-5'>
             <div className="card1 mt-5 login-custom ">
@@ -61,9 +71,7 @@ const UpdatePassword = () => {
       <div>
         
         <input placeholder='Enter your role' type="text" value={userType} onChange={(e) => setUserType(e.target.value)} />
-      </div>
-      <br />
-     
+      </div>  
       <br />
       <div>
         <input placeholder='Enter new password' type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
@@ -76,6 +84,7 @@ const UpdatePassword = () => {
     </div>
     </div>
     </div>
+    </>
     </div>
   );
 };

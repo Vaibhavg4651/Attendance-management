@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import user_icon from "../assets/person.png";
-// import email_icon from "../assets/email.png";
 import password_icon from "../assets/password.png";
 import axios from "axios";
 import "./Login.css";
@@ -22,7 +23,7 @@ const Login = () => {
   }
   const handleLogin = () => {
     if (EID.length != 9 || !password || role === "select role") {
-      // setIsLoginFailed(true);
+      toast.error('Login failed');
       return;
     }
    
@@ -36,17 +37,21 @@ const Login = () => {
     axios
       .post(`http://127.0.0.1:8000/api/user/login`, loginData)
       .then((response) => {
+        toast.success('Login Successful');
         console.log("Login successful. Response:", response.data);
+        localStorage.setItem("token",response.data.token);
         dispatch(loginSuccess(response.data));
         navigate(`/${response.data.id}?role=${role}`);
         console.log(response.data.id);
       })
       .catch((err) => {
         console.error("Login failed. Error:", err);
-        // setIsLoginFailed(true);
+        toast.error('Login failed');
       });
   };
   return (
+    <>
+    <ToastContainer/>
     <div>
       <div className="Container">
         <div className="row justify-content-center mb-4">
@@ -58,7 +63,7 @@ const Login = () => {
                 </div>
                 <div className="header1">
                   <h2>Attendance Management System</h2>
-                  <h1 class="heading">Welcome User</h1>
+                  <h1 className="heading">Welcome User</h1>
                   <p className="text-center" style={{ color: "#8f8f8f" }}>
                     Please <strong style={{ color: "#035b96" }}>Login</strong>{" "}
                     to Get Started.
@@ -123,6 +128,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

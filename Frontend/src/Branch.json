@@ -1,0 +1,82 @@
+[
+    {
+        "BranchID": 1,
+        "BranchName": "CSE",
+        "ClassName": "CSE1"
+    },
+    {
+        "BranchID": 2,
+        "BranchName": "CSE",
+        "ClassName": "CSE2"
+    },
+    {
+        "BranchID": 3,
+        "BranchName": "CSE",
+        "ClassName": "CSE3"
+    },
+    {
+        "BranchID": 4,
+        "BranchName": "CSE",
+        "ClassName": "CSE4"
+    },
+    {
+        "BranchID": 5,
+        "BranchName": "IT",
+        "ClassName": "IT1"
+    },
+    {
+        "BranchID": 6,
+        "BranchName": "IT",
+        "ClassName": "IT2"
+    },
+    {
+        "BranchID": 7,
+        "BranchName": "IT",
+        "ClassName": "IT3"
+    },
+    {
+        "BranchID": 8,
+        "BranchName": "IT",
+        "ClassName": "IT4"
+    },
+    {
+        "BranchID": 9,
+        "BranchName": "ECE",
+        "ClassName": "ECE1"
+    },
+    {
+        "BranchID": 10,
+        "BranchName": "ECE",
+        "ClassName": "ECE2"
+    },
+    {
+        "BranchID": 11,
+        "BranchName": "ECE",
+        "ClassName": "ECE3"
+    },
+    {
+        "BranchID": 12,
+        "BranchName": "ECE",
+        "ClassName": "ECE4"
+    },
+    {
+        "BranchID": 13,
+        "BranchName": "EE",
+        "ClassName": "EE1"
+    },
+    {
+        "BranchID": 14,
+        "BranchName": "EE",
+        "ClassName": "EE2"
+    },
+    {
+        "BranchID": 15,
+        "BranchName": "EE",
+        "ClassName": "EE3"
+    },
+    {
+        "BranchID": 16,
+        "BranchName": "EE",
+        "ClassName": "EE4"
+    }
+]
