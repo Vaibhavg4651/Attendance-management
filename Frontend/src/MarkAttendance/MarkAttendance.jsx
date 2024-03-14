@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useState} from 'react';
-// import xlsx from 'json-as-xlsx';
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx';
 import ReactToExcel from 'react-html-table-to-excel';
-// impport {useEffect} from 'react-hooks';
+import { Route, useNavigate, Routes,Link} from 'react-router-dom';
+
 const students=[   
         
         {
@@ -152,12 +152,18 @@ const MarkAttendance = () => {
     const [attendance, setAttendance] = useState({}); 
     const [presentcount,setpresentcount]=useState(0);
     const [absentcount,setabsentcount]=useState(0);
-    const [filter,showfilter]=useState(false);
-    const [filteroption,setfilteroptions]=useState({
-      date:'',
-      batch:'',
-      class:'',
-    })
+    const navigate=useNavigate();
+    const handlefilter=()=>{
+      navigate('/filters');
+    }
+    
+    useEffect(() => {
+      // Load attendance from local storage on component mount
+      const storedAttendance = JSON.parse(localStorage.getItem('attendance'));
+      if (storedAttendance) {
+        setAttendance(storedAttendance);
+      }
+    }, []);
     useEffect(() => {
       updateCounts(attendance);
     }, [attendance]);
@@ -192,44 +198,33 @@ const MarkAttendance = () => {
     setpresentcount(presentStudents);
     setabsentcount(absentStudents);
   };    
-  const exportToExcel = () => {
-    const data = students.map((student) => ({
-      'S.No.': student[''],
-      Name: student['__1'],
-      'Enrollment no.': student['__8'],
-      Status: attendance[student['']] || 'absent', // default to absent if not marked
-    }));
-    const ws = XLSX.utils.json_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Attendance Sheet');
-    XLSX.writeFile(wb, 'Attendance.xlsx');
-  }
+ 
  return (
-      <div className="mt-4 ml-4">
+  <>
+
+      <div className="ml-4">
         <h4>Student Attendance List</h4>
           <h5>Batch: CSE-1 5th sem
           Subject: Compiler Design 
           Room no : 401</h5>
-<div className='d-flex justify-content-center align-items-center'>
-  <button className='btn btn-primary align-items-center'><i className="fa-solid fa-filter" ></i>Apply Filters</button>
-  <span className='mx-2'></span>
+          <center> 
+        <div className="d-flex justify-content-center align-items-center">
+        <Routes>
   
-  <button className='btn btn-success my-4 '><i className="fa-solid fa-download "></i>
-  <ReactToExcel
-      table="table-to-xls"
-      filename="excelFile"
-      sheet="sheet 1"
-      className="btn btn-success"
-      onClick={exportToExcel}
-      /></button>
-</div>
+  {/* Add other routes as needed */}
+</Routes>
 
-    
-<div className="justify-content-end align-items-center">
-    <h5 style={{ display: 'block' }}>Total students present: {presentcount}</h5>
-    <span></span>
-    <h5 style={{ display: 'block' }}>Total students absent: {absentcount}</h5>
-</div>
+   
+  
+  
+      </div>
+      </center>
+      
+      <div className="justify-content-end align-items-center text-center">
+          <h6 style={{ display: 'block' }}>Total students present: {presentcount}</h6>
+          <span></span>
+          <h6 style={{ display: 'block' }}>Total students absent: {absentcount}</h6>
+      </div>
 
 
 <table className="table"  id="table-to-xls" style={{ borderCollapse: 'collapse', width: '100'}}>
@@ -242,14 +237,14 @@ const MarkAttendance = () => {
             <div className="d-flex align-items-center ">
               <h6>Present</h6>
               <span className='mx-2'></span>
-              <button className='btn btn-primary' onClick={() => handleAllAttendance('present')} >Present all</button>
+              <button className='btn btn-primary' style={{marginBottom:'1rem'}} onClick={() => handleAllAttendance('present')} >Present all</button>
               </div>
             </th>
             <th style={{ border: '1px solid white', padding: '10px' }}>
             <div className="d-flex align-items-center ">
               <h6>Absent</h6>
               <span className='mx-2'></span>
-              <button className='btn btn-primary' onClick={() => handleAllAttendance('absent')} >Absent all</button>
+              <button className='btn btn-primary' style={{marginBottom:'1rem'}} onClick={() => handleAllAttendance('absent')} >Absent all</button>
               </div>
             </th>
           </tr>
@@ -282,11 +277,10 @@ const MarkAttendance = () => {
           ))}
         </tbody>
       </table>
-     
         <br />
-        <br />
-       
+        <br /> 
       </div>
+      </>
     );
   };
   

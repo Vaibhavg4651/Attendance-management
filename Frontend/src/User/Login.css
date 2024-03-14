@@ -83,3 +83,16 @@
         justify-content: center;
         margin-top: 6rem;
     }
+    /* Add this to your existing CSS or create a new CSS file */
+.filter-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  

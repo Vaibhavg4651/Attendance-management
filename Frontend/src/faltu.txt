@@ -1,0 +1,79 @@
+ <button className='btn btn-primary' onClick={handlefilter}>Apply filters</button>
+          <span className='mx-2'></span>
+        <ReactToExcel
+      table="table-to-xls"
+      filename="excelFile"
+      sheet="sheet 1"
+      className="btn btn-success"
+      onClick={exportToExcel}
+      />
+
+       const exportToExcel = () => {
+    const data = students.map((student) => ({
+      'S.No.': student[''],
+      Name: student['__1'],
+      'Enrollment no.': student['__8'],
+      Status: attendance[student['']] || 'absent', // default to absent if not marked
+    }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Attendance Sheet');
+    XLSX.writeFile(wb, 'Attendance.xlsx');
+  }
+
+
+   <div>
+        <div className="Container2">
+          <div className="row justify-content-center mb-4">
+            <div className="col md-5">
+              <div className="card2 mt-5 login-custom ">
+                <div className="card-body">
+                  {/* <input
+                    className="mt-4"
+                    type="number"
+                    placeholder="Enter the subjectid"
+                    onChange={(e) => setSubjectId(e.target.value)}
+                  /> */}
+                    <input
+                      className="mt-4"
+                      type="text"
+                      placeholder="Enter branch name"
+                      onChange={(e) => setBranchName(e.target.value)}
+                    />
+                  <input
+                    className="mt-4"
+                    type="text"
+                    placeholder="Enter Subject name"
+                    onChange={(e) => setSubjectName(e.target.value)}
+                  />
+                  <input
+                    className="mt-4"
+                    type="text"
+                    placeholder="Enter Subject Code"
+                    onChange={(e) => setSubjectCode(e.target.value)}
+                  />
+                  <input
+                    className="mt-4"
+                    type="text"
+                    placeholder="Enter Subject Type"
+                    onChange={(e) => setSubjectType(e.target.value)}
+                  />
+                  <input
+                    className="mt-4"
+                    type="number"
+                    placeholder="Enter the Year"
+                    onChange={(e) => setYear(e.target.value)}
+                  />
+
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleaddSubjects}
+                  >
+                    submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

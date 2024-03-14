@@ -5,6 +5,7 @@ import password_icon from '../assets/password.png';
 import axios from 'axios';
 import { useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 // const djangoBackendURL = 'http://127.0.0.1:8000/';
 
@@ -22,6 +23,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (EID.length !== 9 || !name || !password || !email || role==='select role') {
+      toast.error('Register failed!');
       setIsRegistrationFailed(true);
       return;
     }
@@ -39,6 +41,7 @@ const Register = () => {
     const res = await axios
       .post(`http://127.0.0.1:8000/api/user/signup`, userData)
       .then((response) => {
+        toast.success('Register Successfully');
         console.log('Registration successful. Response:', response.data);
         navigate('/');
       })
@@ -49,6 +52,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <ToastContainer/>
     <div className="container">
       <div className="row justify-content-center mb-4">
         <div className="col-md-5">
@@ -130,26 +135,13 @@ const Register = () => {
               Submit
             </div>
           </div>
-          {/* {isRegistered && !isRegistrationFailed && (
-            <div className="success-message">
-              <center>
-                <h3>Register Successfully</h3>
-              </center>
-            </div>
-          )}
-          {isRegistrationFailed && (
-            <div className="error-message">
-              <center>
-                <h3>Register Unsuccessful. Please fill in all fields</h3>
-              </center>
-            </div>
-          )} */}
         </div>
       </div>
     </div>
     </div>
     </div>
     </div>
+    </>
   );
 };
 
