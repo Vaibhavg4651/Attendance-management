@@ -75,6 +75,8 @@ import { useSelector } from 'react-redux';
 import MarkAttendance from '../MarkAttendance/MarkAttendance';
 import Subjects from '../Subjects/Subjects';
 import { ToastContainer, toast } from 'react-toastify';
+// import { useAuth0 } from '@auth0/auth0-react';
+// import user_icon from '../Assets/person.png'
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
