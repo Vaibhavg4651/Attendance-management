@@ -1,35 +1,71 @@
 import React from 'react';
-import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Login from '../User/Login';
-import Register from '../User/Register'; // Assuming User is your register component
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import MarkAttendance from '../MarkAttendance/MarkAttendance';
+import Subjects from '../Subjects/Subjects';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user);
+  const id = useSelector((state) => state.user.userid);
+  const role = useSelector((state) => state.user.role);
+  const auth = useSelector((state) => state.user.isAuthenticated);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    toast.success('Logout Successfully');
+    localStorage.clear();
+    console.log('Logout successful');
+    navigate('/');
+  };
+
   return (
-    <div>
-      <Router>
-        <nav className="navbar navbar-light bg-primary">
+    <>
+      <ToastContainer />
+      <div>
+        <nav className="navbar navbar-light bg-light">
           <div className="container-fluid">
-            <Link to="/login" className="navbar-brand text-white">
-              <img src="msit.png" alt="" width="30" height="24" className="d-inline-block align-text-top" />
-              Attendance Management System
-            </Link>
-          </div>
-          <div className="d-flex">
-            <Link to='/login' className='btn btn-light mx-2'>
-              Login
-            </Link>
-            <Link to='/register' className='btn btn-light mx-2'>
-              Register
-            </Link>
+            <div className="row align-items-center">
+              <div className="col-auto">
+                <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center" style={{marginBottom:'2rem'}} />
+              </div>
+              <div className="col ml-auto">
+                <h3 className='text-black text-start mt-4' >Attendance Management System</h3>
+                {auth && (
+                  <div className="d-flex align-items-center" style={{marginLeft:'58rem'}}>
+                    <span className="mr-2">
+                      <h4>{`${user.role}`}</h4>
+                      <p>{`${user.userid}`}</p>
+                    </span>
+                    <Routes>
+                      {role === 'faculty' ? (
+                        <>
+                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />
+                          <Route path={`/${id}/subjects`} element={<Subjects />} />
+                          <Route path={`/${id}/attendance`} element={<MarkAttendance />} />
+                        </>
+                      ) : null}
+                      {role === 'proctor' ? (
+                        <>
+                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />
+                        </>
+                      ) : null}
+                      <Route path="/attendance" element={<Link to="/attendance" className="btn btn-light mx-2">Attendance</Link>} />
+                    </Routes>
+                  </div>
+                )}
+
+                {!auth && (
+                  <Link to="/login" className="btn btn-primary ml-auto">
+                    Login
+                  </Link>
+                )}
+              </div>
+            </div>
           </div>
         </nav>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-        </Routes>
-      </Router>
-    </div>
+      </div>
+    </>
   );
 };
 

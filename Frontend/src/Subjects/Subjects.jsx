@@ -1,97 +1,110 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import Navbar from '../Navbar/Navbar';
 
-const Subjects = () => {
-  const semesters = ["1st", "2nd ", "3rd", "4th","5th","6th","7th","8th"];
-  const depts = ["CSE", "IT", "ECE", "EEE"];
-  const types = ["Lecture", "Lab", "Tutorial"];
-  const sub=["Applied mathematics","Applied physics","Applied Chemistry","Engineering Graphics","Manufacturing Process","Indian Constitution","Human Values and Ethics"
-,"Applied mathematics lab","Applied physics lab","Applied Chemistry lab","Engineering Graphics lab"];
+const Subjects = (e) => {
+  // const [subjectid, setSubjectId] = useState(0);
+  const [branchname, setBranchName] = useState();
+  const [subjectname, setSubjectName] = useState();
+  const [subjectCode, setSubjectCode] = useState();
+  const [subjecttype, setSubjectType] = useState();
+  const [Year, setYear] = useState();
 
-  const [selectedSem, setSelectedSem] = useState("");
-  const [selectedDept, setSelectedDept] = useState("");
-  const [selectedType, setSelectedType] = useState("");
+  const handleaddSubjects = async (e) => {
+    const AddSubject = [
 
-  const handleYearChange = (event) => {
-    setSelectedSem(event.target.value);
-    // Reset selected department and type when year changes
-    setSelectedDept("");
-    setSelectedType("");
-  };
+      {
+        // "SubjectID": parseInt(subjectid),
+        "BranchName": branchname,
+        "SubjectName": subjectname,
+        "Subjectcode": subjectCode,
+        "SubjectType": subjecttype,
+        "year": parseInt(Year),
+      }
+    ]
 
-  const handleDeptChange = (event) => {
-    setSelectedDept(event.target.value);
-    // Reset selected type when department changes
-    setSelectedType("");
-  };
+    console.log('Add Subject request:', AddSubject);
 
-  const handleTypeChange = (event) => {
-    setSelectedType(event.target.value);
-  };
-
-  const showSubjects = () => {
-    if (selectedSem && selectedDept && selectedType === "Lecture") {
-      return sub.filter((subject) => !subject.includes("lab"));
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:8000/api/user/addSubjects',
+        AddSubject
+      );
+      console.log('Add Subject successful. Response:', response.data);
+      toast.success('Subject Added Successfully');
+    } catch (err) {
+      console.error('Adding subject failed:', err);
+      toast.error('Add Subject Unsuccessful');
     }
-   else if (selectedSem && selectedDept && selectedType === "Tutorial") {
-      return sub.filter((subject) => !subject.includes("lab"));
-    }
-else if(selectedSem && selectedDept && selectedType === "Lab"){
-    return sub.filter((subject) => subject.includes("lab"));
-
-}
-    return [];
   };
-
-  const subjectsArray = showSubjects();
 
   return (
-    <div>
-      <h2>Subjects</h2>
-      <div>
-        <label htmlFor="yearSelect">Select Semester:</label>
-        <select id="yearSelect" value={selectedSem} onChange={handleYearChange}>
-          <option value="">Select Semester</option>
-          {semesters.map((semester) => (
-            <option key={semester} value={semester}>
-              {semester}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="deptSelect">Select Department:</label>
-        <select id="deptSelect" value={selectedDept} onChange={handleDeptChange}>
-          <option value="">Select Department</option>
-          {depts.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="typeSelect">Select Subject Type:</label>
-        <select id="typeSelect" value={selectedType} onChange={handleTypeChange}>
-          <option value="">Select Type</option>
-          {types.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-      {subjectsArray.length > 0 && (
-        <div>
-          <h3>Subjects for {selectedDept} - {selectedSem} - {selectedType}</h3>
-          {subjectsArray.map((subject, index) => (
-            <div key={index} className="subject-card">
-              <p>{subject}</p>
-              {/* Add more properties as needed */}
-            </div>
-          ))}
+    <>
+      <ToastContainer />
+      <Navbar />
+      <div className='container mt-4'>
+        <h2>Add Subjects</h2>
+        <div className="row g-3">
+          <div className="col-md-3">
+            <label htmlFor="enrollNo" className="form-label">Enter Branch Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="branch"
+              value={branchname}
+              onChange={(e) => setBranchName(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
+            <label htmlFor="branchId" className="form-label">Enter Subject Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="subjectname"
+              value={subjectname}
+              onChange={(e) => setSubjectName(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
+            <label htmlFor="classSerialNo" className="form-label">Enter Subject Code</label>
+            <input
+              type="text"
+              className="form-control"
+              id="subcode"
+              value={subjectCode}
+              onChange={(e) => setSubjectCode(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
+            <label htmlFor="classSerialNo" className="form-label">Enter Subject Type</label>
+            <input
+              type="text"
+              className="form-control"
+              id="subtype"
+              value={subjecttype}
+              onChange={(e) => setSubjectType(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
+            <label htmlFor="group" className="form-label">Year</label>
+            <input
+              type="number"
+              className="form-control"
+              id="year"
+              value={Year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+          </div>
         </div>
-      )}
-    </div>
+        <div className="mt-4">
+          <button className='btn btn-primary' onClick={handleaddSubjects}>
+            Add Student
+          </button>
+        </div>
+        </div>
+
+    </>
   );
 };
 
