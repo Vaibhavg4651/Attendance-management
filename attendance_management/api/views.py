@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer
-from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment
+from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student
 from .models import UserAccount as user 
 
 # Create your views here.
@@ -91,11 +91,14 @@ def AddSubjects(request):
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-
+{
+  "BranchName" : "CSE",
+  "year" : 1
+}
 @api_view(['GET'])
 def GetSubjects(request):
     try:
-        subjects = Subjects.objects.all()
+        subjects = Subjects.objects.filter(BranchName = request.data['BranchName'] , year = request.data['year'])
         serializer = SubjectSerializer(subjects, many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
@@ -143,7 +146,26 @@ def GetFaculty(request, id):
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 
+@api_view(['PATCH'])
+def UpdateFaculty(request):
+    try:
+        faculty = FacultyTeachingAssignment.objects.get(Class = request.data['Class'] , SubjectID = request.data['SubjectID'])
+        faculty.room = request.data['room']
+        faculty.save()
+        return Response({"message":"room updated succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['DELETE'])
+def DeleteFaculty(request):
+    try:
+        faculty = FacultyTeachingAssignment.objects.get(Class = request.data['Class'], SubjectID = request.data['SubjectID'])
+        faculty.delete()
+        return Response({"message":"Faculty deleted succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # Student api
 @api_view(['POST'])
@@ -154,5 +176,17 @@ def AddStudent(request):
             serializer.save()
             return Response(serializer.data , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['GET'])
+def GetStudentWithClass(request):
+    try:
+        Class = request.data['Class']
+        BranchID = Branch.objects.get(ClassName=Class)
+        students = Student.objects.filter(BranchID = BranchID.BranchID , year = request.data['year'])
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
