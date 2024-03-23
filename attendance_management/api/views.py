@@ -121,6 +121,25 @@ def AddProctor(request):
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+@api_view(['GET'])
+def GetProctor(request, id):
+    try:
+        proctor = Proctor.objects.filter(id = id)
+        serializer = ProctorSerializer(proctor)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PATCH'])
+def UpdateProctor(request):
+    try:
+        proctor = Proctor.objects.get(id = request.data['id'])
+        branch = Branch.objects.get(ClassName=request.data['BranchID'])
+        proctor.BranchID = branch.BranchID
+        proctor.save()
+        return Response({"message":"Proctor updated succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # Faculty api
 @api_view(['POST'])
@@ -217,10 +236,13 @@ def DeleteStudent(request):
     
 
 @api_view(['POST'])
-def MarkAttendance(request):
+def MarkAttendance(request , id):
     try:
+        faculty = FacultyTeachingAssignment.objects.filter(FacultyID = id)
         serializer = AttendanceSerializer(data=request.data, many=True)
-        attendance(request.data)
+        attendance(request.data , faculty.total_lectures)
+        faculty.total_lectures += 1
+        faculty.save()
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data , status=status.HTTP_201_CREATED)
@@ -230,5 +252,20 @@ def MarkAttendance(request):
     
 
 
-def attendance(data):
-    
+def attendance(data , total_lectures):
+    try:
+        student_subjects = StudentSubjectAttendanceSerializer()
+        for student_data in data:
+            student, created = StudentSubjectAttendanceSerializer.objects.get_or_create(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID = student_data['SubjectID'], defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0})
+            if student_data['AttendanceStatus'] == 'present':
+                student.attended_lectures += 1
+
+            elif student_data['AttendanceStatus'] == 'absent':
+                student.notAttended_lectures += 1
+            
+            student.total_lectures = total_lectures 
+            student.save()
+                
+            
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

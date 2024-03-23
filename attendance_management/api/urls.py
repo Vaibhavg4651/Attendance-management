@@ -17,4 +17,5 @@ urlpatterns = [
     path('updateFaculty', views.UpdateFaculty , name="updatefaculty"),
     path('deleteFaculty', views.DeleteFaculty , name="deletefaculty"),
     path('getFacultyDetails/<uuid:id>', views.GetFaculty , name="faculties"),
+    path('markAttendance/<int:faculty_id>', views.MarkAttendance , name="markattendance"),
 ]

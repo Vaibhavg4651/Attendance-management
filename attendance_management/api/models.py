@@ -121,7 +121,7 @@ class FacultyTeachingAssignment(models.Model):
     Class = models.CharField(default=False)
     year = models.IntegerField()
     room = models.CharField()
-    total_lectures = models.IntegerField(default=0)
+    total_lectures = models.IntegerField(default=1)
 
 
 class Student(models.Model):
@@ -136,8 +136,9 @@ class Student(models.Model):
 class StudentSubjectAttendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
     SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
-    total_lectures = models.IntegerField(default=0)
-    attended_lectures = models.IntegerField(default=0)
+    total_lectures = models.IntegerField()
+    attended_lectures = models.IntegerField()
+    notAttended_lectures = models.IntegerField()
 
 
 class Attendance(models.Model):
