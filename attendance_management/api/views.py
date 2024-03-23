@@ -251,6 +251,7 @@ def MarkAttendance(request , id):
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
+
 def attendance(data , total_lectures):
     try:
         student_subjects = StudentSubjectAttendanceSerializer()
