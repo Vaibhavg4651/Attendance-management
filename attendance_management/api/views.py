@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer
+from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer , AttendanceSerializer , StudentSubjectAttendanceSerializer
 from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student
 from .models import UserAccount as user 
 
@@ -190,3 +190,45 @@ def GetStudentWithClass(request):
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PATCH'])
+def UpdateStudent(request):
+    try:
+        serializer = StudentSerializer()
+        model_fields = serializer.fields.keys()
+        for student_data in request.data:
+            student = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
+            for key in student_data.keys():
+                if key in model_fields:
+                    setattr(student, key, student_data[key])
+            student.save()
+        return Response({"message":"Student data updated succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['DELETE'])
+def DeleteStudent(request):
+    try:
+        student = Student.objects.get(EnrollmentNumber = request.data['EnrollmentNumber'])
+        student.delete()
+        return Response({"message":"Student deleted succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['POST'])
+def MarkAttendance(request):
+    try:
+        serializer = AttendanceSerializer(data=request.data, many=True)
+        attendance(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+def attendance(data):
+    

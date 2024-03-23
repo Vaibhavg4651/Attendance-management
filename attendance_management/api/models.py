@@ -121,6 +121,7 @@ class FacultyTeachingAssignment(models.Model):
     Class = models.CharField(default=False)
     year = models.IntegerField()
     room = models.CharField()
+    total_lectures = models.IntegerField(default=0)
 
 
 class Student(models.Model):
@@ -146,3 +147,4 @@ class Attendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
     Date = models.DateField()
     AttendanceStatus = models.CharField(max_length=255) # Present or Absent
+    room = models.CharField()
