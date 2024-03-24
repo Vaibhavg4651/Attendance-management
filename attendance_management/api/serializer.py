@@ -34,16 +34,16 @@ class StudentSerializer(serializers.ModelSerializer):
 class StudentSubjectAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentSubjectAttendance
-        fields = ('EnrollmentNumber', 'SubjectID', 'total_lectures', 'attended_lectures')
+        fields = ('EnrollmentNumber', 'SubjectID', 'total_lectures', 'attended_lectures', 'notAttended_lectures')
 
 
 class FacultyTeachingAssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = FacultyTeachingAssignment
-        fields = ('FacultyID', 'id', 'SubjectID', 'SemesterNumber', 'Class', 'year', 'room')
+        fields = ('FacultyID', 'id', 'SubjectID', 'SemesterNumber', 'Class', 'year', 'room', 'total_lectures')
 
 
 class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
-        fields = ('AttendanceID', 'SubjectID', 'FacultyID', 'EnrollmentNumber')
+        fields = ('AttendanceID', 'SubjectID', 'FacultyID', 'EnrollmentNumber' , 'AttendanceStatus' , 'room' )

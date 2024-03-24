@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer
+from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer , AttendanceSerializer , StudentSubjectAttendanceSerializer
 from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student
 from .models import UserAccount as user 
 
@@ -121,6 +121,25 @@ def AddProctor(request):
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+@api_view(['GET'])
+def GetProctor(request, id):
+    try:
+        proctor = Proctor.objects.filter(id = id)
+        serializer = ProctorSerializer(proctor)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PATCH'])
+def UpdateProctor(request):
+    try:
+        proctor = Proctor.objects.get(id = request.data['id'])
+        branch = Branch.objects.get(ClassName=request.data['BranchID'])
+        proctor.BranchID = branch.BranchID
+        proctor.save()
+        return Response({"message":"Proctor updated succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # Faculty api
 @api_view(['POST'])
@@ -188,5 +207,65 @@ def GetStudentWithClass(request):
         students = Student.objects.filter(BranchID = BranchID.BranchID , year = request.data['year'])
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['PATCH'])
+def UpdateStudent(request):
+    try:
+        serializer = StudentSerializer()
+        model_fields = serializer.fields.keys()
+        for student_data in request.data:
+            student = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
+            for key in student_data.keys():
+                if key in model_fields:
+                    setattr(student, key, student_data[key])
+            student.save()
+        return Response({"message":"Student data updated succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['DELETE'])
+def DeleteStudent(request):
+    try:
+        student = Student.objects.get(EnrollmentNumber = request.data['EnrollmentNumber'])
+        student.delete()
+        return Response({"message":"Student deleted succesfully"} , status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['POST'])
+def MarkAttendance(request , id):
+    try:
+        faculty = FacultyTeachingAssignment.objects.filter(FacultyID = id)
+        serializer = AttendanceSerializer(data=request.data, many=True)
+        attendance(request.data , faculty.total_lectures)
+        faculty.total_lectures += 1
+        faculty.save()
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+def attendance(data , total_lectures):
+    try:
+        student_subjects = StudentSubjectAttendanceSerializer()
+        for student_data in data:
+            student, created = StudentSubjectAttendanceSerializer.objects.get_or_create(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID = student_data['SubjectID'], defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0})
+            if student_data['AttendanceStatus'] == 'present':
+                student.attended_lectures += 1
+
+            elif student_data['AttendanceStatus'] == 'absent':
+                student.notAttended_lectures += 1
+            
+            student.total_lectures = total_lectures 
+            student.save()
+                
+            
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
