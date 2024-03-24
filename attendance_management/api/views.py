@@ -91,10 +91,7 @@ def AddSubjects(request):
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-{
-  "BranchName" : "CSE",
-  "year" : 1
-}
+    
 @api_view(['GET'])
 def GetSubjects(request):
     try:
