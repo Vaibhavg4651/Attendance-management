@@ -18,7 +18,6 @@ const Navbar = () => {
     console.log('Logout successful');
     navigate('/');
   };
- 
 
   return (
     <>
@@ -28,17 +27,12 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="row align-items-center">
               <div className="col-auto">
-                <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center " style={{marginBottom:'6rem'}} />
+                <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center" style={{marginBottom:'2rem'}} />
               </div>
               <div className="col ml-auto">
                 <h3 className='text-black text-start mt-4' >Attendance Management System</h3>
-                <center>
-                  <Link to="/attendance" className='btn btn-primary mt-4' >View Attendance</Link>
-                  <span className='mx-2'></span>
-                  <button className='btn btn-primary mt-4'>Add Student</button>
-                </center>
                 {auth && (
-                  <div className="d-flex align-items-center" style={{marginLeft:'69rem'}}>
+                  <div className="d-flex align-items-center" style={{marginLeft:'58rem'}}>
                     <span className="mr-2">
                       <h4>{`${user.role}`}</h4>
                       <p>{`${user.userid}`}</p>
