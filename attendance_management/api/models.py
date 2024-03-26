@@ -1,4 +1,6 @@
 import uuid
+from django.utils import timezone
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, 
@@ -146,6 +148,6 @@ class Attendance(models.Model):
     SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
     FacultyID = models.ForeignKey(FacultyTeachingAssignment, on_delete=models.CASCADE)
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
-    Date = models.DateField()
+    Date = models.DateField(default= timezone.now)
     AttendanceStatus = models.CharField(max_length=255) # Present or Absent
     room = models.CharField()
