@@ -95,8 +95,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': getenv('DJANGO_DB_NAME', 'attendance'),
-        'USER': getenv('DJANGO_DB_USER', 'postgres'),
-        'PASSWORD': getenv('DJANGO_DB_PASSWORD', 'kshitiz@01'),
+        'USER': getenv('DJANGO_DB_USER', 'vaibhavg4651'),
+        'PASSWORD': getenv('DJANGO_DB_PASSWORD', 'Zodi@1234'),
         'HOST': getenv('DJANGO_DB_HOST', 'localhost'),
         'PORT': getenv('DJANGO_DB_PORT', '5432'),
 
