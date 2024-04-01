@@ -1,17 +1,16 @@
 import { useState } from "react";
 import "./App.css";
-// import Login from "./User/Login";
 import Register from "./User/Register";
 import Subjects from "./Subjects/Subjects";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import Proctor from "./Proctor/Proctor";
 import Faculty from "./Faculty/Faculty";
-// import UpdatePassword from "./User/UpdatePassword";
 import Login from "./User/Login";
 import UpdatePassword from "./User/UpdatePassword";
 import AddProctor from "./Proctor/AddProctor";
-import Filters from "./MarkAttendance/Filters";
+// import Filters from "./MarkAttendance/Filters";
+import MarkAttendance from "./MarkAttendance/MarkAttendance";
 
 function App() {
   const userid = useSelector((state)=>{return state.user.userid})
@@ -43,7 +42,9 @@ const ShowComponent = () => {
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />
-        <Route exact path="/:id/filters" element={<Filters/>}/>
+        {/* <Route exact path="/:id/filters" element={<Filters/>}/> */}
+        <Route exact path="/:id/viewattendance" element={<MarkAttendance/>}/>
+        <Route exact path="/:id/student" element={<Proctor/>}/>
         </Route>
         </Routes>
       </BrowserRouter>
