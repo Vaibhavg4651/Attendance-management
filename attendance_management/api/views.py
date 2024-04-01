@@ -143,6 +143,8 @@ def UpdateProctor(request):
 def AddFaculty(request):
     try:
         user_type = user.objects.get(id = request.data['id'])
+        if user_type.SubjectID == request.data['SubjectID'] and user_type.Class == request.data['Class']:
+            return Response({"detail": "Faculty already exists"}, status=status.HTTP_400_BAD_REQUEST)
         if user_type.user_type != 'faculty':
             return Response({"detail": "User is not a faculty"}, status=status.HTTP_400_BAD_REQUEST)
         serializer = FacultyTeachingAssignmentSerializer(data=request.data)
@@ -215,6 +217,13 @@ def UpdateStudent(request):
         for student_data in request.data:
             student = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
             for key in student_data.keys():
+                if key == 'EnrollmentNumber':
+                    continue
+                if key == 'BranchID':  
+                    branch_id = student_data[key]
+                    branch = Branch.objects.get(pk=branch_id) 
+                    setattr(student, 'BranchID', branch)
+                    continue
                 if key in model_fields:
                     setattr(student, key, student_data[key])
             student.save()
@@ -225,7 +234,7 @@ def UpdateStudent(request):
 @api_view(['DELETE'])
 def DeleteStudent(request):
     try:
-        student = Student.objects.get(EnrollmentNumber = request.data['EnrollmentNumber'])
+        student = Student.objects.filter(EnrollmentNumber = request.data['EnrollmentNumber'])
         student.delete()
         return Response({"message":"Student deleted succesfully"} , status=status.HTTP_200_OK)
     except Exception as e:
@@ -235,14 +244,14 @@ def DeleteStudent(request):
 @api_view(['POST'])
 def MarkAttendance(request , id):
     try:
-        faculty = FacultyTeachingAssignment.objects.filter(FacultyID = id)
+        faculty = FacultyTeachingAssignment.objects.get(FacultyID = id)
         serializer = AttendanceSerializer(data=request.data, many=True)
         attendance(request.data , faculty.total_lectures)
         faculty.total_lectures += 1
         faculty.save()
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data , status=status.HTTP_201_CREATED)
+            return Response({"message":"Attendance Marked successfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -251,7 +260,6 @@ def MarkAttendance(request , id):
 
 def attendance(data , total_lectures):
     try:
-        student_subjects = StudentSubjectAttendanceSerializer()
         for student_data in data:
             student, created = StudentSubjectAttendanceSerializer.objects.get_or_create(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID = student_data['SubjectID'], defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0})
             if student_data['AttendanceStatus'] == 'present':
