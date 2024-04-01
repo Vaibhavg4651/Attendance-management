@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import MarkAttendance from '../MarkAttendance/MarkAttendance';
 import Subjects from '../Subjects/Subjects';
 import { ToastContainer, toast } from 'react-toastify';
+import Proctor from '../Proctor/Proctor';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -18,6 +19,7 @@ const Navbar = () => {
     console.log('Logout successful');
     navigate('/');
   };
+ 
 
   return (
     <>
@@ -27,12 +29,12 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="row align-items-center">
               <div className="col-auto">
-                <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center" style={{marginBottom:'2rem'}} />
+                <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center " style={{marginBottom:'6rem'}} />
               </div>
               <div className="col ml-auto">
-                <h3 className='text-black text-start mt-4' >Attendance Management System</h3>
+              <h3 className='text-black text-start mt-4' >Attendance Management System</h3>
                 {auth && (
-                  <div className="d-flex align-items-center" style={{marginLeft:'58rem'}}>
+                  <div className="d-flex align-items-center" style={{marginLeft:'69rem'}}>
                     <span className="mr-2">
                       <h4>{`${user.role}`}</h4>
                       <p>{`${user.userid}`}</p>
@@ -43,15 +45,17 @@ const Navbar = () => {
                           <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />
                           <Route path={`/${id}/subjects`} element={<Subjects />} />
                           <Route path={`/${id}/attendance`} element={<MarkAttendance />} />
+                          
                         </>
                       ) : null}
                       {role === 'proctor' ? (
                         <>
-                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />
+                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />       
                         </>
                       ) : null}
                       <Route path="/attendance" element={<Link to="/attendance" className="btn btn-light mx-2">Attendance</Link>} />
                     </Routes>
+                    
                   </div>
                 )}
 
@@ -64,6 +68,7 @@ const Navbar = () => {
             </div>
           </div>
         </nav>
+        
       </div>
     </>
   );
