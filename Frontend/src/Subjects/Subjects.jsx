@@ -99,7 +99,7 @@ const Subjects = (e) => {
         </div>
         <div className="mt-4">
           <button className='btn btn-primary' onClick={handleaddSubjects}>
-            Add Student
+            Add Subject
           </button>
         </div>
         </div>
