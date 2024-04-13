@@ -42,6 +42,7 @@ ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
+    'filters.apps.FiltersConfig',
     'rest_framework',
     'corsheaders',
     'django.contrib.admin',

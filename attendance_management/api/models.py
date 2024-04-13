@@ -110,7 +110,12 @@ class Subjects(models.Model):
     SubjectID = models.AutoField(primary_key=True)
     SubjectName = models.CharField(max_length=255)
     BranchName = models.CharField(max_length=255)
-    SubjectType = models.CharField(max_length=255)
+    type_choices = (
+        ('lecture','Lecture'),
+        ('lab','Lab'),
+        ('tutorial','Tutorial'),
+    )
+    SubjectType = models.CharField(choices=type_choices)
     year = models.IntegerField()
     Subjectcode = models.CharField(max_length=255)                                             
     
@@ -120,7 +125,7 @@ class FacultyTeachingAssignment(models.Model):
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)                           
     SemesterNumber = models.IntegerField()
-    Class = models.CharField(default=False)
+    Class = models.CharField()
     year = models.IntegerField()
     room = models.CharField()
     total_lectures = models.IntegerField(default=1)
@@ -134,6 +139,10 @@ class Student(models.Model):
     StudentName = models.CharField(max_length=255)
     Batch = models.IntegerField()
     year = models.IntegerField()
+    SemesterNumber = models.IntegerField()
+    totalHeld = models.IntegerField(default=0)
+    totalAttended = models.IntegerField(default=0)
+    totalPercentage = models.FloatField(default=0.0)
     
 class StudentSubjectAttendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -141,6 +150,7 @@ class StudentSubjectAttendance(models.Model):
     total_lectures = models.IntegerField()
     attended_lectures = models.IntegerField()
     notAttended_lectures = models.IntegerField()
+    percentage = models.FloatField()
 
 
 class Attendance(models.Model):

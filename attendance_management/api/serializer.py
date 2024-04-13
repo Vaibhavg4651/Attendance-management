@@ -29,12 +29,12 @@ class SubjectSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year') 
+        fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year', 'totalAttended', 'totalPercentage') 
 
 class StudentSubjectAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentSubjectAttendance
-        fields = ('EnrollmentNumber', 'SubjectID', 'total_lectures', 'attended_lectures', 'notAttended_lectures')
+        fields = ('EnrollmentNumber', 'SubjectID', 'total_lectures', 'attended_lectures', 'notAttended_lectures' , 'percentage')
 
 
 class FacultyTeachingAssignmentSerializer(serializers.ModelSerializer):
