@@ -6,13 +6,14 @@ const GetStudent = () => {
   const [Class,SetClass]=useState('');
   const [year,SetYear]=useState('');
   const getStudentDetails={
-    "Class":Class,
+      Class,
     "year":parseInt(year)
   }
   const HandleGetStudentChange=async()=>{
     try{
     console.log('Get Student request',getStudentDetails);
-    const res=await axios.get('http://127.0.0.1:8000/api/user/getStudents',getStudentDetails);
+    console.log(getStudentDetails);
+   const res=await axios.get('http://127.0.0.1:8000/api/user/getStudents',getStudentDetails);
     console.log('Get Student Successful',res.data);
     }
     catch(error){
