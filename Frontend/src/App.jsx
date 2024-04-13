@@ -8,7 +8,7 @@ import Proctor from "./Proctor/Proctor";
 import Faculty from "./Faculty/Faculty";
 import Login from "./User/Login";
 import UpdatePassword from "./User/UpdatePassword";
-import AddProctor from "./Proctor/AddProctor";
+// import AddProctor from "./Proctor/AddProctor";
 // import Filters from "./MarkAttendance/Filters";
 import MarkAttendance from "./MarkAttendance/MarkAttendance";
 
@@ -38,7 +38,7 @@ const ShowComponent = () => {
         <Routes>
         <Route exact path="/" element={<Login/>} />
         <Route exact path="/updatepassword" element={<UpdatePassword/>}/>
-        <Route exact path="/branch" element={<AddProctor/>}/>
+       
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />
