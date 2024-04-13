@@ -4,8 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer , AttendanceSerializer , StudentSubjectAttendanceSerializer
-from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student
+from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student , StudentSubjectAttendance , Subjects
 from .models import UserAccount as user 
+from django.core.exceptions import MultipleObjectsReturned
 
 # Create your views here.
 
@@ -246,7 +247,26 @@ def MarkAttendance(request , id):
     try:
         faculty = FacultyTeachingAssignment.objects.get(FacultyID = id)
         serializer = AttendanceSerializer(data=request.data, many=True)
-        attendance(request.data , faculty.total_lectures)
+        total_lectures = faculty.total_lectures
+        for student_data in request.data:
+            student_percentage = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
+            subject_instance = Subjects.objects.get(SubjectID=student_data['SubjectID'])
+            student, created = StudentSubjectAttendance.objects.get_or_create(EnrollmentNumber=student_percentage, SubjectID = subject_instance, defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0 , 'percentage':0.0})
+            if student_data['AttendanceStatus'] == 'present':
+                student.attended_lectures += 1
+                student_percentage.totalAttended += 1
+                student_percentage.totalHeld += 1
+                student_percentage.totalPercentage = round((student_percentage.totalAttended / student_percentage.totalHeld) * 100,2)
+
+            elif student_data['AttendanceStatus'] == 'absent':
+                student.notAttended_lectures += 1
+                student_percentage.totalHeld += 1
+                student_percentage.totalPercentage = round((student_percentage.totalAttended / student_percentage.totalHeld) * 100,2)
+            
+            student.percentage = round((student.attended_lectures / total_lectures) * 100, 2)
+            student.total_lectures = total_lectures 
+            student.save()
+            student_percentage.save()
         faculty.total_lectures += 1
         faculty.save()
         if serializer.is_valid():
@@ -257,20 +277,3 @@ def MarkAttendance(request , id):
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
-
-def attendance(data , total_lectures):
-    try:
-        for student_data in data:
-            student, created = StudentSubjectAttendanceSerializer.objects.get_or_create(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID = student_data['SubjectID'], defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0})
-            if student_data['AttendanceStatus'] == 'present':
-                student.attended_lectures += 1
-
-            elif student_data['AttendanceStatus'] == 'absent':
-                student.notAttended_lectures += 1
-            
-            student.total_lectures = total_lectures 
-            student.save()
-                
-            
-    except Exception as e:
-        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
