@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import React from 'react'
 import { ToastContainer, toast } from "react-toastify";
+import Filters from "../MarkAttendance/Filters";
 
 const AddStudent = () => {
     const [studentDetailsList, setStudentDetailsList] = useState([]);
@@ -26,12 +27,12 @@ const AddStudent = () => {
       }
     ]
     const addStudent = async () => {
-        try {
-          console.log('Sending Add Student request',details);
-          const response = await axios.post('http://127.0.0.1:8000/api/user/addStudents',details);
+      try {
+        console.log('Sending Add Student request',details);
+        const response = await axios.post('http://127.0.0.1:8000/api/user/addStudents',details);
+        setStudentDetailsList([...studentDetailsList, ...response.data]);
           console.log('Student added successfully',response.data);
           toast.success('Student added successfully');
-          setStudentDetailsList([...studentDetailsList, ...response.data]);
           clearFields();
         } catch (error) {
           console.log('Error adding student:', error);
@@ -220,7 +221,7 @@ const AddStudent = () => {
       </div>    
         </div>
       </div>
-
+            {/* <Filters/> */}
     </>
   )
 }

@@ -9,6 +9,7 @@ import {OutTable,ExcelRenderer} from 'react-excel-renderer';
 import AddStudent from './AddStudent';
 import Login from '../User/Login';
 import AddProctor from './AddProctor';
+import Filters from '../MarkAttendance/Filters';
 
 const Proctor = () => {
   const [firsttime,setfirsttime]=useState(false);
@@ -32,7 +33,12 @@ const Proctor = () => {
       <Navbar/>
     <div>{firsttime?(
       <AddProctor onLogin={handleLogin}/>):(<AddStudent/>)}
+      <AddStudent/>
     </div>
+    <Filters/>
+    <br />
+    <br />
+    <br />
     </>
   );
 }
