@@ -146,7 +146,7 @@ class Student(models.Model):
     
 class StudentSubjectAttendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
-    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)
+    SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE, related_name='student_subject_attendance')
     total_lectures = models.IntegerField()
     attended_lectures = models.IntegerField()
     notAttended_lectures = models.IntegerField()

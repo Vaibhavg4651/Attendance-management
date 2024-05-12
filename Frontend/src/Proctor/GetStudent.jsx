@@ -3,17 +3,15 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 
 const GetStudent = () => {
-  const [Class,SetClass]=useState('');
+  const [Class,SetClass]=useState("");
   const [year,SetYear]=useState('');
   const getStudentDetails={
-      Class,
+    "Class": Class,
     "year":parseInt(year)
   }
   const HandleGetStudentChange=async()=>{
     try{
-    console.log('Get Student request',getStudentDetails);
-    console.log(getStudentDetails);
-   const res=await axios.get('http://127.0.0.1:8000/api/user/getStudents',getStudentDetails);
+    let res = await axios.get('http://127.0.0.1:8000/api/user/getStudents',{ params: getStudentDetails });
     console.log('Get Student Successful',res.data);
     }
     catch(error){
@@ -34,7 +32,7 @@ const GetStudent = () => {
               className="form-control"
               id="class"
               value={Class}
-             onChange={(e) => SetClass(e.target.value)}
+             onChange={(e) => SetClass(e.target.value.toUpperCase())}
             />
           </div>
           <div className="col-md-3">

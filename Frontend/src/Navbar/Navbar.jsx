@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MarkAttendance from '../MarkAttendance/MarkAttendance';
@@ -8,14 +8,11 @@ import Proctor from '../Proctor/Proctor';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const id = useSelector((state) => state.user.userid);
-  const role = useSelector((state) => state.user.role);
   const auth = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     toast.success('Logout Successfully');
-    localStorage.clear();
     console.log('Logout successful');
     navigate('/');
   };
@@ -37,25 +34,8 @@ const Navbar = () => {
                   <div className="d-flex align-items-center" style={{marginLeft:'69rem'}}>
                     <span className="mr-2">
                       <h4>{`${user.role}`}</h4>
-                      <p>{`${user.userid}`}</p>
                     </span>
-                    <Routes>
-                      {role === 'faculty' ? (
-                        <>
-                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />
-                          <Route path={`/${id}/subjects`} element={<Subjects />} />
-                          <Route path={`/${id}/attendance`} element={<MarkAttendance />} />
-                          
-                        </>
-                      ) : null}
-                      {role === 'proctor' ? (
-                        <>
-                          <Route path="/" element={<button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>} />       
-                        </>
-                      ) : null}
-                      <Route path="/attendance" element={<Link to="/attendance" className="btn btn-light mx-2">Attendance</Link>} />
-                    </Routes>
-                    
+                      <button onClick={handleLogout} className="btn btn-danger mx-2">Logout</button>
                   </div>
                 )}
 

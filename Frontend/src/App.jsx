@@ -38,13 +38,11 @@ const ShowComponent = () => {
         <Routes>
         <Route exact path="/" element={<Login/>} />
         <Route exact path="/updatepassword" element={<UpdatePassword/>}/>
-       
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />
         {/* <Route exact path="/:id/filters" element={<Filters/>}/> */}
-        <Route exact path="/:id/viewattendance" element={<MarkAttendance/>}/>
-        <Route exact path="/:id/student" element={<Proctor/>}/>
+        {/* <Route exact path="/:id/student" element={<Proctor/>}/> */}
         </Route>
         </Routes>
       </BrowserRouter>
