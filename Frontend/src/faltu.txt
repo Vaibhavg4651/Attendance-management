@@ -77,3 +77,40 @@
           </div>
         </div>
       </div>
+
+
+       // <div className='filter-modal'>
+        //   <label>Date:</label>
+        //   <input type="date" placeholder="Enter date" onChange={(e) => handleStartDateChange(e.target.value)} />
+        //   <br />
+        //   <br />
+        //   <div className='filter-item'>
+        //     {/* <h4 className='text-center'>OR</h4> */}
+        //     <label>Start Date:</label>
+        //     <input type="date" onChange={(e) => handleStartDateChange(e.target.value)} />
+        //   </div>
+        //   <br />
+        //   <div>
+        //     <label>End Date:</label>
+        //     <input type="date" onChange={(e) => handleEndDateChange(e.target.value)} />
+        //   </div>
+        //   <br />
+        //     {/* <h4 className='text-center'>OR</h4> */}
+        //   <div>
+        //   <select
+        //             className=""
+        //             value={Percentage}
+        //             onChange={(e) => setPercentage(e.target.value)}
+        //           >
+        //             <option value="select role">Select by Percentage</option>
+        //             <option value="proctor">Below 30</option>
+        //             <option value="proctor">30-40%</option>
+        //             <option value="proctor">50-60%</option>
+        //             <option value="proctor">60-70%</option>
+        //             <option value="faculty">70-80%</option>
+        //           </select>
+        //   </div>
+        //     <button className="btn btn-primary" onClick={applyFilters}>
+        //     Apply
+        //   </button>
+        // </div>

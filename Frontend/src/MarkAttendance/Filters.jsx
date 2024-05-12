@@ -1,60 +1,90 @@
-// import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-// const Filters = () => {
-//     const [filter,showfilter]=useState(true);
-//     const [start,setstart]=useState('');
-//     const [end,setend]=useState('');
-//     const [Percentage,setPercentage]=useState('');
-//     const handlepercentage=(percentage)=>{
-//         setPercentage(percentage);
-//       }
-//       const handleStartDateChange = (date) => {
-//         setstart(date);
-//       };
-    
-//       const handleEndDateChange = (date) => {
-//         setend(date);
-//       };
-    
-//     const setfilter=()=>{
-//       showfilter((prevVisible) => !prevVisible);
-//     }
-//     const applyFilters=()=>{
-//       setfilter(false);
-//     }
+const Filters = () => {
+  const [filter, showFilter] = useState(true);
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+  const [percentage, setPercentage] = useState('');
 
-//   return (
-//     // <div>
-    
+  const handlePercentage = (percentage) => {
+    setPercentage(percentage);
+  };
 
-//     //    {filter && (
-//     //     <div className="filter-modal" >
-        
-//     //       <label>Date:</label>
-//     //       <input type="date" placeholder="Enter date" onChange={(e) => handleStartDateChange(e.target.value)} />
-//     //       <div>
-//     //         <h4 className='text-center'>OR</h4>
-//     //         <label>Start Date:</label>
-//     //         <input type="date" onChange={(e) => handleStartDateChange(e.target.value)} />
-//     //       </div>
-//     //       <div>
-//     //         <label>End Date:</label>
-//     //         <input type="date" onChange={(e) => handleEndDateChange(e.target.value)} />
-//     //       </div>
-//     //         <h4 className='text-center'>OR</h4>
-//     //       <div>
-//     //       <button className="btn btn-primary mx-2" onClick={handlepercentage}>
-//     //         Sort by Percentage
-//     //        </button>
-//     //       </div>
-//     //                <button className="btn btn-primary" onClick={applyFilters}>
-//     //         Apply
-//     //       </button>
-//     //     </div>
-//     //   )}
-   
-//     // </div>
-    
-//   }
+  const handleStartDateChange = (date) => {
+    setStart(date);
+  };
 
-// export default Filters
+  const handleEndDateChange = (date) => {
+    setEnd(date);
+  };
+
+  const setFilter = () => {
+    showFilter((prevVisible) => prevVisible);
+  };
+
+  const applyFilters = () => {
+    setFilter(false);
+  };
+
+  return (
+    <div className='container mt-4'>
+      <h2 className='d-flex justify-content-center '>Apply Filters</h2>
+      <div className="row g-3">
+        <div className="col-md-3">
+          <label htmlFor="startDate" className="form-label">Enter Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="startDate"
+            value={start}
+            onChange={(e) => handleStartDateChange(e.target.value)}
+          />
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="startDate" className="form-label">Start Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="startDate"
+            value={start}
+            onChange={(e) => handleStartDateChange(e.target.value)}
+          />
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="endDate" className="form-label">End Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="endDate"
+            value={end}
+            onChange={(e) => handleEndDateChange(e.target.value)}
+          />
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="percentage" className="form-label">Percentage</label>
+          <select
+            className="form-select"
+            value={percentage}
+            onChange={(e) => setPercentage(e.target.value)}
+          >
+            <option value="">Select by Percentage</option>
+            <option value="below30">Below 30%</option>
+            <option value="30-40">30-40%</option>
+            <option value="50-60">50-60%</option>
+            <option value="60-70">60-70%</option>
+            <option value="70-80">70-80%</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <center>
+        <button className='btn btn-primary'>
+            Apply
+        </button>
+        </center>
+      </div>
+    </div>
+  );
+};
+
+export default Filters;

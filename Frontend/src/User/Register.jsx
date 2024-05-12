@@ -74,12 +74,13 @@ const Register = () => {
               </div>
               <br />
               <div className="d-flex flex-column align-items-center" style={{marginTop:"3rem"}}>
-                <select
-                  className="form-control mb-3"
+              <select
+                  className="form-select w-50"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
+                  
                 >
-                  <option value="select role">Select role...</option>
+                  <option value="select role">Select role</option>
                   <option value="proctor">Proctor</option>
                   <option value="faculty">Faculty</option>
                 </select>
