@@ -9,6 +9,7 @@ const AddStudent = () => {
     const [enrollNo, setEnrollNo] = useState('');
     const [branchId, setBranchId] = useState('');
     const [classSerialNo, setClassSerialNo] = useState('');
+    const [semester, setSemester] = useState('');
     const [group, setGroup] = useState('');
     const [studentName, setStudentName] = useState('');
     const [batch, setBatch] = useState('');
@@ -22,6 +23,7 @@ const AddStudent = () => {
         "ClassSerialNumber": parseInt(classSerialNo),
         "Group": group,
         "StudentName": studentName,
+        "SemesterNumber":parseInt(semester),
         "Batch": parseInt(batch),
         "year": parseInt(year),
       }
@@ -102,13 +104,23 @@ const AddStudent = () => {
             />
           </div>
           <div className="col-md-3">
+            <label htmlFor="Semester" className="form-label">Semester Number</label>
+            <input
+              type="number"
+              className="form-control"
+              id="Semester"
+              value={semester}
+              onChange={(e) => setSemester(e.target.value)}
+            />
+          </div>
+          <div className="col-md-3">
             <label htmlFor="group" className="form-label">Group</label>
             <input
               type="text"
               className="form-control"
               id="group"
               value={group}
-              onChange={(e) => setGroup(e.target.value)}
+              onChange={(e) => setGroup(e.target.value.toUpperCase())}
             />
           </div>
           <div className="col-md-3">

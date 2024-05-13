@@ -48,7 +48,6 @@ const Subjects = (e) => {
   return (
     <>
       <ToastContainer />
-      {/* <Navbar /> */}
       <div className='container mt-4'>
         <h2>Add Subjects</h2>
         <div className="row g-3">

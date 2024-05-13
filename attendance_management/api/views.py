@@ -143,16 +143,11 @@ def UpdateProctor(request):
 @api_view(['POST'])
 def AddFaculty(request):
     try:
-        user_type = user.objects.get(id = request.data['id'])
-        if user_type.SubjectID == request.data['SubjectID'] and user_type.Class == request.data['Class']:
-            return Response({"detail": "Faculty already exists"}, status=status.HTTP_400_BAD_REQUEST)
-        if user_type.user_type != 'faculty':
-            return Response({"detail": "User is not a faculty"}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = FacultyTeachingAssignmentSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data , status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            serializer = FacultyTeachingAssignmentSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data , status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     

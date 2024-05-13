@@ -7,13 +7,20 @@ class AttendanceSerializer(serializers.ModelSerializer):
         model = Attendance
         fields = ('id', 'SubjectID', 'EnrollmentNumber', 'from_date' , 'to_date' , 'Class', 'year', 'room', 'lessThanPercentage', 'greaterThanPercentage', 'group', 'SubjectType')
 
-class SubjectSerializer(serializers.ModelSerializer):
+class StudentSubjectAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Subjects , StudentSubjectAttendance
-        fields = ('SubjectID', 'Subjectcode', 'SubjectType', 'total_lectures', 'total_attended')
+        model = StudentSubjectAttendance
+        fields = ('total_lectures', 'attended_lectures')
+
+class SubjectSerializer(serializers.ModelSerializer):
+    attend = StudentSubjectAttendanceSerializer()
+
+    class Meta:
+        model = Subjects
+        fields = ('SubjectID', 'Subjectcode', 'SubjectType', 'attend')
 
 class allAttendanceSerializer(serializers.ModelSerializer):
-    Subjects = SubjectSerializer(many=True)
+    Subjects = SubjectSerializer(read_only=True , many=True)
     class Meta:
         model = Student
-        fields = ( 'ClassSerialNumber','EnrollmentNumber', 'StudentName','Group', 'Subjects', 'totalHeld','totalAttended','totalPercentage')
+        fields = ( 'ClassSerialNumber','EnrollmentNumber', 'StudentName','Group', 'totalHeld','totalAttended','totalPercentage','Subjects')
