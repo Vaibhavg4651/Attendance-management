@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MarkAttendance from '../MarkAttendance/MarkAttendance';
@@ -8,14 +8,11 @@ import Proctor from '../Proctor/Proctor';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const id = useSelector((state) => state.user.userid);
-  const role = useSelector((state) => state.user.role);
   const auth = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     toast.success('Logout Successfully');
-    localStorage.clear();
     console.log('Logout successful');
     navigate('/');
   };
