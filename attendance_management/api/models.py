@@ -111,7 +111,7 @@ class Subjects(models.Model):
     SubjectName = models.CharField(max_length=255)
     BranchName = models.CharField(max_length=255)
     type_choices = (
-        ('lecture','Lecture'),
+        ('theory','Theory'),
         ('lab','Lab'),
         ('tutorial','Tutorial'),
     )

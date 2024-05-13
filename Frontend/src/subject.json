@@ -21,5 +21,7 @@
     {"BranchName": "CSE", "SubjectName": "Programming-in-C", "Subjectcode":"PIC" , "SubjectType" : "Lab","year": 1 },
     {"BranchName": "CSE", "SubjectName": "Environmental-Studies" , "Subjectcode": "EVS", "SubjectType" : "Lab","year": 1 },
     {"BranchName": "CSE", "SubjectName":"Workshop-Practice", "Subjectcode": "WP", "SubjectType" : "Lab","year":1 },
-    {"BranchName": "CSE", "SubjectName":"Engineering-Mechanics" , "Subjectcode": "EM", "SubjectType" : "Lab","year": 1 }
+    {"BranchName": "CSE", "SubjectName":"Engineering-Mechanics" , "Subjectcode": "EM", "SubjectType" : "Lab","year": 1 },
+    {"BranchName": "CSE", "SubjectName":"Engineering-Vaibhav" , "Subjectcode": "EV", "SubjectType" : "Lab","year": 1 }
   ]
+  

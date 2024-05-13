@@ -11,11 +11,12 @@ import UpdatePassword from "./User/UpdatePassword";
 // import AddProctor from "./Proctor/AddProctor";
 // import Filters from "./MarkAttendance/Filters";
 import MarkAttendance from "./MarkAttendance/MarkAttendance";
+import GetStudent from "./Proctor/GetStudent";
 
 function App() {
   const userid = useSelector((state)=>{return state.user.userid})
   const role = useSelector((state)=>{return state.user.role})
-
+  const facultyId = useSelector((state)=>state.user.facultyId);
 
 
 const ShowComponent = () => {
@@ -38,6 +39,7 @@ const ShowComponent = () => {
         <Routes>
         <Route exact path="/" element={<Login/>} />
         <Route exact path="/updatepassword" element={<UpdatePassword/>}/>
+       <Route exact path="/attendance" element={<GetStudent/>}/>
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />

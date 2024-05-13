@@ -39,6 +39,9 @@ const AddProctor = () => {
           <div className="col md-5">
             <div className="card2 mt-5 login-custom ">
               <div className="card-body">
+              <strong style={{ color: "#035b96" }} className='d-flex justify-content-center align-items-center text-center'>
+                        Enter your details
+                      </strong>{" "}
       <input className='mt-4' type="text" placeholder='Enter your eid' onChange={(e)=>setId(e.target.value)} />
       <input className='mt-4' type="text" placeholder='Enter your branchId' onChange={(e)=>setBranchId(e.target.value)} />
       <input  className='mt-4'
@@ -46,7 +49,8 @@ const AddProctor = () => {
       placeholder='Enter the semester number'
       onChange={(e) => setSemester(e.target.value)}
   />
-      <button className='btn btn-primary' onClick={handleAddProctor}>submit</button>
+      <center><button className='btn btn-primary d-flex align-items-center' onClick={handleAddProctor}>submit</button>
+      </center>
     </div>
     </div>
     </div>

@@ -200,7 +200,7 @@ def GetStudentWithClass(request):
         Class = request.query_params.get('Class')
         year = request.query_params.get('year')
         BranchID = Branch.objects.get(ClassName=Class)
-        students = Student.objects.filter(BranchID = BranchID.BranchID , year = year)
+        students = Student.objects.filter(BranchID = BranchID.BranchID , year =year)
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:

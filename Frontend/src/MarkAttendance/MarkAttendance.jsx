@@ -1,8 +1,11 @@
+
 import React, { useEffect } from 'react'
 import { useState} from 'react';
 // import * as XLSX from 'xlsx';
 import ReactToExcel from 'react-html-table-to-excel';
 import { Route, useNavigate, Routes,Link} from 'react-router-dom';
+import Filters from './Filters';
+import { ToastContainer, toast } from 'react-toastify';
 
 const students=[   
         
@@ -152,9 +155,10 @@ const MarkAttendance = () => {
     const [attendance, setAttendance] = useState({}); 
     const [presentcount,setpresentcount]=useState(0);
     const [absentcount,setabsentcount]=useState(0);
-    const navigate=useNavigate();
+    const [filter,showfilter]=useState('');
+    // const navigate=useNavigate();
     const handlefilter=()=>{
-      navigate('/filters');
+        showfilter(!filter);
     }
     
     useEffect(() => {
@@ -198,10 +202,12 @@ const MarkAttendance = () => {
     setpresentcount(presentStudents);
     setabsentcount(absentStudents);
   };    
- 
+ const handlesubmitattendance=()=>{
+  toast.success('Attendance marked successfully');
+ }
  return (
   <>
-
+<ToastContainer/>
       <div className="ml-4">
         <h4>Student Attendance List</h4>
           <h5>Batch: CSE-1 5th sem
@@ -213,10 +219,6 @@ const MarkAttendance = () => {
   
   {/* Add other routes as needed */}
 </Routes>
-
-   
-  
-  
       </div>
       </center>
       
@@ -226,6 +228,14 @@ const MarkAttendance = () => {
           <h6 style={{ display: 'block' }}>Total students absent: {absentcount}</h6>
       </div>
 
+      <div className='d-flex justify-content-center align-items-center text-center'>
+  {/* <button className='btn btn-primary' onClick={handlefilter}>Apply Filters</button>
+  {
+   filter && (
+     <Filters/>
+    )
+  } */}
+</div>  
 
 <table className="table"  id="table-to-xls" style={{ borderCollapse: 'collapse', width: '100'}}>
         <thead>
@@ -278,10 +288,153 @@ const MarkAttendance = () => {
         </tbody>
       </table>
         <br />
-        <br /> 
       </div>
+      <div className='d-flex justify-content-center align-items-center text-center'>
+        <button className='btn btn-primary' onClick={handlesubmitattendance}>
+          Submit Attendance
+        </button>
+      </div>
+        <br /> 
       </>
     );
   };
   
   export default MarkAttendance;
+
+// import React, { useState, useEffect } from 'react';
+// import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+
+// const MarkAttendance = () => {
+//   const [attendance, setAttendance] = useState({});
+//   const [presentCount, setPresentCount] = useState(0);
+//   const [absentCount, setAbsentCount] = useState(0);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     updateCounts(attendance);
+//   }, [attendance]);
+
+//   const handleAttendanceChange = (sNo, status) => {
+//     const updatedAttendance = {
+//       ...attendance,
+//       [sNo]: status,
+//     };
+//     setAttendance(updatedAttendance);
+//   };
+
+//   const handleAllAttendance = (status) => {
+//     const updatedAttendance = {};
+//     students.forEach((student) => {
+//       updatedAttendance[student['']] = status;
+//     });
+//     setAttendance(updatedAttendance);
+//   };
+
+//   const updateCounts = (updatedAttendance) => {
+//     const presentStudents = Object.values(updatedAttendance).filter(
+//       (status) => status === 'present'
+//     ).length;
+//     const absentStudents = students.length - presentStudents;
+
+//     setPresentCount(presentStudents);
+//     setAbsentCount(absentStudents);
+//   };
+
+//   const handleSubmitAttendance = async () => {
+//     try {
+//       const response = await fetch('http://127.0.0.1:8000/api/user/markAttendance/2', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(Object.entries(attendance).map(([sNo, status]) => ({
+//           EnrollmentNumber: students.find(student => student[''] === sNo)['__8'],
+//           SubjectID: 4,
+//           FacultyID: 2,
+//           AttendanceStatus: status,
+//           room: "403"
+//         }))),
+//       });
+//       if (response.ok) {
+//         const data = await response.json();
+//         console.log(data.message); // Log the response message
+//       } else {
+//         throw new Error('Failed to mark attendance');
+//       }
+//     } catch (error) {
+//       console.error('Error marking attendance:', error);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <div className="ml-4">
+//         <h4>Student Attendance List</h4>
+//         <h5>Batch: CSE-1 5th sem Subject: Compiler Design Room no : 401</h5>
+
+//         <div className="d-flex justify-content-end align-items-center text-center">
+//           <h6 style={{ display: 'block' }}>Total students present: {presentCount}</h6>
+//           <span></span>
+//           <h6 style={{ display: 'block' }}>Total students absent: {absentCount}</h6>
+//         </div>
+
+//         <table className="table" id="table-to-xls" style={{ borderCollapse: 'collapse', width: '100%' }}>
+//           <thead>
+//             <tr style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
+//               <th style={{ border: '1px solid white', padding: '10px' }}><h6>S.No.</h6></th>
+//               <th style={{ border: '1px solid white', padding: '10px' }}><h6>Name</h6></th>
+//               <th style={{ border: '1px solid white', padding: '10px' }}><h6>Enrollment no.</h6></th>
+//               <th style={{ border: '1px solid white', padding: '10px' }}>
+//                 <div className="d-flex align-items-center ">
+//                   <h6>Present</h6>
+//                   <span className='mx-2'></span>
+//                   <button className='btn btn-primary' style={{ marginBottom: '1rem' }} onClick={() => handleAllAttendance('present')}>Present all</button>
+//                 </div>
+//               </th>
+//               <th style={{ border: '1px solid white', padding: '10px' }}>
+//                 <div className="d-flex align-items-center ">
+//                   <h6>Absent</h6>
+//                   <span className='mx-2'></span>
+//                   <button className='btn btn-primary' style={{ marginBottom: '1rem' }} onClick={() => handleAllAttendance('absent')}>Absent all</button>
+//                 </div>
+//               </th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {students.map((student) => (
+//               <tr key={student['']} style={{ border: '1px solid black' }}>
+//                 <td style={{ border: '1px solid black', padding: '10px' }}>{student['']}</td>
+//                 <td style={{ border: '1px solid black', padding: '10px' }}>{student['__1']}</td>
+//                 <td style={{ border: '1px solid black', padding: '10px' }}>{student['__8']}</td>
+//                 <td style={{ border: '1px solid black', padding: '10px' }}>
+//                   <input
+//                     type="radio"
+//                     name={`attendance-${student['']}`}
+//                     value="present"
+//                     onChange={() => handleAttendanceChange(student[''], 'present')}
+//                     checked={attendance[student['']] === 'present'}
+//                   />
+//                 </td>
+//                 <td style={{ border: '1px solid black', padding: '10px' }}>
+//                   <input
+//                     type="radio"
+//                     name={`attendance-${student['']}`}
+//                     value="absent"
+//                     onChange={() => handleAttendanceChange(student[''], 'absent')}
+//                     checked={attendance[student['']] === 'absent'}
+//                   />
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+
+//         <div className="justify-content-end align-items-center text-center">
+//           <button className='btn btn-primary' onClick={handleSubmitAttendance}>Submit Attendance</button>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default MarkAttendance;

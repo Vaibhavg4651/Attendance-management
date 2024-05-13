@@ -80,16 +80,18 @@ const Login = () => {
                   </p>
                 </div>
                 <br />
-                <div className="d-flex flex-column align-items-center dropdown" >
-                  <select
-                    className="form-control w-50"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                  >
-                    <option value="select role">Select role</option>
-                    <option value="proctor">Proctor</option>
-                    <option value="faculty">Faculty</option>
-                  </select>
+                <div className="d-flex dropdown" >
+                <select
+                  className="form-select w-50"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  
+                >
+                  <option value="select role">Select role</option>
+                  <option value="proctor">Proctor</option>
+                  <option value="faculty">Faculty</option>
+                </select>
+
                 </div>
                 <div className="inputs">
                   <div className="input">
