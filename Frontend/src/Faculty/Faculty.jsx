@@ -17,7 +17,7 @@ const Faculty = () => {
         </Routes> */}
         <AddFaculty/>
         <Subjects/>
-        {/* <GetStudent/> */}
+        <GetStudent/>
         <br />
         {/* <MarkAttendance/> */}
     </div>
