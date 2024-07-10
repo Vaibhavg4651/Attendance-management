@@ -3,8 +3,9 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.utils import timezone
 from .serializer import UserSerializer , BranchSerializer , SubjectSerializer , ProctorSerializer , StudentSerializer , FacultyTeachingAssignmentSerializer , AttendanceSerializer , StudentSubjectAttendanceSerializer
-from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student , StudentSubjectAttendance , Subjects
+from .models import Branch , Proctor , Subjects , FacultyTeachingAssignment , Student , StudentSubjectAttendance , Subjects, Attendance
 from .models import UserAccount as user 
 from django.core.exceptions import MultipleObjectsReturned
 
@@ -242,9 +243,12 @@ def DeleteStudent(request):
 def MarkAttendance(request , id):
     try:
         faculty = FacultyTeachingAssignment.objects.get(FacultyID = id)
-        serializer = AttendanceSerializer(data=request.data, many=True)
         total_lectures = faculty.total_lectures
+        attendance = []
         for student_data in request.data:
+            student = Attendance.objects.filter(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID=student_data['SubjectID'], Date = timezone.now().date())
+            if student:
+                return Response({"message":"Attendance already marked"}, status=status.HTTP_200_OK)
             student_percentage = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
             subject_instance = Subjects.objects.get(SubjectID=student_data['SubjectID'])
             student, created = StudentSubjectAttendance.objects.get_or_create(EnrollmentNumber=student_percentage, SubjectID = subject_instance, defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0 , 'percentage':0.0})
@@ -263,13 +267,26 @@ def MarkAttendance(request , id):
             student.total_lectures = total_lectures 
             student.save()
             student_percentage.save()
+            attendanceObject = {
+            "SubjectID" : student_data['SubjectID'],
+            "FacultyID" : id,
+            "EnrollmentNumber" : student_data['EnrollmentNumber'], 
+            "AttendanceStatus" : student_data['AttendanceStatus'],
+            "room" : student_data['room'],
+            "total_lectures" : total_lectures,
+            "attended_lectures" : student.attended_lectures
+            }
+            attendance.append(attendanceObject)
         faculty.total_lectures += 1
         faculty.save()
+
+        serializer = AttendanceSerializer(data=attendance, many=True)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save() 
             return Response({"message":"Attendance Marked successfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
+        print(str(e))
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 

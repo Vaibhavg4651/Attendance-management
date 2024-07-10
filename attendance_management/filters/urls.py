@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('proctor', views.proctor_filter , name="proctor_filter"),
+    path('allfilter', views.all_filter , name="allfilter"),
+    path('proctorFilter', views.proctor_filter , name="proctorFilter"),
 ]
