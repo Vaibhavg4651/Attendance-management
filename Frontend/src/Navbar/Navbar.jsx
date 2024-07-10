@@ -41,14 +41,14 @@ const Navbar = () => {
                     <li><button onClick={handleLogout} className="btn btn-danger dropdown-item">Logout</button></li>
                   </ul>
                 </li>
-                <Routes>
+                {/* <Routes>
                   {role === 'faculty' ? (
                     <>
                       <Route path={`/${id}/subjects`} element={<li className="nav-item"><Link to={`/${id}/subjects`} className="nav-link">Subjects</Link></li>} />
                       <Route path={`/${id}/attendance`} element={<li className="nav-item"><Link to={`/${id}/attendance`} className="nav-link">Mark Attendance</Link></li>} />
                     </>
                   ) : null}
-                </Routes>
+                </Routes> */}
               </ul>
             )}
             {!auth && (
