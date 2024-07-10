@@ -13,7 +13,7 @@ const Subjects = (e) => {
   const branch=['CSE','IT','ECE','EEE'];
   const subname=SubjectData.map(sub=>sub.SubjectName);
   const subcode=SubjectData.map((x)=> x.Subjectcode);
-  const subtype=['theory','Lab','Tutorial'];
+  const subtype=['Lecture','Lab','Tutorial'];
   const year=[1,2,3,4];
 
   const handleaddSubjects = async (e) => {

@@ -162,7 +162,6 @@
 
                 },
                 "lab":{
-                  
                     "Compiler-Design" : "CD",
                     "Operating-Systems" : "OS",
                     "Computer-Networks" : "CN",
@@ -173,8 +172,6 @@
                     "Artificial Inteliigence":"AI",
                     "Statistics,Statistical Modelling and Data Analysis": "SSDMA",
                     "Web Technologies":"WT"
-                    
-                    
                 }
             },
             "IT" : {

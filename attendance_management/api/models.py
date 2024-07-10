@@ -111,7 +111,7 @@ class Subjects(models.Model):
     SubjectName = models.CharField(max_length=255)
     BranchName = models.CharField(max_length=255)
     type_choices = (
-        ('theory','Theory'),
+        ('lecture','Lecture'),
         ('lab','Lab'),
         ('tutorial','Tutorial'),
     )
@@ -161,3 +161,5 @@ class Attendance(models.Model):
     Date = models.DateField(default= timezone.now)
     AttendanceStatus = models.CharField(max_length=255) # Present or Absent
     room = models.CharField()
+    total_lectures = models.IntegerField(default=0)
+    attended_lectures = models.IntegerField(default=0)
