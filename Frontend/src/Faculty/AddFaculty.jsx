@@ -5,10 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import GetStudent from '../Proctor/GetStudent';
 import { Link } from 'react-router-dom';
+import UpdateFaculty from './UpdateFaculty';
+
 const AddFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
     const [subjectId, setSubjectId] = useState(0);
-    const [facultyId,setFacultyId]=useState(); 
+    const [facultyId, setFacultyId] = useState();
     const [semesterNumber, setSemesterNumber] = useState(0);
     const [Class, setClass] = useState('');
     const [year, setYear] = useState(0);
@@ -16,21 +18,17 @@ const AddFaculty = () => {
     const [details, setDetails] = useState([]);
     const [error, setError] = useState(null);
 
-    // Function to fetch Id and SubjectID from the backend
-    const fetchIds = async () => {
+   const fetchIds = async () => {
         try {
-            // Make API call to fetch Id and SubjectID
             const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
             const data = response.data;
+            // console.log(response.SubjectID);
             setDetails(data);
-            setSubjectId(data.SubjectID);
-            setFacultyId(data.FacultyID);
-            setRoom(data.room);
-        
+            setSubjectId(data[0].SubjectID);
+            // console.log(data[0].SubjectID);
+            setFacultyId(data[0].FacultyID);
+            setRoom(data[0].room);
             console.log(data);
-            // Set the fetched Id and SubjectID in the state
-            // setId(userid);
-            // setSubjectId(data.subjectId);
         } catch (error) {
             console.error('Error fetching Ids:', error);
             setError(error);
@@ -38,11 +36,10 @@ const AddFaculty = () => {
     };
 
     useEffect(() => {
-        // Fetch faculty details when component mounts
         fetchIds();
-    }, []); // Empty dependency array to run only once when component mounts
+    }, []);
 
-    const handleAddFaculty = async (e) => {
+    const handleAddFaculty = async () => {
         const facultyDetails = {
             SemesterNumber: parseInt(semesterNumber),
             Class: Class,
@@ -59,7 +56,7 @@ const AddFaculty = () => {
             toast.error('Add unsuccessful');
         }
     };
-    
+
     return (
         <>
             <Navbar />
@@ -83,45 +80,44 @@ const AddFaculty = () => {
                         </div>
                     </div>
                 </div>
-                </div>
-                
+            </div>
 
-                <div>
-                    <center>
-                    <h3 style={{margin:'auto'}}>Faculty Details</h3>
-                    </center>
-                    <div className='details mt-4 d-flex align-items-center'>
-                        <table style={{ width: '75%',margin:'auto' }}>
-                            <thead style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
-                                <tr>
-                                    <th style={{ border: '1px solid white', padding: '7px' }}>Class</th>
-                                    <th style={{ border: '1px solid white', padding: '7px' }}>Semester</th>
-                                    <th style={{ border: '1px solid white', padding: '7px' }}>Room</th>
-                                    <th style={{ border: '1px solid white', padding: '7px' }}>Action</th>
+            <div>
+                <center>
+                    <h3 style={{ margin: 'auto' }}>Faculty Details</h3>
+                </center>
+                <div className='details mt-4 d-flex align-items-center'>
+                    <table style={{ width: '75%', margin: 'auto' }}>
+                        <thead style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
+                            <tr>
+                                <th style={{ border: '1px solid white', padding: '7px' }}>Class</th>
+                                <th style={{ border: '1px solid white', padding: '7px' }}>Semester</th>
+                                <th style={{ border: '1px solid white', padding: '7px' }}>Room</th>
+                                <th style={{ border: '1px solid white', padding: '7px' }}>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {details.map((faculty, index) => (
+                                <tr key={index}>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.Class}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.SemesterNumber}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.room}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>
+                                        <div >
+                                            <Link to='/attendance' className='btn btn-primary flex' element={<GetStudent subjectId={subjectId} facultyId={facultyId} room={room} />}>Mark Attendance</Link>
+                                            &ensp;
+                                            <Link to='/edit' className='btn btn-secondary' element={<UpdateFaculty/>}>Edit Details</Link>
+                                            &ensp;
+                                            <Link className='btn btn-danger' element={<GetStudent />}>Delete Details</Link>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {details.map((faculty, index) => (
-                                    <tr key={index}>
-                                        <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.Class}</td>
-                                        <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.SemesterNumber}</td>
-                                        <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.room}</td>
-                                        <td style={{ border: '1px solid black', padding: '10px' }}>
-                                            <div >
-                                                <Link path='/attendance' className='btn btn-primary flex' element={<GetStudent/>}>Mark Attendance</Link>
-                                                &ensp;
-                                                <Link className='btn btn-secondary' element={<GetStudent/>}>Edit Details</Link>
-                                                &ensp;
-                                                <Link className='btn btn-danger' element={<GetStudent/>}>Delete Details</Link>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                <GetStudent subjectId={subjectId} facultyId={facultyId} room={room}/>
+            </div>
+            {/* <GetStudent subjectId={subjectId} facultyId={facultyId} Room={room}/> */}
         </>
     );
 };

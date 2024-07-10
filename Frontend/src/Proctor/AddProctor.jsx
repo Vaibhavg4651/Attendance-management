@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 // import Navbar from '../Navbar/Navbar';
 import { toast,ToastContainer } from 'react-toastify';
+import AddStudent from './AddStudent';
 
 const AddProctor = () => {
     const [id,setId]=useState();
