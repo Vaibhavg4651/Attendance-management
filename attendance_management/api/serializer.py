@@ -29,7 +29,7 @@ class SubjectSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year', 'totalAttended', 'totalPercentage','SemesterNumber') 
+        fields = ('EnrollmentNumber', 'BranchID', 'ClassSerialNumber', 'Group', 'StudentName', 'Batch', 'year', 'totalAttended','totalHeld', 'totalPercentage','SemesterNumber') 
 
 class StudentSubjectAttendanceSerializer(serializers.ModelSerializer):
     class Meta:

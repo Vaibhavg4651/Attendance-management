@@ -123,10 +123,11 @@ def AddProctor(request):
 @api_view(['GET'])
 def GetProctor(request, id):
     try:
-        proctor = Proctor.objects.filter(id = id)
+        proctor = Proctor.objects.get(id=id)
         serializer = ProctorSerializer(proctor)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
+        print(str(e))
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 @api_view(['PATCH'])
@@ -205,6 +206,7 @@ def GetStudentWithClass(request):
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
+        print(str(e))
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 @api_view(['PATCH'])
