@@ -9,6 +9,7 @@ urlpatterns = [
     path('addSubjects', views.AddSubjects , name="subjects"),
     path('getSubjects', views.GetSubjects , name="getSubjects"),
     path('addProctor', views.AddProctor , name="proctor"),
+    path('getProctor/<uuid:id>', views.GetProctor, name="getproctor"),
     path('addStudents', views.AddStudent , name="students"),
     path('getStudents', views.GetStudentWithClass , name="getstudentswithclass"),
     path('updateStudents', views.UpdateStudent , name="updatestudent"),
