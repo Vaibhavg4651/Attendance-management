@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 // import Navbar from '../Navbar/Navbar';
 import { toast,ToastContainer } from 'react-toastify';
-import AddStudent from './AddStudent';
+import GetProctor from './GetProctor';
+
 
 const AddProctor = () => {
     const [id,setId]=useState();
@@ -34,6 +35,7 @@ const AddProctor = () => {
   return (
     <>   
     <ToastContainer/> 
+    
     <div>
     <div className="Container2">
         <div className="row justify-content-center mb-4">

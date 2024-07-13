@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
@@ -13,17 +13,15 @@ const UpdateFaculty = () => {
     const [room, setRoom] = useState('');
     const [details, setDetails] = useState({});
     const [error, setError] = useState(null);
-
+    const navigate=useNavigate();
     const fetchFacultyDetails = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
             const data = response.data;
             // console.log(data[0]);
-
-           
-
             setSubjectId(data[0].SubjectID);
             setClass(data[0].Class);
+
         } catch (error) {
             console.error('Error fetching faculty details:', error);
             setError(error);
@@ -44,7 +42,9 @@ const UpdateFaculty = () => {
         try {
             const res = await axios.patch(`http://127.0.0.1:8000/api/user/updateFaculty`, facultyDetails);
             console.log('Update Faculty successful. Response:', res.data);
+            navigate(-1);
             toast.success('Faculty updated successfully');
+
         } catch (err) {
             console.error('Update faculty failed. Error:', err);
             toast.error('Update unsuccessful');

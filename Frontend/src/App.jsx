@@ -1,26 +1,19 @@
-import { useState } from "react";
-import "./App.css";
 import Register from "./User/Register";
 import Subjects from "./Subjects/Subjects";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import Proctor from "./Proctor/Proctor";
 import Faculty from "./Faculty/Faculty";
 import Login from "./User/Login";
 import UpdatePassword from "./User/UpdatePassword";
-// import AddProctor from "./Proctor/AddProctor";
-// import Filters from "./MarkAttendance/Filters";
-import MarkAttendance from "./MarkAttendance/MarkAttendance";
-import GetStudent from "./Proctor/GetStudent";
+import GetStudent from "./Students/GetStudent";
 import UpdateFaculty from "./Faculty/UpdateFaculty";
+import AddFaculty from "./Faculty/AddFaculty";
 
 function App() {
   const userid = useSelector((state)=>{return state.user.userid})
   const role = useSelector((state)=>{return state.user.role})
-  // const facultyId = useSelector((state)=>state.user.facultyId);
-  // const subjectId=useSelector((state)=>state.user.subjectId);
-  // const room=useSelector((state)=>state.user.room);
-
+  
 const ShowComponent = () => {
   const { id } = useParams();
   const user_type = new URLSearchParams(window.location.search).get('role'); 
@@ -46,8 +39,7 @@ const ShowComponent = () => {
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />
-        {/* <Route exact path="/:id/filters" element={<Filters/>}/> */}
-        {/* <Route exact path="/:id/student" element={<Proctor/>}/> */}
+        <Route exact path="/:id/addfaculty" element={<AddFaculty/>}/>
         </Route>
         </Routes>
       </BrowserRouter>
