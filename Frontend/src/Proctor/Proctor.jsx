@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../Navbar/Navbar';
-import {OutTable,ExcelRenderer} from 'react-excel-renderer';
-// import xlsx  from 'json-as-xlsx';
-// import { useNavigate } from 'react-router-dom';
-// import Filters from '../MarkAttendance/Filters';
-import AddStudent from './AddStudent';
+import AddStudent from '../Students/AddStudent';
 import Login from '../User/Login';
 import AddProctor from './AddProctor';
-import Filters from '../MarkAttendance/Filters';
+import Filters from '../Filters/Filters';
+import GetProctor from './GetProctor';
 
 const Proctor = () => {
   const [firsttime,setfirsttime]=useState(false);
@@ -33,7 +28,8 @@ const Proctor = () => {
       <Navbar/>
     <div>{firsttime?(
       <AddProctor onLogin={handleLogin}/>):(<AddStudent/>)}
-      <AddStudent/>
+      <GetProctor/>
+    <AddStudent/>
     </div>
     <Filters/>
     <br />

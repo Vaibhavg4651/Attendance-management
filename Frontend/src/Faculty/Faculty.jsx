@@ -4,22 +4,19 @@ import Navbar from '../Navbar/Navbar'
 // import Filters from '../MarkAttendance/Filters'
 import Subjects from '../Subjects/Subjects'
 import AddFaculty from './AddFaculty'
-import GetStudent from '../Proctor/GetStudent'
+
 import { Route, Routes } from 'react-router-dom'
+import GetFaculty from './GetFaculty'
+import GetSubjects from '../Subjects/GetSubjects'
 
 const Faculty = () => {
   return (
     <div>
-      {/* <Filters/> */}
-        {/* <Navbar/> */}
-        {/* <Routes>
-        <Route path='/attendance' element={<GetStudent/>}/>
-        </Routes> */}
-        <AddFaculty/>
+     
+        <GetFaculty/>
+        <GetSubjects/>
         <Subjects/>
-        <GetStudent/>
-        <br />
-        {/* <MarkAttendance/> */}
+      
     </div>
   )
 }

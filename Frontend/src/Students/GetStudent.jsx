@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Filters from '../MarkAttendance/Filters';
+import Filters from '../Filters/Filters';
 import * as XLSX from 'xlsx';
 import { useSelector } from 'react-redux';
 
@@ -11,14 +11,14 @@ const GetStudent = () => {
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [studentData, setStudentData] = useState([]);
-  const [subjectId, setSubjectId] = useState(0);
-  const [facultyId, setFacultyId] = useState(0);
-  const [Room, setRoom] = useState(0);
+  const [facultyDetails, setFacultyDetails] = useState([]);
+  const [selectedFaculty, setSelectedFaculty] = useState({});
   const [loading, setLoading] = useState(false);
   const [attendance, setAttendance] = useState({});
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
   const [attendanceMarked, setAttendanceMarked] = useState(false);
+  const [facultyClass,setFacultyClass]=useState('');
 
   const classes = ['CSE1', 'CSE2', 'CSE3', 'CSE4', 'IT1', 'IT2', 'IT3', 'ECE1', 'ECE2', 'ECE3', 'EEE1', 'EEE2'];
   const years = [1, 2, 3, 4];
@@ -46,9 +46,9 @@ const GetStudent = () => {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
       const data = response.data;
-      setSubjectId(data[0].SubjectID);
-      setFacultyId(data[0].FacultyID);
-      setRoom(data[0].room);
+      
+      setFacultyDetails(data);
+      setSelectedFaculty(data[0]); // Default to first faculty member
       console.log(data);
     } catch (error) {
       console.error('Error fetching Ids:', error);
@@ -62,15 +62,15 @@ const GetStudent = () => {
   const markAttendanceapi = async () => {
     const studarray = studentData.map((student) => ({
       EnrollmentNumber: student.EnrollmentNumber,
-      SubjectID: subjectId,
-      FacultyID: facultyId,
+      SubjectID: selectedFaculty.SubjectID,
+      FacultyID: selectedFaculty.FacultyID,
       AttendanceStatus: attendance[student.EnrollmentNumber],
-      room: Room,
+      room: selectedFaculty.room,
     }));
 
     try {
       console.log('Sending request', studarray);
-      const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${facultyId}`, studarray);
+      const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${selectedFaculty.FacultyID}`, studarray);
       console.log('Attendance marked successfully', res.data);
       const updatedStudentData = studentData.filter((student) => !studarray.some((att) => att.EnrollmentNumber === student.EnrollmentNumber));
       setStudentData(updatedStudentData);
@@ -156,6 +156,7 @@ const GetStudent = () => {
       <ToastContainer />
       <div className='container mt-4'>
         <h2>Get Student Details</h2>
+      
         <div className='row g-3'>
           <div className='col-md-3'>
             <label htmlFor='class' className='form-label'>Class</label>
@@ -194,7 +195,14 @@ const GetStudent = () => {
       {studentData && studentData.length > 0 && (
         <>
           <div className='container mt-4'>
-            <h2>Student Details</h2>
+          <h2>
+  Student Details of Class
+  {" "}
+     {selectedClass} {" "} {selectedYear} year
+      {/* {index < facultyDetails.length - 1 ? ", " : ""} */}
+  
+    </h2>
+            {/* <h3>Total Lectures held: {selectedFaculty.total_lectures}</h3> */}
             <Filters />
             <h5>Total Students Present: {presentCount}</h5>
             <h5>Total Students Absent: {absentCount}</h5>
