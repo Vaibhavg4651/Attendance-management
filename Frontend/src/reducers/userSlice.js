@@ -5,6 +5,8 @@ const userSlice = createSlice({
     userid: null,
     isAuthenticated: false,
     role: null,
+    BranchId:null,
+    SemesterNumber:null,
   },
   reducers: {
     loginSuccess: (state, action) => {
@@ -13,13 +15,18 @@ const userSlice = createSlice({
       state.role = action.payload.user_type;
       state.email=action.payload.email
     },
+    setBranchId(state, action) {
+      state.BranchId = action.payload.BranchID;
+      state.SemesterNumber = action.payload.SemesterNumber;
+    },
     logout: (state) => {
       state.isAuthenticated = false;
       state.role = "";
       state.userid = null;
+      state.BranchId=null;
     },
   },
 });
 
 export default userSlice.reducer;
-export const { loginSuccess ,logout} = userSlice.actions;
+export const { loginSuccess ,logout , setBranchId, setSemesterNumber} = userSlice.actions;

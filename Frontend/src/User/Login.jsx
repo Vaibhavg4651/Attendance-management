@@ -39,7 +39,6 @@ const Login = () => {
       .then((response) => {
         toast.success('Login Successful');
         console.log("Login successful. Response:", response.data);
-        localStorage.setItem("token",response.data.token);
         dispatch(loginSuccess(response.data));
         navigate(`/${response.data.id}?role=${role}`);
         console.log(response.data.id);
