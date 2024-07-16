@@ -23,6 +23,7 @@ def all_filter(request):
         facultySubjects = FacultyTeachingAssignment.objects.filter(Class=request.data['Class'], year=request.data['year'])
         for faculty in facultySubjects:
             subjects.append(faculty.SubjectID_id)
+           
         students = Student.objects.filter(BranchID=request.data['BranchID'], year=request.data['year'])
         for student in students:
             attendance = {
@@ -38,6 +39,7 @@ def all_filter(request):
             for sub in subjects:
                 try:
                     studentdetails = StudentSubjectAttendance.objects.get(EnrollmentNumber=student.EnrollmentNumber , SubjectID=sub)
+                    
                     subject = {
                             "SubjectID": sub,
                             "Subjectcode": studentdetails.SubjectID.Subjectcode,
@@ -45,6 +47,7 @@ def all_filter(request):
                             "attend":{"total_lectures": studentdetails.total_lectures,"attended_lectures": studentdetails.attended_lectures
                             }
                         }
+                       
                     attendance['Subjects'].append(subject)          
                 except StudentSubjectAttendance.DoesNotExist:
                     for faculty in facultySubjects:
@@ -56,6 +59,7 @@ def all_filter(request):
                                 "attend":{"total_lectures": faculty.total_lectures - 1,
                                 "attended_lectures": 0
                             }}
+                           
                             attendance['Subjects'].append(subject)
 
             attendanceArray.append(attendance)
