@@ -5,7 +5,7 @@ import { ExcelRenderer } from "react-excel-renderer";
 import branches from "../Branch.json";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddStudent = () => {
+const AddStudent = ({branchId}) => {
   const [studentDetailsList, setStudentDetailsList] = useState([]);
   const [header, setHeader] = useState([]);
   const [cols, setCols] = useState([]);
@@ -21,13 +21,13 @@ const AddStudent = () => {
         const studentDetails = response.rows.slice(1).map((row) => {
           return {
             EnrollmentNumber: parseInt(row[0]),
-            BranchID: parseInt(row[1]), // Map branch name to BranchID
-            ClassSerialNumber: parseInt(row[2]),
-            Group: row[3],
-            StudentName: row[4],
-            Batch: parseInt(row[5]),
-            SemesterNumber: parseInt(row[6]),
-            year: parseInt(row[7]),
+            BranchID: branchId, // Map branch name to BranchID
+            ClassSerialNumber: parseInt(row[1]),
+            Group: row[2],
+            StudentName: row[3],
+            Batch: parseInt(row[4]),
+            SemesterNumber: parseInt(row[5]),
+            year: parseInt(row[6]),
           };
         });
         setHeader(header);

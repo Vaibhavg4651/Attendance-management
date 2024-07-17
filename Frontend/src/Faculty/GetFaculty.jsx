@@ -10,6 +10,8 @@ import Navbar from '../Navbar/Navbar';
 
 const GetFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
+    const role = useSelector((state)=>{return state.user.role})
+  
     const [details, setDetails] = useState([]);
     const [subjectId, setSubjectId] = useState(0);
     const [facultyId, setFacultyId] = useState();
@@ -47,11 +49,13 @@ const GetFaculty = () => {
                     <table style={{ width: '75%', margin: 'auto' }}>
                         <thead style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
                             <tr>
-                                <th style={{ border: '1px solid white', padding: '7px' }}>Class</th>
-                                <th style={{ border: '1px solid white', padding: '7px' }}>Semester</th>
-                                <th style={{ border: '1px solid white', padding: '7px' }}>Room</th>
-                                <th style={{ border: '1px solid white', padding: '7px' }}>Total Lectures Held</th>
-                                <th style={{ border: '1px solid white', padding: '7px' }}>Action</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Class</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Semester</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Year</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Subject</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Room</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Total Lectures Held</th>
+                                <th style={{ border: '1px solid white', padding: '15px' }}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +63,8 @@ const GetFaculty = () => {
                                 <tr key={index}>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.Class}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.SemesterNumber}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.year}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>PIC</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.room}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.total_lectures}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>
@@ -67,7 +73,7 @@ const GetFaculty = () => {
                                             &ensp;
                                             <Link to='/edit' className='btn btn-secondary' element={<UpdateFaculty />}>Update Details</Link>
                                             &ensp;
-                                            <Link className='btn btn-danger' element={<GetStudent />}>Delete Details</Link>
+                                            {/* <Link className='btn btn-danger' element={<GetStudent />}>Delete Details</Link> */}
                                         </div>
                                     </td>
                                 </tr>
@@ -75,10 +81,10 @@ const GetFaculty = () => {
                         </tbody>
                     </table>
                 </div>
-                <div>
-                    {/* <h2>Add More Details</h2> */}
-                    <Link to={`/${userid}/addfaculty`} className='btn btn-primary'>Add More Details</Link>
-                </div>
+                {/* <div>
+                    <h2>Add More Details</h2>
+                    <Link to={`/${userid}?role=${role}/addFaculty`} className='btn btn-primary'>Add More Details</Link>
+                </div> */}
             </div>
         </>
     );
