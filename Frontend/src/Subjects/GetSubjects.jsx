@@ -1,26 +1,31 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const GetSubjects = () => {
   const [BranchName,setBranchName]=useState('');
   const [year ,setYear]=useState(0);
   const [subjectData,setSubjectData]=useState([]);
   const years=[1,2,3,4];
-  const branch=['CSE','IT','ECE','EEE'];
+  const branch=["CSE","IT","ECE","EEE"];
 
  const handleGetSubjects=async()=>{
 
   const subRequest={
-    "BranchName":BranchName,
-    "year":parseInt(year)
+    BranchName: BranchName,
+        "year":parseInt(year)
   }
   try {
     console.log('Sending Get Subject request',subRequest);
-    const response=await axios.get('http://127.0.0.1:8000/api/user/getSubjects');
+    const response=await axios.get('http://127.0.0.1:8000/api/user/getSubjects',{BranchName: BranchName,
+      "year":parseInt(year)});
     console.log('Get Subject response',response.data);
+    toast.success('Subjects Fetched Successfully');
     setSubjectData(response.data);
 
   } catch (error) {
     console.log('Error in  getting subjects',error);
+    toast.error("Error in getting subjects");
+    console.log(error.response.data);
   }
  }
   return (

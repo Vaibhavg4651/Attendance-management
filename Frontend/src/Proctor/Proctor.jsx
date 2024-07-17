@@ -26,11 +26,9 @@ const Proctor = () => {
   return (
     <>
       <Navbar/>
-    <div>{firsttime?(
-      <AddProctor onLogin={handleLogin}/>):(<AddStudent/>)}
+   
       <GetProctor/>
-    <AddStudent/>
-    </div>
+    {/* < AddStudent/> */}
     <Filters/>
     <br />
     <br />
