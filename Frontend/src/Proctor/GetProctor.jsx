@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import branches from '../Branch.json';
 import AddStudent from '../Students/AddStudent';
+import { setBranchId } from "../reducers/userSlice";
+
 const GetProctor = () => {
+    const dispatch=useDispatch();
     const userid=useSelector((state)=>state.user.userid);
     const [details,setDetails]=useState();
     const [semester,setSemester]=useState(0);
@@ -16,6 +19,12 @@ const GetProctor = () => {
             setDetails(data);
             setSemester(data.SemesterNumber);
             setBranchId(data.BranchID);
+            dispatch(
+                setBranchId({
+                  BranchID: data.BranchID,
+                  SemesterNumber:data.SemesterNumber,
+                })
+              );
             const branch=branches.find(branch=>branch.BranchID===data.BranchID);
             if (branch) {
                 setClassName(branch.ClassName);

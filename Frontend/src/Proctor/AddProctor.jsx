@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 // import Navbar from '../Navbar/Navbar';
 import { toast,ToastContainer } from 'react-toastify';
 import GetProctor from './GetProctor';
-import { toast, ToastContainer } from "react-toastify";
-import AddStudent from "./AddStudent";
 import { useSelector, useDispatch } from 'react-redux';
 
 
