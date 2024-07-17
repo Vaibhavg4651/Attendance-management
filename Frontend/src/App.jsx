@@ -24,9 +24,9 @@ const ShowComponent = () => {
       return <Proctor/>;
     }
   }
-   else{
-    return <h1>Invalid</h1>
-  }
+  //  else{
+  //   return <h1>Invalid</h1>
+  // }
 };
   return (
     <>
@@ -39,7 +39,7 @@ const ShowComponent = () => {
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/:id" element={<ShowComponent  />}>
         <Route exact path="/:id/subjects" element={<Subjects/>} />
-        <Route exact path="/:id/addfaculty" element={<AddFaculty/>}/>
+        <Route exact path={`/:id/?role=${role}/addFaculty`} element={<AddFaculty/>}/>
         </Route>
         </Routes>
       </BrowserRouter>

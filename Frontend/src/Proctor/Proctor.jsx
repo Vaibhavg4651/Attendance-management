@@ -49,21 +49,14 @@ const Proctor = () => {
 
   return (
     <>
-      <Navbar />
-      <div>
-        {firstTime === null ? (
-          <p>Loading...</p>
-        ) : firstTime ? (
-          <AddProctor />
-        ) : (
-          <AddStudent />
-        )}
-      </div>
+      <Navbar/>
+   
       <GetProctor/>
-      <Filters />
-      <br />
-      <br />
-      <br />
+    {/* < AddStudent/> */}
+    <Filters/>
+    <br />
+    <br />
+    <br />
     </>
   );
 };

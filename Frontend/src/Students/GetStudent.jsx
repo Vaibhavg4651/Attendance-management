@@ -23,14 +23,15 @@ const GetStudent = () => {
   const classes = ['CSE1', 'CSE2', 'CSE3', 'CSE4', 'IT1', 'IT2', 'IT3', 'ECE1', 'ECE2', 'ECE3', 'EEE1', 'EEE2'];
   const years = [1, 2, 3, 4];
 
-  const getStudentDetails = {
+  const getStudentDetails = facultyDetails ? {
     Class: selectedClass,
     year: parseInt(selectedYear),
-  };
+  } : {};
 
   const handleGetStudentChange = async () => {
     try {
       setLoading(true);
+      console.log('Sending request',getStudentDetails);
       const response = await axios.get('http://127.0.0.1:8000/api/user/getStudents', { params: getStudentDetails });
       console.log(response.data);
       setStudentData(response.data);
@@ -48,12 +49,12 @@ const GetStudent = () => {
       const data = response.data;
       
       setFacultyDetails(data);
-      setSelectedFaculty(data[0]); // Default to first faculty member
+      setSelectedFaculty(data[0]); 
       console.log(data);
     } catch (error) {
       console.error('Error fetching Ids:', error);
     }
-  };
+  }
 
   useEffect(() => {
     fetchIds();
@@ -72,12 +73,12 @@ const GetStudent = () => {
       console.log('Sending request', studarray);
       const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${selectedFaculty.FacultyID}`, studarray);
       console.log('Attendance marked successfully', res.data);
-      const updatedStudentData = studentData.filter((student) => !studarray.some((att) => att.EnrollmentNumber === student.EnrollmentNumber));
-      setStudentData(updatedStudentData);
-      const updatedAttendance = { ...attendance };
-      studarray.forEach((att) => delete updatedAttendance[att.EnrollmentNumber]);
-      setAttendance(updatedAttendance);
-      updateCounts(updatedAttendance);
+      // const updatedStudentData = studentData.filter((student) => !studarray.some((att) => att.EnrollmentNumber === student.EnrollmentNumber));
+      // setStudentData(updatedStudentData);
+      // const updatedAttendance = { ...attendance };
+      // studarray.forEach((att) => delete updatedAttendance[att.EnrollmentNumber]);
+      // setAttendance(updatedAttendance);
+      // updateCounts(updatedAttendance);
       setAttendanceMarked(true);
       toast.success('Attendance marked successfully');
     } catch (error) {
@@ -152,7 +153,8 @@ const GetStudent = () => {
   };
 
   return (
-    <div>
+   
+ <div>
       <ToastContainer />
       <div className='container mt-4'>
         <h2>Get Student Details</h2>
@@ -203,7 +205,7 @@ const GetStudent = () => {
   
     </h2>
             {/* <h3>Total Lectures held: {selectedFaculty.total_lectures}</h3> */}
-            <Filters />
+            {/* <Filters /> */}
             <h5>Total Students Present: {presentCount}</h5>
             <h5>Total Students Absent: {absentCount}</h5>
             <div></div>
@@ -238,7 +240,7 @@ const GetStudent = () => {
                     <td style={{ border: '1px solid black', padding: '8px' }}>
                       <input
                         type='radio'
-                        name={`attendance-${student.EnrollmentNumber}`}
+                        name= {`attendance-${student.EnrollmentNumber}`}
                         value='present'
                         checked={attendance[student.EnrollmentNumber] === 'present'}
                         onChange={() => handleAttendanceChange(student.EnrollmentNumber, 'present')}
@@ -271,5 +273,4 @@ const GetStudent = () => {
     </div>
   );
 };
-
 export default GetStudent;

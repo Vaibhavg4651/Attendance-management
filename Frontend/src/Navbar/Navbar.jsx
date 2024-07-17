@@ -31,18 +31,18 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {auth && (
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+              <ul className="navbar-nav ms-auto mb-2 align-items-center">
                 <li className="nav-item d-flex flex-column align-items-center">
                   <span className="nav-link">{user.name}</span>
                   <span className="nav-link text-primary"> <h4>{user.role}</h4></span>
                 </li>
                 <li className="nav-item d-flex align-items-center">
                   {/* <img src="profile.png" alt="Profile" className="rounded-circle" width="30" height="30" /> */}
-                  <span className="nav-link dropdown-toggle ms-2" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
                     {user.email}
                   </span>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><button onClick={handleLogout} className="btn btn-danger dropdown-item">Logout</button></li>
+                    <li><button onClick={handleLogout} className="dropdown-item">Logout</button></li>
                   </ul>
                 </li>
               </ul>
