@@ -20,9 +20,11 @@ const Navbar = () => {
       <ToastContainer />
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <img src="msit.png" alt="" width="120" height="100" className="d-inline-block align-text-center" />
-            <span className="ms-2">Attendance Management System</span>
+          <Link to="/" className="navbar-brand container-fluid d-flex flex-row">
+          <div className=''>
+            <img src="msit.png" alt="" width="100" height="90" className="d-inline-block align-text-center" />
+          </div>
+            <span className='ms-2'>Attendance Management System</span>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

@@ -37,7 +37,7 @@ def Signup(request):
     try:
         existing_user = user.objects.filter(EID=request.data['EID'], user_type=request.data['user_type']).first()
         if existing_user:
-            return Response({"error": "User with the same EID and user_type already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "User with the same EID and user_type already exists."}, status=status.HTTP_400_BAD_REQUEST)
     
         request.data['password'] = make_password(request.data['password'])
 
@@ -97,7 +97,9 @@ def AddSubjects(request):
 @api_view(['GET'])
 def GetSubjects(request):
     try:
-        subjects = Subjects.objects.filter(BranchName = request.data['BranchName'] , year = request.data['year'])
+        Branch = request.query_params.get('BranchName')
+        year = request.query_params.get('year')
+        subjects = Subjects.objects.filter(BranchName = Branch , year = year)
         serializer = SubjectSerializer(subjects, many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
@@ -111,6 +113,9 @@ def AddProctor(request):
         if user_type.user_type != 'proctor':
             return Response({"detail": "User is not a proctor"}, status=status.HTTP_400_BAD_REQUEST)
         branch = Branch.objects.get(ClassName=request.data['BranchID'])
+        proctor = Proctor.objects.filter(BranchID = branch.BranchID, SemesterNumber = request.data['SemesterNumber'])
+        if proctor:
+            return Response({"detail": "Proctor for this class already exist"}, status=status.HTTP_400_BAD_REQUEST)
         request.data['BranchID'] = branch.BranchID
         serializer = ProctorSerializer(data=request.data)
         if serializer.is_valid():
@@ -118,12 +123,15 @@ def AddProctor(request):
             return Response(serializer.data , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
+        print(str(e))
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 @api_view(['GET'])
 def GetProctor(request, id):
     try:
         proctor = Proctor.objects.get(id=id)
+        if not proctor:
+            return Response({"detail": "Proctor does not exist"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ProctorSerializer(proctor)
         return Response(serializer.data , status=status.HTTP_200_OK)
     except Exception as e:
