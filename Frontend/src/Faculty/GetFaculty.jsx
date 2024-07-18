@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import GetStudent from '../Students/GetStudent';
 import UpdateFaculty from './UpdateFaculty';
 import Navbar from '../Navbar/Navbar';
+import AddFaculty from './AddFaculty';
+import subjectData from '../subject.json';
 
 
 const GetFaculty = () => {
@@ -17,7 +19,12 @@ const GetFaculty = () => {
     const [facultyId, setFacultyId] = useState();
     const [room, setRoom] = useState('');
     const [error, setError] = useState(null);
-
+    const [showAddFaculty,setShowAddFaculty]=useState(false);
+    const [subjects,setSubjects]=useState([]);
+    const subjectMap=subjectData.reduce((map,sub)=>{
+        map[sub.SubjectID]=sub.Subjectcode;
+        return map;
+    },{});
     const fetchIds = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
@@ -37,11 +44,15 @@ const GetFaculty = () => {
         fetchIds();
     }, []);
 
+
+    const handleAddNewClass=()=>{
+        setShowAddFaculty(true);
+    }
     return (
         <>
             <Navbar />
             <ToastContainer />
-            <div>
+            <div className='mt-4'>
                 <center>
                     <h3 style={{ margin: 'auto' }}>Faculty Details</h3>
                 </center>
@@ -64,7 +75,7 @@ const GetFaculty = () => {
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.Class}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.SemesterNumber}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.year}</td>
-                                    <td style={{ border: '1px solid black', padding: '10px' }}>PIC</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{subjectMap[faculty.SubjectID] || faculty.SubjectID}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.room}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.total_lectures}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>
@@ -73,7 +84,7 @@ const GetFaculty = () => {
                                             &ensp;
                                             <Link to='/edit' className='btn btn-secondary' element={<UpdateFaculty />}>Update Details</Link>
                                             &ensp;
-                                            {/* <Link className='btn btn-danger' element={<GetStudent />}>Delete Details</Link> */}
+                                           
                                         </div>
                                     </td>
                                 </tr>
@@ -81,10 +92,13 @@ const GetFaculty = () => {
                         </tbody>
                     </table>
                 </div>
-                {/* <div>
+                <div className='container'>
+                    <div className='container mt-4'>
                     <h2>Add More Details</h2>
-                    <Link to={`/${userid}?role=${role}/addFaculty`} className='btn btn-primary'>Add More Details</Link>
-                </div> */}
+                    <button className='btn btn-primary' onClick={handleAddNewClass}>Add New Class</button>
+                    {showAddFaculty && <AddFaculty/>}
+                </div>
+                </div>
             </div>
         </>
     );

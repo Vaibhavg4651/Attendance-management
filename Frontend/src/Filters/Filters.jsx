@@ -6,7 +6,7 @@ import branchDataJson from '../Branch.json';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Filters = () => {
-  const [filter, showFilter] = useState(true);
+ 
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [percentage, setPercentage] = useState('');
@@ -164,30 +164,52 @@ const Filters = () => {
         studentData.length > 0 ? (
           <div className='container mt-4'>
             <h2>Filtered Students of {selectedClass} {" "} {selectedYear} year</h2>
-            {/* <h3>Subject: {studentData[0].Subjects[0].Subjectcode} {" "} {studentData[0].Subjects[0].SubjectType}
-            </h3> */}
+          
             <table className='table'>
               <thead>
                 <tr style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>S.No.</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Name</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Enrollment no.</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Group</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Total Lectures Held</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Total Lectures Attended</h6></th>
-                  <th style={{ border: '1px solid white', padding: '7px' }}><h6>Total Percentage</h6></th>
+                  <th rowSpan="3" style={{ border: '1px solid white', padding: '6px' }}><h6>S.No.</h6></th>
+                  <th rowSpan="3" style={{ border: '1px solid white', padding: '6px' }}><h6>Name</h6></th>
+                  <th rowSpan="3" style={{ border: '1px solid white', padding: '6px' }}><h6>Enrollment no.</h6></th>
+                  <th rowSpan="3" style={{ border: '1px solid white', padding: '6px' }}><h6>Group</h6></th>
+                  {
+                    studentData[0].Subjects.map((sub,index)=>(
+                  <th key={index} colSpan="2" style={{ border: '1px solid white', padding: '6px' }}>{sub.Subjectcode}({sub.SubjectType})<h6></h6> 
+                  </th>
+                  ))}
+                  <th rowSpan="2" style={{ border: '1px solid white', padding: '6px' }}><h6>Total Lectures Held</h6></th>
+                  <th rowSpan="2" style={{ border: '1px solid white', padding: '6px' }}><h6>Total Lectures Attended</h6></th>
+                  <th rowSpan="2" style={{ border: '1px solid white', padding: '6px' }}><h6>Total Percentage</h6></th>
                 </tr>
+                  <tr style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
+                  {studentData[0].Subjects.map((sub,index)=>(
+                    <React.Fragment key={index}>
+                      <th style={{ border: '1px solid white', padding: '6px' }}>LH</th>
+                      <th style={{ border: '1px solid white', padding: '6px' }}>LA</th>
+
+                    </React.Fragment>
+                  ))}
+                  </tr>
+             
               </thead>
               <tbody>
                 {studentData.map((student, index) => (
                   <tr key={index}>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.ClassSerialNumber}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.StudentName}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.EnrollmentNumber}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.Group}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.totalHeld}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.totalAttended}</td>
-                    <td style={{ border: '1px solid black', padding: '8px' }}>{student.totalPercentage}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.ClassSerialNumber}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.StudentName}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.EnrollmentNumber}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.Group}</td>
+                    
+                    {student.Subjects.map((sub,subIndex)=>(
+                      <React.Fragment key={subIndex}>
+                        <td style={{ border: '1px solid black', padding: '6px' }}>{sub.attend.total_lectures}</td>
+                        <td style={{ border: '1px solid black', padding: '6px' }}>{sub.attend.attended_lectures}</td>
+                      </React.Fragment>
+                    ))}
+                  
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.totalHeld}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.totalAttended}</td>
+                    <td style={{ border: '1px solid black', padding: '6px' }}>{student.totalPercentage}</td>
                   </tr>
                 ))}
               </tbody>
