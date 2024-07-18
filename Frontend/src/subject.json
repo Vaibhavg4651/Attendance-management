@@ -1,27 +1,410 @@
 [
-    {"BranchName": "CSE", "SubjectName": "Applied-Mathematics-1", "Subjectcode": "AM-1", "SubjectType" : "Theory","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Applied-Physics-1", "Subjectcode": "AP-1", "SubjectType" : "Theory","year": 1} ,
-    {"BranchName": "CSE", "SubjectName": "Applied-Chemistry", "Subjectcode": "AC", "SubjectType" : "Theory","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Manufacturing-Process" , "Subjectcode":"MP", "SubjectType" : "Theory","year":1 },
-    {"BranchName": "CSE", "SubjectName": "Communication-Skills" , "Subjectcode":"CS", "SubjectType" : "Theory","year":1 },
-    {"BranchName": "CSE", "SubjectName": "Indian-Constitution" , "Subjectcode": "IC", "SubjectType" : "Theory","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Programming-in-C" , "Subjectcode": "PIC", "SubjectType" : "Theory","year": 1},
-    {"BranchName": "CSE", "SubjectName": "Environmental-Studies" , "Subjectcode": "EVS" , "SubjectType" : "Theory","year":1},
-    {"BranchName": "CSE", "SubjectName": "Human-Values-And-Ethics", "Subjectcode": "HVPE" , "SubjectType" : "Theory","year":1},
-    {"BranchName": "CSE", "SubjectName": "Applied-Mathematics-2" , "Subjectcode": "AM-2", "SubjectType" : "Theory","year":1 },
-    {"BranchName": "CSE", "SubjectName": "Applied-Physics-2" , "Subjectcode": "AP-2", "SubjectType" : "Theory","year":1},
-    {"BranchName": "CSE", "SubjectName": "Engineering-Mechanics"  , "Subjectcode": "EM", "SubjectType" : "Theory","year":1},
-    {"BranchName": "CSE", "SubjectName":  "Electrical-Science"   , "Subjectcode": "ES", "SubjectType" : "Tutorial","year":1},
-    {"BranchName": "CSE", "SubjectName": "Applied-Physics-1", "Subjectcode": "AP-1", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Applied-Physics-2", "Subjectcode": "AP-2", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Applied-Chemistry", "Subjectcode": "AC", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Engineering-Graphics-1" , "Subjectcode": "EG-1", "SubjectType" : "Lab","year": 1},
-    {"BranchName": "CSE", "SubjectName": "Engineering-Graphics-2" , "Subjectcode": "EG-2", "SubjectType" : "Lab","year": 1},
-    {"BranchName": "CSE", "SubjectName": "Electrical-Science"  , "Subjectcode": "ES", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Programming-in-C", "Subjectcode":"PIC" , "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName": "Environmental-Studies" , "Subjectcode": "EVS", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName":"Workshop-Practice", "Subjectcode": "WP", "SubjectType" : "Lab","year":1 },
-    {"BranchName": "CSE", "SubjectName":"Engineering-Mechanics" , "Subjectcode": "EM", "SubjectType" : "Lab","year": 1 },
-    {"BranchName": "CSE", "SubjectName":"Engineering-Vaibhav" , "Subjectcode": "EV", "SubjectType" : "Lab","year": 1 }
-  ]
-  
+  {
+    "SubjectID": 1,
+    "SubjectName": "Applied-Mathematics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AM-1"
+  },
+  {
+    "SubjectID": 2,
+    "SubjectName": "Applied-Physics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AP-1"
+  },
+  {
+    "SubjectID": 3,
+    "SubjectName": "Applied-Chemistry",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AC"
+  },
+  {
+    "SubjectID": 5,
+    "SubjectName": "Communication-Skills",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "CS"
+  },
+  {
+    "SubjectID": 6,
+    "SubjectName": "Indian-Constitution",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "IC"
+  },
+  {
+    "SubjectID": 7,
+    "SubjectName": "Programming-in-C",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "PIC"
+  },
+  {
+    "SubjectID": 8,
+    "SubjectName": "Environmental-Studies",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "EVS"
+  },
+  {
+    "SubjectID": 9,
+    "SubjectName": "Human-Values-And-Ethics",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "HVPE"
+  },
+  {
+    "SubjectID": 10,
+    "SubjectName": "Applied-Mathematics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AM-2"
+  },
+  {
+    "SubjectID": 11,
+    "SubjectName": "Applied-Physics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AP-2"
+  },
+  {
+    "SubjectID": 12,
+    "SubjectName": "Engineering-Mechanics",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "EM"
+  },
+  {
+    "SubjectID": 13,
+    "SubjectName": "Electrical-Science",
+    "BranchName": "CSE",
+    "SubjectType": "Tutorial",
+    "year": 1,
+    "Subjectcode": "ES"
+  },
+  {
+    "SubjectID": 14,
+    "SubjectName": "Applied-Physics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AP-1"
+  },
+  {
+    "SubjectID": 15,
+    "SubjectName": "Applied-Physics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AP-2"
+  },
+  {
+    "SubjectID": 16,
+    "SubjectName": "Applied-Chemistry",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AC"
+  },
+  {
+    "SubjectID": 17,
+    "SubjectName": "Engineering-Graphics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EG-1"
+  },
+  {
+    "SubjectID": 18,
+    "SubjectName": "Engineering-Graphics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EG-2"
+  },
+  {
+    "SubjectID": 19,
+    "SubjectName": "Electrical-Science",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "ES"
+  },
+  {
+    "SubjectID": 20,
+    "SubjectName": "Programming-in-C",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "PIC"
+  },
+  {
+    "SubjectID": 21,
+    "SubjectName": "Environmental-Studies",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EVS"
+  },
+  {
+    "SubjectID": 22,
+    "SubjectName": "Workshop-Practice",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "WP"
+  },
+  {
+    "SubjectID": 23,
+    "SubjectName": "Engineering-Mechanics",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EM"
+  },
+  {
+    "SubjectID": 24,
+    "SubjectName": "Applied-Mathematics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AM-1"
+  },
+  {
+    "SubjectID": 25,
+    "SubjectName": "Applied-Physics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AP-1"
+  },
+  {
+    "SubjectID": 26,
+    "SubjectName": "Applied-Chemistry",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AC"
+  },
+  {
+    "SubjectID": 27,
+    "SubjectName": "Manufacturing-Process",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "MP"
+  },
+  {
+    "SubjectID": 28,
+    "SubjectName": "Communication-Skills",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "CS"
+  },
+  {
+    "SubjectID": 29,
+    "SubjectName": "Indian-Constitution",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "IC"
+  },
+  {
+    "SubjectID": 30,
+    "SubjectName": "Programming-in-C",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "PIC"
+  },
+  {
+    "SubjectID": 31,
+    "SubjectName": "Environmental-Studies",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "EVS"
+  },
+  {
+    "SubjectID": 32,
+    "SubjectName": "Human-Values-And-Ethics",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "HVPE"
+  },
+  {
+    "SubjectID": 33,
+    "SubjectName": "Applied-Mathematics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AM-2"
+  },
+  {
+    "SubjectID": 34,
+    "SubjectName": "Applied-Physics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "AP-2"
+  },
+  {
+    "SubjectID": 35,
+    "SubjectName": "Engineering-Mechanics",
+    "BranchName": "CSE",
+    "SubjectType": "Theory",
+    "year": 1,
+    "Subjectcode": "EM"
+  },
+  {
+    "SubjectID": 36,
+    "SubjectName": "Electrical-Science",
+    "BranchName": "CSE",
+    "SubjectType": "Tutorial",
+    "year": 1,
+    "Subjectcode": "ES"
+  },
+  {
+    "SubjectID": 37,
+    "SubjectName": "Applied-Physics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AP-1"
+  },
+  {
+    "SubjectID": 38,
+    "SubjectName": "Applied-Physics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AP-2"
+  },
+  {
+    "SubjectID": 39,
+    "SubjectName": "Applied-Chemistry",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "AC"
+  },
+  {
+    "SubjectID": 40,
+    "SubjectName": "Engineering-Graphics-1",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EG-1"
+  },
+  {
+    "SubjectID": 41,
+    "SubjectName": "Engineering-Graphics-2",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EG-2"
+  },
+  {
+    "SubjectID": 42,
+    "SubjectName": "Electrical-Science",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "ES"
+  },
+  {
+    "SubjectID": 43,
+    "SubjectName": "Programming-in-C",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "PIC"
+  },
+  {
+    "SubjectID": 44,
+    "SubjectName": "Environmental-Studies",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EVS"
+  },
+  {
+    "SubjectID": 45,
+    "SubjectName": "Workshop-Practice",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "WP"
+  },
+  {
+    "SubjectID": 46,
+    "SubjectName": "Engineering-Mechanics",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "EM"
+  },
+  {
+    "SubjectID": 47,
+    "SubjectName": "Engineering-Mechanics",
+    "BranchName": "CSE",
+    "SubjectType": "lab",
+    "year": 1,
+    "Subjectcode": "EM"
+  },
+  {
+    "SubjectID": 48,
+    "SubjectName": "Electrical-Science",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 1,
+    "Subjectcode": "ES"
+  },
+  {
+    "SubjectID": 49,
+    "SubjectName": "Applied-Mathematics-1",
+    "BranchName": "CSE",
+    "SubjectType": "theory",
+    "year": 1,
+    "Subjectcode": "AM-1"
+  },
+  {
+    "SubjectID": 50,
+    "SubjectName": "Applied-Mathematics-1",
+    "BranchName": "CSE",
+    "SubjectType": "theory",
+    "year": 1,
+    "Subjectcode": "AM-1"
+  },
+  {
+    "SubjectID": 51,
+    "SubjectName": "Applied-Mathematics-1",
+    "BranchName": "CSE",
+    "SubjectType": "theory",
+    "year": 1,
+    "Subjectcode": "AM-1"
+  },
+  {
+    "SubjectID": 4,
+    "SubjectName": "Manufacturing-Process",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 1,
+    "Subjectcode": "MP"
+  }
+]

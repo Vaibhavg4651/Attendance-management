@@ -1,23 +1,32 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import Navbar from '../Navbar/Navbar';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import subjectData from '../subject.json';
 
 const AddFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
-    const [subjectId, setSubjectId] = useState(0);
-    const [facultyId, setFacultyId] = useState();
     const [semesterNumber, setSemesterNumber] = useState(0);
     const [Class, setClass] = useState('');
     const [year, setYear] = useState(0);
     const [room, setRoom] = useState('');
     const [error, setError] = useState(null);
+    const [subCode,setSubCode]=useState('');
+    const [subject,setSubject]=useState([]);
     const navigate=useNavigate();
-
+    
+useEffect(()=>{
+    setSubject(subjectData);
+})
     const handleAddFaculty = async () => {
+        const selectedSubject=subject.find(sub=>sub.Subjectcode===subCode)
+        if(!selectedSubject){
+            toast.error("Invalid Subjet Name");
+        }
         const facultyDetails = {
+            id:userid,
+            SubjectID:selectedSubject.SubjectID,
             SemesterNumber: parseInt(semesterNumber),
             Class: Class,
             year: parseInt(year),
@@ -28,7 +37,7 @@ const AddFaculty = () => {
             const res = await axios.post('http://127.0.0.1:8000/api/user/addFaculty', facultyDetails);
             console.log('Add Faculty successful. Response:', res.data);
             toast.success('Faculty added successfully');
-            navigate(-1);
+            // navigate(-1);
         } catch (err) {
             console.error('Add faculty failed. Error:', err);
             toast.error('Add unsuccessful');
@@ -37,7 +46,7 @@ const AddFaculty = () => {
 
     return (
         <>
-            <Navbar />
+         
             <ToastContainer />
             <div className="Container2">
                 <div className="row justify-content-center mb-4">
@@ -48,6 +57,7 @@ const AddFaculty = () => {
                                     Enter your details
                                 </strong>
                                 <input className='mt-4' type="number" placeholder='Enter your Semester' onChange={(e) => setSemesterNumber(e.target.value)} />
+                                <input className='mt-4' type="text" placeholder='Enter your Subject' onChange={(e) => setSubCode(e.target.value)} />
                                 <input className='mt-4' type="text" placeholder='Enter your Class' onChange={(e) => setClass(e.target.value)} />
                                 <input className='mt-4' type="number" placeholder='Enter your Year' onChange={(e) => setYear(e.target.value)} />
                                 <input className='mt-4' type="number" placeholder='Enter your Room' onChange={(e) => setRoom(e.target.value)} />
