@@ -43,7 +43,7 @@ const GetProctor = () => {
   return (
     <div className="container">
     <h2 className=" text-center mt-3 text-primary">Proctor Details: {className} Semester No- {semester}</h2>
-        {branchId && <AddStudent branchId={branchId}/>}
+        {/* {branchId && <AddStudent branchId={branchId}/>} */}
 </div>
   )
 }
