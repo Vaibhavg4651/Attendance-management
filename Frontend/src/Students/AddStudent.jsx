@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ExcelRenderer } from "react-excel-renderer";
 import branches from "../Branch.json";
+import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddStudent = ({branchId}) => {
@@ -17,11 +18,12 @@ const AddStudent = ({branchId}) => {
         console.log("Error in display", err);
         toast.error("Failed to read Excel file");
       } else {
+        console.log(response);
         const header = response.rows[0];
         const studentDetails = response.rows.slice(1).map((row) => {
           return {
             EnrollmentNumber: parseInt(row[0]),
-            BranchID: branchId, // Map branch name to BranchID
+            BranchID: branchId, // Map branch name to BranchID // Map branch name to BranchID
             ClassSerialNumber: parseInt(row[1]),
             Group: row[2],
             StudentName: row[3],
