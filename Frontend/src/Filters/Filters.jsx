@@ -6,7 +6,25 @@ import branchDataJson from '../Branch.json';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Filters = () => {
- 
+  const branchID = useSelector((state) => state.user.BranchId);
+  const sem = useSelector((state) => state.user.SemesterNumber);
+  const [year, setYear] = useState(0);
+
+  if(sem === 1 || sem === 2){
+    setYear(1);
+  }
+  else if(sem === 3 || sem === 4){
+    setYear(2);
+  }
+  else if(sem === 5 || sem === 6){
+    setYear(3);
+  }
+  else if(sem === 7 || sem === 8){
+    setYear(4);
+  }
+
+
+  const [filter, showFilter] = useState(true);
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [percentage, setPercentage] = useState('');
@@ -15,8 +33,7 @@ const Filters = () => {
   const [studentData, setStudentData] = useState([]);
   const [branchData, setBranchData] = useState([]);
   const [proctorStudentData, setProctorStudentData] = useState([]);
-  const classes = ["CSE1", "CSE2", "CSE3", "CSE4", "IT1", "IT2", "IT3", "ECE1", "ECE2", "ECE3", "EE1", "EE2"];
-  const year = [1, 2, 3, 4];
+  // const year = [1, 2, 3, 4];
 
   useEffect(() => {
     setBranchData(branchDataJson);
@@ -30,11 +47,11 @@ const Filters = () => {
   };
 
   const filterchange = async () => {
-    const selectedBranch = branchData.find(branch => branch.ClassName === selectedClass);
+    const selectedBranch = branchData.find(branch => branch.BranchID === branchID);
     const requestdetails = {
-      BranchID: selectedBranch ? selectedBranch.BranchID : null,
-      Class: selectedClass,
-      year: parseInt(selectedYear),
+      BranchID: branchID,
+      Class: selectedBranch.ClassName,
+      year: parseInt(year),
     };
 
     if (!validateRequestDetails(requestdetails)) {

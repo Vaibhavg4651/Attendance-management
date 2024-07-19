@@ -192,7 +192,6 @@ def filterfields( to_date, enrollList , subjectList ):
                 attendance['totalAttended'] = totalAttended
                 attendance['totalPercentage'] = round((totalAttended/totalHeld)*100,2)
                 attendanceArray.append(attendance)
-            print(attendanceArray)
             return attendanceArray
         except Exception as e:
             print(str(e))

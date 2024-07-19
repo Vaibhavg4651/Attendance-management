@@ -151,6 +151,7 @@ class StudentSubjectAttendance(models.Model):
     attended_lectures = models.IntegerField()
     notAttended_lectures = models.IntegerField()
     percentage = models.FloatField()
+    Date = models.DateField(default= timezone.now)
 
 
 class Attendance(models.Model):

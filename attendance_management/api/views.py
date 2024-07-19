@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import api_view
@@ -256,7 +257,14 @@ def MarkAttendance(request , id):
         total_lectures = faculty.total_lectures
         attendance = []
         for student_data in request.data:
-            student = Attendance.objects.filter(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID=student_data['SubjectID'], Date = timezone.now().date())
+            if isinstance(student_data, dict):
+                date = student_data.get('Date', None)
+            else:
+                date = None
+            # Set date to current date if not provided or empty
+            if not date:
+                date = timezone.now().date()
+            student = Attendance.objects.filter(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID=student_data['SubjectID'], Date = date)
             if student:
                 return Response({"message":"Attendance already marked"}, status=status.HTTP_200_OK)
             student_percentage = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
@@ -275,8 +283,13 @@ def MarkAttendance(request , id):
             
             student.percentage = round((student.attended_lectures / total_lectures) * 100, 2)
             student.total_lectures = total_lectures 
+            date = datetime.strptime(date, '%Y-%m-%d').date()
+            if student.Date < date:
+                student.Date = date
             student.save()
             student_percentage.save()
+            
+
             attendanceObject = {
             "SubjectID" : student_data['SubjectID'],
             "FacultyID" : id,
@@ -284,7 +297,8 @@ def MarkAttendance(request , id):
             "AttendanceStatus" : student_data['AttendanceStatus'],
             "room" : student_data['room'],
             "total_lectures" : total_lectures,
-            "attended_lectures" : student.attended_lectures
+            "attended_lectures" : student.attended_lectures,
+            "Date": date
             }
             attendance.append(attendanceObject)
         faculty.total_lectures += 1

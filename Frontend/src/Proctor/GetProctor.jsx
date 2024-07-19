@@ -12,33 +12,25 @@ const GetProctor = () => {
     const [semester,setSemester]=useState(0);
     const [className,setClassName]=useState('');
     const [branchId,setBranchId]=useState(null);
-    const handleGetProctor=async()=>{
-        try {
-            const response=await axios.get(`http://127.0.0.1:8000/api/user/getProctor/${userid}`);
-            const data=response.data;
-            setDetails(data);
-            setSemester(data.SemesterNumber);
-            setBranchId(data.BranchID);
-            dispatch(
-                setBranchId({
-                  BranchID: data.BranchID,
-                  SemesterNumber:data.SemesterNumber,
-                })
-              );
-            const branch=branches.find(branch=>branch.BranchID===data.BranchID);
+    const handleGetProctor= async()=>{
+            await axios.get(`http://127.0.0.1:8000/api/user/getProctor/${userid}`)
+            .then((response) => {
+            setDetails(response.data);
+            setSemester(response.data.SemesterNumber);
+            setBranchId(response.data.BranchID);
+            const branch=branches.find(branch=>branch.BranchID===response.data.BranchID);
+            dispatch(setBranchId({ "BranchID": response.data.BranchID, "SemesterNumber": response.data.SemesterNumber }));
             if (branch) {
                 setClassName(branch.ClassName);
             }
-            console.log(data);
-           
-        } catch (error) {
+            })
+         .catch ((error)=> {
             console.log("Error in getting proctor",error);
-        }
-    }
+    });
+}
+
     useEffect(() => {
-        if (userid) {
             handleGetProctor();
-        }
     }, [userid]); 
   return (
     <div className="container">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ExcelRenderer } from "react-excel-renderer";
@@ -6,8 +6,26 @@ import branches from "../Branch.json";
 import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddStudent = ({branchId}) => {
+const AddStudent = () => {
+  const branchId = useSelector((state) => state.user.BranchId);
+  const branch=branches.find(branch=>branch.BranchID===branchId);
+  const className=branch.ClassName;
   const [studentDetailsList, setStudentDetailsList] = useState([]);
+  const [year, setYear] = useState(0);
+
+  if(sem === 1 || sem === 2){
+    setYear(1);
+  }
+  else if(sem === 3 || sem === 4){
+    setYear(2);
+  }
+  else if(sem === 5 || sem === 6){
+    setYear(3);
+  }
+  else if(sem === 7 || sem === 8){
+    setYear(4);
+  }
+
   const [header, setHeader] = useState([]);
   const [cols, setCols] = useState([]);
 
@@ -54,6 +72,28 @@ const AddStudent = ({branchId}) => {
       toast.error("Failed to add students");
     }
   };
+
+  const getStudentDetails = {
+    Class: className,
+    year: parseInt(year),
+  };
+
+  const getStudents = async () => {
+    try {
+      const response = await axios.get("http://http://127.0.0.1:8000/api/user/getStudents",{ params: getStudentDetails });
+      setStudentDetailsList(response.data);
+      console.log("Students fetched successfully", response.data);
+    }
+    catch (error) {
+      console.log("Error fetching students:", error);
+    }
+  }
+
+  useEffect(() => {
+    getStudents();
+  }
+    , []);
+  
 
   return (
     <div className="container">
