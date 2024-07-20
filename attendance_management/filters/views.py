@@ -91,7 +91,9 @@ def proctor_filter(request):
         subjectList = []
         facultySubjects = FacultyTeachingAssignment.objects.filter(Class=request.data['Class'], year=request.data['year'])
         if subjects:
-            subjectList = subjects
+            for faculty in facultySubjects:
+                if(faculty.SubjectID_id in subjects):
+                    subjectList.append(faculty.SubjectID_id)
         else:
             for faculty in facultySubjects:
                 subjectList.append(faculty.SubjectID_id)
@@ -143,7 +145,6 @@ def proctor_filter(request):
 
 def filterfields( to_date, enrollList , subjectList ):
         try:
-            print(enrollList)
             attendanceArray = []
             # students = Student.objects.filter(EnrollmentNumber__in=enrollList)
             for student in enrollList:

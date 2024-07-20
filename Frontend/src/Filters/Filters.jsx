@@ -50,6 +50,7 @@ const Filters = () => {
   const [group, setGroup] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [EnrollmentNumber, setEnrollmentNumber] = useState([]);
+  const [subjectType, setSubjectType] = useState("");
 
   const filteredSubjects = useMemo(
     () => filterSubjects(Subjects, year, branchName),
@@ -83,7 +84,7 @@ const Filters = () => {
   };
 
   const handleSubjectTypeChange = (selectedOptions) => {
-    setGroup(selectedOptions.value);
+    setSubjectType(selectedOptions.value);
   };
 
   const validateRequestDetails = (details) => {
@@ -138,6 +139,20 @@ const Filters = () => {
   };
 
   const proctorFilter = async () => {
+    let temp = [];
+    let uniqueArray = [];
+    if(subjectType !== ""){
+      temp = filteredSubjects.map((sub) => {
+        if (sub.label.includes(subjectType)) {
+          return sub.value;
+        }
+        return null;
+      })
+      .filter((sub) => sub !== null);
+      const concatenatedArray = subjects.length===0 ?temp: [...temp, ...subjects];
+      const uniqueSet = new Set(concatenatedArray);
+      uniqueArray = [...uniqueSet];
+    }
     const proctorRequestDetails = {
       BranchID: branchID,
       Class: selectedBranch.ClassName,
@@ -146,7 +161,7 @@ const Filters = () => {
         from_date: start, // optional
         to_date: end, // mandatory
         EnrollmentNumber: EnrollmentNumber, // optional
-        subjects: subjects, // optional
+        subjects: uniqueArray.length===0 ? subjects : uniqueArray, // optional
         group: group, // optional
         lessThanPercentage: parseInt(LessThanPercentage), // optional
         greaterThanPercentage: parseInt(greaterThanPercentage), // optional
@@ -252,7 +267,7 @@ const Filters = () => {
             Subject Type
           </label>
           <Select
-            value={subjectTypeOptions.filter((option) => option.value === group)}
+            value={subjectTypeOptions.filter((option) => option.value === subjectType)}
             options={subjectTypeOptions}
             onChange={handleSubjectTypeChange}
           />
