@@ -47,7 +47,7 @@ const Proctor = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div style={{ marginBottom: '5rem' }}>
         {firstTime === null ? (
           <p>Loading...</p>
         ) : firstTime ? (
