@@ -3,7 +3,7 @@
     "SubjectID": 1,
     "SubjectName": "Applied-Mathematics-1",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-1"
   },
@@ -11,7 +11,7 @@
     "SubjectID": 2,
     "SubjectName": "Applied-Physics-1",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AP-1"
   },
@@ -19,7 +19,7 @@
     "SubjectID": 3,
     "SubjectName": "Applied-Chemistry",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AC"
   },
@@ -27,7 +27,7 @@
     "SubjectID": 5,
     "SubjectName": "Communication-Skills",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "CS"
   },
@@ -35,7 +35,7 @@
     "SubjectID": 6,
     "SubjectName": "Indian-Constitution",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "IC"
   },
@@ -43,7 +43,7 @@
     "SubjectID": 7,
     "SubjectName": "Programming-in-C",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "PIC"
   },
@@ -51,7 +51,7 @@
     "SubjectID": 8,
     "SubjectName": "Environmental-Studies",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "EVS"
   },
@@ -59,7 +59,7 @@
     "SubjectID": 9,
     "SubjectName": "Human-Values-And-Ethics",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "HVPE"
   },
@@ -67,7 +67,7 @@
     "SubjectID": 10,
     "SubjectName": "Applied-Mathematics-2",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-2"
   },
@@ -75,7 +75,7 @@
     "SubjectID": 11,
     "SubjectName": "Applied-Physics-2",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AP-2"
   },
@@ -83,7 +83,7 @@
     "SubjectID": 12,
     "SubjectName": "Engineering-Mechanics",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "EM"
   },
@@ -179,7 +179,7 @@
     "SubjectID": 24,
     "SubjectName": "Applied-Mathematics-1",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-1"
   },
@@ -187,7 +187,7 @@
     "SubjectID": 25,
     "SubjectName": "Applied-Physics-1",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AP-1"
   },
@@ -195,7 +195,7 @@
     "SubjectID": 26,
     "SubjectName": "Applied-Chemistry",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AC"
   },
@@ -203,7 +203,7 @@
     "SubjectID": 27,
     "SubjectName": "Manufacturing-Process",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "MP"
   },
@@ -211,7 +211,7 @@
     "SubjectID": 28,
     "SubjectName": "Communication-Skills",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "CS"
   },
@@ -219,7 +219,7 @@
     "SubjectID": 29,
     "SubjectName": "Indian-Constitution",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "IC"
   },
@@ -227,7 +227,7 @@
     "SubjectID": 30,
     "SubjectName": "Programming-in-C",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "PIC"
   },
@@ -235,7 +235,7 @@
     "SubjectID": 31,
     "SubjectName": "Environmental-Studies",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "EVS"
   },
@@ -243,7 +243,7 @@
     "SubjectID": 32,
     "SubjectName": "Human-Values-And-Ethics",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "HVPE"
   },
@@ -251,7 +251,7 @@
     "SubjectID": 33,
     "SubjectName": "Applied-Mathematics-2",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-2"
   },
@@ -259,7 +259,7 @@
     "SubjectID": 34,
     "SubjectName": "Applied-Physics-2",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AP-2"
   },
@@ -267,7 +267,7 @@
     "SubjectID": 35,
     "SubjectName": "Engineering-Mechanics",
     "BranchName": "CSE",
-    "SubjectType": "Theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "EM"
   },
@@ -379,7 +379,7 @@
     "SubjectID": 49,
     "SubjectName": "Applied-Mathematics-1",
     "BranchName": "CSE",
-    "SubjectType": "theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-1"
   },
@@ -387,7 +387,7 @@
     "SubjectID": 50,
     "SubjectName": "Applied-Mathematics-1",
     "BranchName": "CSE",
-    "SubjectType": "theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-1"
   },
@@ -395,7 +395,7 @@
     "SubjectID": 51,
     "SubjectName": "Applied-Mathematics-1",
     "BranchName": "CSE",
-    "SubjectType": "theory",
+    "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "AM-1"
   },
