@@ -132,9 +132,43 @@ const Filters = () => {
   };
 
   const exportToExcel = () => {
-    const worksheet = XSLX.utils.json_to_sheet(studentData);
-    const workbook = XSLX.utils.book_new();
-    XSLX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    if(studentData.length===0){
+      toast.warn('No Data Available to export');
+      return;
+    }
+    let headers=['S.No.','Name','Enrollment No.','Group'];
+    const flattenData=studentData.map((student,index)=>{
+      let rowData={
+        'S.No.':student.ClassSerialNumber,
+        'Name':student.StudentName,
+        'Enrollment No.':student.EnrollmentNumber,
+        'Group':student.Group,
+
+      }
+      student.Subjects.forEach((sub,subIndex)=>{
+        rowData[`LH_${sub.Subjectcode}(${sub.SubjectType})`]=sub.attend.total_lectures;
+        rowData[`LA_${sub.Subjectcode}(${sub.SubjectType})`]=sub.attend.attended_lectures;
+
+        if(index===0){
+          headers.push(`LH_${sub.Subjectcode}(${sub.SubjectType})`);
+          headers.push(`LA_${sub.Subjectcode}(${sub.SubjectType})`);
+        }
+
+      });
+      rowData['Total Lectures Held']=student.totalHeld;
+      rowData['Total Lectures Attended']=student.totalAttended;
+      rowData['Total Percentage']=student.totalPercentage;
+      if (index === 0) {
+        headers.push('Total Lectures Held', 'Total Lectures Attended', 'Total Percentage');
+      }
+
+      return rowData;
+        });
+
+    const worksheet =XSLX.utils.json_to_sheet(flattenData,{header:headers});
+    const workbook =XSLX.utils.book_new();
+    XSLX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     XSLX.writeFile(workbook, `FilteredStudents.xlsx`);
   };
 
