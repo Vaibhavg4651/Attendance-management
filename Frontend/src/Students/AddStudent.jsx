@@ -1,30 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ExcelRenderer } from "react-excel-renderer";
 import branches from "../Branch.json";
 import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import { setStudents } from "../reducers/userSlice";
+
+
+const getYearFromSemester = (semester) => {
+  if (semester === 1 || semester === 2) {
+    return 1;
+  } else if (semester === 3 || semester === 4) {
+    return 2;
+  } else if (semester === 5 || semester === 6) {
+    return 3;
+  } else if (semester === 7 || semester === 8) {
+    return 4;
+  } else {
+    return 0; 
+  }
+};
+
+const filterenrollment = (data) => {
+  return data.map(student => ({value: student.EnrollmentNumber,label: student.StudentName}));
+};
 
 const AddStudent = () => {
+  const dispatch = useDispatch();
   const branchId = useSelector((state) => state.user.BranchId);
+  const sem = useSelector((state) => state.user.SemesterNumber);
+  const year = useMemo(() => getYearFromSemester(parseInt(sem)), [sem]);
   const branch=branches.find(branch=>branch.BranchID===branchId);
   const className=branch.ClassName;
   const [studentDetailsList, setStudentDetailsList] = useState([]);
-  const [year, setYear] = useState(0);
-
-  if(sem === 1 || sem === 2){
-    setYear(1);
-  }
-  else if(sem === 3 || sem === 4){
-    setYear(2);
-  }
-  else if(sem === 5 || sem === 6){
-    setYear(3);
-  }
-  else if(sem === 7 || sem === 8){
-    setYear(4);
-  }
 
   const [header, setHeader] = useState([]);
   const [cols, setCols] = useState([]);
@@ -64,9 +73,9 @@ const AddStudent = () => {
         "http://127.0.0.1:8000/api/user/addStudents",
         studentDetails
       );
-      setStudentDetailsList([...studentDetailsList, ...response.data]);
       console.log("Students added successfully", response.data);
       toast.success("Students added successfully");
+      window.location.reload();
     } catch (error) {
       console.log("Error adding students:", error);
       toast.error("Failed to add students");
@@ -80,9 +89,10 @@ const AddStudent = () => {
 
   const getStudents = async () => {
     try {
-      const response = await axios.get("http://http://127.0.0.1:8000/api/user/getStudents",{ params: getStudentDetails });
+      const response = await axios.get("http://127.0.0.1:8000/api/user/getStudents",{ params: getStudentDetails });
       setStudentDetailsList(response.data);
-      console.log("Students fetched successfully", response.data);
+      let students = filterenrollment(response.data);
+      dispatch(setStudents(students));
     }
     catch (error) {
       console.log("Error fetching students:", error);
