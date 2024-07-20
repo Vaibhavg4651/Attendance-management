@@ -230,34 +230,6 @@ const Filters = () => {
     <div className="container mt-4">
       <h2 className="d-flex justify-content-center">Apply Filters</h2>
       <div className="row">
-        {/* <div className="col-md-2">
-          <label htmlFor="class" className="form-label">Class</label>
-          <select
-            className="form-select"
-            id="class"
-            value={selectedClass}
-            onChange={(e) => setSelectedClass(e.target.value)}
-          >
-            <option value="">Select Class</option>
-            {classes.map((cls, index) => (
-              <option key={index} value={cls}>{cls}</option>
-            ))}
-          </select>
-        </div> */}
-        {/* <div className="col-md-2">
-          <label htmlFor="year" className="form-label">Year</label>
-          <select
-            className="form-select"
-            id="year"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-          >
-            <option value="">Select Year</option>
-            {year.map((yr, index) => (
-              <option key={index} value={yr}>{yr}</option>
-            ))}
-          </select>
-        </div> */}
         <div className="col-md-2 ">
           <label htmlFor="enrollment" className="form-label">
             Select Students
