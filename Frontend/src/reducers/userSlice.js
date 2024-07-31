@@ -8,6 +8,8 @@ const userSlice = createSlice({
     BranchId:null,
     SemesterNumber:null,
     Students : [],
+    Faculty:{},
+
   },
   reducers: {
     loginSuccess: (state, action) => {
@@ -18,19 +20,25 @@ const userSlice = createSlice({
     },
     setBranchId(state, action) {
       state.BranchId = action.payload.BranchID;
-      state.SemesterNumber = action.payload.SemesterNumber;
+      state.SemesterNumber = action.payload.SemesterNumber; 
     },
     setStudents(state, action) {
       state.Students = action.payload;
+    },
+    setFaculty(state,action){
+      state.Faculty=action.payload;
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.role = "";
       state.userid = null;
       state.BranchId=null;
+      state.SemesterNumber=null;
+      state.Faculty={};
+      state.Students={};
     },
   },
 });
 
 export default userSlice.reducer;
-export const { loginSuccess ,logout , setBranchId, setStudents} = userSlice.actions;
+export const { loginSuccess ,logout , setBranchId, setStudents,setFaculty} = userSlice.actions;
