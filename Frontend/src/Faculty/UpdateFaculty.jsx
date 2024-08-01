@@ -18,7 +18,7 @@ const UpdateFaculty = () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
             const data = response.data;
-            // console.log(data[0]);
+            
             setSubjectId(data[0].SubjectID);
             setClass(data[0].Class);
 
@@ -53,7 +53,7 @@ const UpdateFaculty = () => {
 
     return (
         <>
-            <Navbar />
+           
             <ToastContainer />
             <div className="Container2">
                 <div className="row justify-content-center">

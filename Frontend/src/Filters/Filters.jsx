@@ -235,9 +235,9 @@ const Filters = () => {
             Select Students
           </label>
           <Select
-            value={students.filter((option) =>
-              EnrollmentNumber.includes(option.value)
-            )}
+          value={(students && students.length > 0)? students.filter((option) =>
+            EnrollmentNumber.includes(option.value)
+          ) : []}
             options={students}
             styles={customStyles}
             onChange={handleStudentChange}

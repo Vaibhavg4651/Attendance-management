@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import GetStudent from '../Students/GetStudent';
@@ -8,12 +8,15 @@ import UpdateFaculty from './UpdateFaculty';
 import Navbar from '../Navbar/Navbar';
 import AddFaculty from './AddFaculty';
 import subjectData from '../subject.json';
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setBranchId ,setFaculty} from '../reducers/userSlice';
 
 const GetFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
     const role = useSelector((state)=>{return state.user.role})
-  
+    const navigate=useNavigate();
+    const dispatch =useDispatch();
     const [details, setDetails] = useState([]);
     const [subjectId, setSubjectId] = useState(0);
     const [facultyId, setFacultyId] = useState();
@@ -23,6 +26,7 @@ const GetFaculty = () => {
     const [subjects,setSubjects]=useState([]);
     const subjectMap=subjectData.reduce((map,sub)=>{
         map[sub.SubjectID]=sub.Subjectcode;
+        // console.log(map);
         return map;
     },{});
     const fetchIds = async () => {
@@ -48,25 +52,38 @@ const GetFaculty = () => {
     const handleAddNewClass=()=>{
         setShowAddFaculty(true);
     }
+    let currentDate = new Date();
+currentDate.setDate(currentDate.getDate()-1);
+let curr_year = currentDate.getFullYear();
+let month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+let day = ('0' + currentDate.getDate()).slice(-2);
+let dateOnly = `${curr_year}-${month}-${day}`;
+    const handleGetStudent=(faculty,date)=>{
+        return()=>{
+        dispatch(setFaculty(faculty));
+        console.log('dispatch success');
+        navigate('/attendance',{state:{date}});
+        }
+    }
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <ToastContainer />
-            <div className='mt-4'>
+            <div className='mt-4' style={{width:'auto'}}>
                 <center>
                     <h3 style={{ margin: 'auto' }}>Faculty Details</h3>
                 </center>
                 <div className='details mt-4 d-flex align-items-center'>
-                    <table style={{ width: '75%', margin: 'auto' }}>
+                    <table style={{ width: 'auto', margin: 'auto' }}>
                         <thead style={{ backgroundColor: 'rgb(51, 51, 103)', color: 'white' }}>
                             <tr>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Class</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Semester</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Year</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Subject</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Room</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Total Lectures Held</th>
-                                <th style={{ border: '1px solid white', padding: '15px' }}>Action</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Class</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Semester</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Year</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Subject</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Room</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Total Lectures Held</th>
+                                <th style={{ border: '1px solid white', padding: '10px' }}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,9 +97,11 @@ const GetFaculty = () => {
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.total_lectures}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>
                                         <div>
-                                            <Link to='/attendance' className='btn btn-primary flex' element={<GetStudent subjectId={subjectId} facultyId={facultyId} room={room} />}>Mark Attendance</Link>
+                                            <button  className='btn btn-primary flex mt-auto' onClick={handleGetStudent(faculty ,"")}>Mark Attendance</button>
                                             &ensp;
-                                            <Link to='/edit' className='btn btn-secondary' element={<UpdateFaculty />}>Update Details</Link>
+                                            <button  className='btn btn-danger flex mt-auto' onClick={handleGetStudent(faculty,dateOnly)}>Mark Yesterday's Attendance</button>
+                                            &ensp;
+                                            <Link to='/edit' className='btn btn-secondary flex' element={<UpdateFaculty />}>Update Details</Link>
                                             &ensp;
                                            
                                         </div>
@@ -95,7 +114,7 @@ const GetFaculty = () => {
                 <div className='container'>
                     <div className='container mt-4'>
                     <h2>Add More Details</h2>
-                    <button className='btn btn-primary' onClick={handleAddNewClass}>Add New Class</button>
+                    <button className='btn btn-primary ' onClick={handleAddNewClass}>Add New Class</button>
                     {showAddFaculty && <AddFaculty/>}
                 </div>
                 </div>
