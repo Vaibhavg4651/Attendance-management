@@ -48,10 +48,10 @@ useEffect(()=>{
         <>
          
             <ToastContainer />
-            <div className="Container2">
+            <div className="Container3">
                 <div className="row justify-content-center mb-4">
                     <div className="col md-5">
-                        <div className="card2 mt-5 login-custom ">
+                        <div className="card3 mt-5 login-custom ">
                             <div className="card-body">
                                 <strong style={{ color: "#035b96" }} className='d-flex justify-content-center align-items-center text-center'>
                                     Enter your details

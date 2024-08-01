@@ -283,7 +283,7 @@ def MarkAttendance(request , id):
             
             student.percentage = round((student.attended_lectures / total_lectures) * 100, 2)
             student.total_lectures = total_lectures 
-            date = datetime.strptime(date, '%Y-%m-%d').date()
+            date = datetime.strptime(str(date), '%Y-%m-%d').date()
             if student.Date < date:
                 student.Date = date
             student.save()

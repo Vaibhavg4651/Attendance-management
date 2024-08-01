@@ -33,7 +33,7 @@ const GetProctor = () => {
             handleGetProctor();
     }, [userid]); 
   return (
-    <div className="container">
+    <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 p-3 container ">
     <h2 className=" text-center mt-3 text-primary">Proctor Details: {className} Semester No- {semester}</h2>
         {/* {branchId && <AddStudent branchId={branchId}/>} */}
 </div>

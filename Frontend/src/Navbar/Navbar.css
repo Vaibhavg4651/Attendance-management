@@ -1,0 +1,86 @@
+/* Custom CSS for Navbar */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  .navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .navbar-brand img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .navbar-nav .nav-item {
+    margin-left: 15px;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+  }
+  
+  .navbar .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+  
+  @media (max-width: 10.98px) {
+    .navbar-brand span {
+      display: none;
+    }
+    .navbar-brand img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  @media (max-width: 575.98px) {
+    .navbar-nav .nav-item {
+      margin-left: 0;
+    }
+    .nav-item .nav-link {
+      text-align: center;
+    }
+  }
+  @media only screen and (max-width:542px) and (min-width:400px) {
+  
+    .navbar{
+   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+    }
+/*    
+    .navbar-expand-lg{
+      width: auto;
+    }
+  .navbar-nav {
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .navbar-nav .nav-item {
+      margin: 0;
+  }
+
+  .nav-link {
+      width: 100%;
+  }
+  .navbar-toggler{
+    margin-left: 10px;
+  }
+  .navbar-nav .nav-item{  
+    margin-left: 0;
+  }
+  .navbar{
+    width: au;
+  }
+    */
+  }
+  

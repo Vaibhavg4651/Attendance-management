@@ -2,36 +2,37 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Filters from '../Filters/Filters';
 import * as XLSX from 'xlsx';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
 
 const GetStudent = () => {
   const userid = useSelector((state) => state.user.userid);
-  const [selectedClass, setSelectedClass] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
+  const faculty=useSelector((state)=>state.user.Faculty);
+  const location=useLocation();
+  const {date}=location.state ||({date:""});
   const [studentData, setStudentData] = useState([]);
-  const [facultyDetails, setFacultyDetails] = useState([]);
-  const [selectedFaculty, setSelectedFaculty] = useState({});
   const [loading, setLoading] = useState(false);
   const [attendance, setAttendance] = useState({});
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
   const [attendanceMarked, setAttendanceMarked] = useState(false);
-  const [facultyClass,setFacultyClass]=useState('');
-
-  const classes = ['CSE1', 'CSE2', 'CSE3', 'CSE4', 'IT1', 'IT2', 'IT3', 'ECE1', 'ECE2', 'ECE3', 'EEE1', 'EEE2'];
-  const years = [1, 2, 3, 4];
-
-  const getStudentDetails = facultyDetails ? {
-    Class: selectedClass,
-    year: parseInt(selectedYear),
-  } : {};
-
+ 
+  console.log(faculty);
+  useEffect(()=>{
+    handleGetStudentChange();
+  },[faculty]);
+  const getStudentDetails={
+    Class:faculty.Class,
+    
+    year:parseInt(faculty.year),
+  }
   const handleGetStudentChange = async () => {
     try {
       setLoading(true);
       console.log('Sending request',getStudentDetails);
+     
       const response = await axios.get('http://127.0.0.1:8000/api/user/getStudents', { params: getStudentDetails });
       console.log(response.data);
       setStudentData(response.data);
@@ -43,42 +44,23 @@ const GetStudent = () => {
     }
   };
 
-  const fetchIds = async () => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
-      const data = response.data;
-      
-      setFacultyDetails(data);
-      setSelectedFaculty(data[0]); 
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching Ids:', error);
-    }
-  }
 
-  useEffect(() => {
-    fetchIds();
-  }, []);
+ 
 
   const markAttendanceapi = async () => {
     const studarray = studentData.map((student) => ({
       EnrollmentNumber: student.EnrollmentNumber,
-      SubjectID: selectedFaculty.SubjectID,
-      FacultyID: selectedFaculty.FacultyID,
+      SubjectID: faculty.SubjectID,
+      FacultyID: faculty.FacultyID,
       AttendanceStatus: attendance[student.EnrollmentNumber],
-      room: selectedFaculty.room,
+      room: faculty.room,
+      Date:date,
     }));
-
+   
     try {
       console.log('Sending request', studarray);
-      const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${selectedFaculty.FacultyID}`, studarray);
+      const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${faculty.FacultyID}`, studarray);
       console.log('Attendance marked successfully', res.data);
-      // const updatedStudentData = studentData.filter((student) => !studarray.some((att) => att.EnrollmentNumber === student.EnrollmentNumber));
-      // setStudentData(updatedStudentData);
-      // const updatedAttendance = { ...attendance };
-      // studarray.forEach((att) => delete updatedAttendance[att.EnrollmentNumber]);
-      // setAttendance(updatedAttendance);
-      // updateCounts(updatedAttendance);
       setAttendanceMarked(true);
       toast.success('Attendance marked successfully');
     } catch (error) {
@@ -156,56 +138,19 @@ const GetStudent = () => {
    
  <div>
       <ToastContainer />
+      {/* <Navbar/> */}
       <div className='container mt-4'>
         <h2>Get Student Details</h2>
-      
-        <div className='row g-3'>
-          <div className='col-md-3'>
-            <label htmlFor='class' className='form-label'>Class</label>
-            <select
-              className='form-select'
-              id='class'
-              value={selectedClass}
-              onChange={(e) => setSelectedClass(e.target.value)}
-            >
-              <option value=''>Select Class</option>
-              {classes.map((className, index) => (
-                <option key={index} value={className}>{className}</option>
-              ))}
-            </select>
-          </div>
-          <div className='col-md-3'>
-            <label htmlFor='year' className='form-label'>Year</label>
-            <select
-              className='form-select'
-              id='year'
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
-            >
-              <option value=''>Select Year</option>
-              {years.map((year, index) => (
-                <option key={index} value={year}>{year}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <button className='btn btn-primary' onClick={handleGetStudentChange}>Get Students</button>
       </div>
-
       {loading && <p>Loading...</p>}
-
       {studentData && studentData.length > 0 && (
         <>
           <div className='container mt-4'>
           <h2>
   Student Details of Class
   {" "}
-     {selectedClass} {" "} {selectedYear} year
-      {/* {index < facultyDetails.length - 1 ? ", " : ""} */}
-  
+     {faculty.Class} {" "} {faculty.year} year
     </h2>
-            {/* <h3>Total Lectures held: {selectedFaculty.total_lectures}</h3> */}
-            {/* <Filters /> */}
             <h5>Total Students Present: {presentCount}</h5>
             <h5>Total Students Absent: {absentCount}</h5>
             <div></div>
@@ -264,7 +209,7 @@ const GetStudent = () => {
             <center>
               <div className='flex'>
                 <button className='d-flex align-items-center btn btn-primary' onClick={markAttendanceapi}>Submit Attendance</button>
-                <button className='d-flex align-items-center btn btn-success' onClick={downloadExcel}>Download Excel</button>
+                <button className='d-flex align-items-center btn btn-success mb-4' onClick={downloadExcel}>Download Excel</button>
               </div>
             </center>
           </div>
