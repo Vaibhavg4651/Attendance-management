@@ -33,7 +33,7 @@ const Login = () => {
       password: password,
       user_type: role,
     };
-    console.log("Sending registration request:", loginData);
+
     axios
       .post(`http://127.0.0.1:8000/api/user/login`, loginData)
       .then((response) => {
@@ -41,7 +41,6 @@ const Login = () => {
         console.log("Login successful. Response:", response.data);
         dispatch(loginSuccess(response.data));
         navigate(`/${response.data.id}?role=${role}`);
-        console.log(response.data.id);
       })
       .catch((err) => {
         console.error("Login failed. Error:", err);

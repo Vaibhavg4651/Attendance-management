@@ -11,7 +11,6 @@ import {Auth0Provider} from '@auth0/auth0-react';
 let persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
       <Auth0Provider
@@ -24,5 +23,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App />
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
 )

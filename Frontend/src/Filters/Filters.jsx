@@ -40,7 +40,7 @@ const Filters = () => {
   const selectedBranch = branchData.find(
     (branch) => branch.BranchID === branchID
   );
-  const branchName = selectedBranch.BranchName;
+  const branchName = selectedBranch?.BranchName;
   const year = useMemo(() => getYearFromSemester(parseInt(sem)), [sem]);
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");

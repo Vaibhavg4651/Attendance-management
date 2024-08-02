@@ -15,8 +15,6 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     toast.success('Logout Successfully');
-    console.log('Logout successful');
-    console.log(user);
     navigate('/');
   };
 

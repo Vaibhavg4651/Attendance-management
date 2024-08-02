@@ -101,8 +101,7 @@ const AddStudent = () => {
 
   useEffect(() => {
     getStudents();
-  }
-    , []);
+  },[]);
   
 
   return (

@@ -30,12 +30,12 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.isAuthenticated = false;
-      state.role = "";
+      state.role = null;
       state.userid = null;
       state.BranchId=null;
       state.SemesterNumber=null;
       state.Faculty={};
-      state.Students={};
+      state.Students=[];
     },
   },
 });
