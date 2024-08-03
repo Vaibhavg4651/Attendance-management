@@ -1,7 +1,7 @@
 {
     "Year": {
         "First" : {
-                "theory": {
+                "Lecture": {
                     "Applied-Mathematics-1" : "AM-1",
                     "Applied-Physics-1" : "AP-1",
                     "Applied-Chemistry" : "AC",
@@ -33,7 +33,7 @@
         },
         "Second" : {
             "CSE" : {
-                "theory": {
+                "Lecture": {
                     "Computational-Methods" : "CM",
                     "Indian-Knowledge-System" : "IKS",
                     "Discrete-Mathematics" : "DM",

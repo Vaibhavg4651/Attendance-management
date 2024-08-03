@@ -23,7 +23,6 @@ const getYearFromSemester = (semester) => {
 };
 
 const filterSubjects = (subject, year, branchName) => {
-  console.log("Filtering subjects:", year, branchName);
   const sub = subject.filter(
     (subject) => subject.year === year && subject.BranchName === branchName
   );
@@ -62,6 +61,7 @@ const Filters = () => {
       ...provided,
       maxHeight: "60px", // Adjust the max height as needed
       overflowY: "auto", // Enable vertical scroll
+      color: "#8d8c8d", opacity: "1", width: "100%" ,font: "inherit"
     }),
   };
 
@@ -250,6 +250,7 @@ const Filters = () => {
           </label>
           <Select
             value={groupOptions.filter((option) => option.value === group)}
+            styles={customStyles}
             options={groupOptions}
             onChange={handleGroupChange}
           />
@@ -274,6 +275,7 @@ const Filters = () => {
           </label>
           <Select
             value={subjectTypeOptions.filter((option) => option.value === subjectType)}
+            styles={customStyles}
             options={subjectTypeOptions}
             onChange={handleSubjectTypeChange}
           />
@@ -288,6 +290,7 @@ const Filters = () => {
             id="start"
             value={start}
             onChange={(e) => setStart(e.target.value)}
+            style={{color: "#8d8c8d", opacity: "1", width: "100%" ,font: "inherit"}}
             max={new Date().toISOString().split("T")[0]}
           />
         </div>
@@ -301,6 +304,7 @@ const Filters = () => {
             id="end"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
+            style={{color: "#8d8c8d", opacity: "1", width: "100%" ,font: "inherit"}}
             max={new Date().toISOString().split("T")[0]}
           />
         </div>
@@ -313,6 +317,7 @@ const Filters = () => {
             className="form-control"
             id="percentage"
             value={greaterThanPercentage}
+            style={{color: "#8d8c8d", opacity: "1", width: "100%" ,font: "inherit"}}
             onChange={(e) => setgreaterThanPercentage(e.target.value)}
           />
         </div>
@@ -325,6 +330,7 @@ const Filters = () => {
             className="form-control"
             id="percentage"
             value={LessThanPercentage}
+            style={{color: "#8d8c8d", opacity: "1", width: "100%" ,font: "inherit"}}
             onChange={(e) => setLessThanPercentage(e.target.value)}
           />
         </div>

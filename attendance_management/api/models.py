@@ -111,9 +111,9 @@ class Subjects(models.Model):
     SubjectName = models.CharField(max_length=255)
     BranchName = models.CharField(max_length=255)
     type_choices = (
-        ('lecture','Lecture'),
-        ('lab','Lab'),
-        ('tutorial','Tutorial'),
+        ('Lecture','Lecture'),
+        ('Lab','Lab'),
+        ('Tutorial','Tutorial'),
     )
     SubjectType = models.CharField(choices=type_choices)
     year = models.IntegerField()

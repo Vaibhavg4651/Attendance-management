@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { setStudents } from "../reducers/userSlice";
 
-
 const getYearFromSemester = (semester) => {
   if (semester === 1 || semester === 2) {
     return 1;
@@ -18,12 +17,15 @@ const getYearFromSemester = (semester) => {
   } else if (semester === 7 || semester === 8) {
     return 4;
   } else {
-    return 0; 
+    return 0;
   }
 };
 
 const filterenrollment = (data) => {
-  return data.map(student => ({value: student.EnrollmentNumber,label: student.StudentName}));
+  return data.map((student) => ({
+    value: student.EnrollmentNumber,
+    label: student.StudentName,
+  }));
 };
 
 const AddStudent = () => {
@@ -31,8 +33,8 @@ const AddStudent = () => {
   const branchId = useSelector((state) => state.user.BranchId);
   const sem = useSelector((state) => state.user.SemesterNumber);
   const year = useMemo(() => getYearFromSemester(parseInt(sem)), [sem]);
-  const branch=branches.find(branch=>branch.BranchID===branchId);
-  const className=branch.ClassName;
+  const branch = branches.find((branch) => branch.BranchID === branchId);
+  const className = branch.ClassName;
   const [studentDetailsList, setStudentDetailsList] = useState([]);
 
   const [header, setHeader] = useState([]);
@@ -89,25 +91,31 @@ const AddStudent = () => {
 
   const getStudents = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/user/getStudents",{ params: getStudentDetails });
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/user/getStudents",
+        { params: getStudentDetails }
+      );
       setStudentDetailsList(response.data);
       let students = filterenrollment(response.data);
       dispatch(setStudents(students));
-    }
-    catch (error) {
+    } catch (error) {
       console.log("Error fetching students:", error);
     }
-  }
+  };
 
   useEffect(() => {
     getStudents();
-  },[]);
-  
+  }, []);
 
   return (
     <div className="container">
-      <h2 className="container mt-4">Add Students</h2>
-      <input type="file" onChange={handleFileChange} />
+      <h2 className="mt-4">Add Students</h2>
+      <div className="mb-3">
+        <label htmlFor="formFile" className="form-label">
+          Add Students by Uploading Excel
+        </label>
+        <input className="form-control w-25" type="file" id="formFile" onChange={handleFileChange}/>
+      </div>
       <ToastContainer />
       {studentDetailsList.length > 0 && (
         <div className="mt-4">
@@ -121,7 +129,6 @@ const AddStudent = () => {
                 <th>Group</th>
                 <th>Batch</th>
                 <th>Semester Number</th>
-                
               </tr>
             </thead>
             <tbody>
@@ -133,7 +140,6 @@ const AddStudent = () => {
                   <td>{student.Group}</td>
                   <td>{student.Batch}</td>
                   <td>{student.SemesterNumber}</td>
-                  
                 </tr>
               ))}
             </tbody>

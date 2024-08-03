@@ -5,6 +5,7 @@ const userSlice = createSlice({
     userid: null,
     isAuthenticated: false,
     role: null,
+    email:null,
     BranchId:null,
     SemesterNumber:null,
     Students : [],
@@ -33,6 +34,7 @@ const userSlice = createSlice({
       state.role = null;
       state.userid = null;
       state.BranchId=null;
+      state.email=null;
       state.SemesterNumber=null;
       state.Faculty={};
       state.Students=[];
