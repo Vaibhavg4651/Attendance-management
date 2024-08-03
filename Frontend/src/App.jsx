@@ -9,6 +9,7 @@ import UpdatePassword from "./User/UpdatePassword";
 import GetStudent from "./Students/GetStudent";
 import UpdateFaculty from "./Faculty/UpdateFaculty";
 import AddFaculty from "./Faculty/AddFaculty";
+import AutoClearReduxState from "./User/AutoClearReduxState";
 
 function App() {
   const userid = useSelector((state)=>{return state.user.userid})
@@ -32,6 +33,7 @@ const ShowComponent = () => {
     <>
       <BrowserRouter>
         <Routes>
+          <Route exact path="/*" element={<AutoClearReduxState />} />
         <Route exact path="/" element={<Login/>} />
         <Route exact path="/updatepassword" element={<UpdatePassword/>}/>
        <Route exact path="/attendance" element={<GetStudent/>}/>

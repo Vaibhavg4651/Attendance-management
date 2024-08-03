@@ -257,36 +257,41 @@ def MarkAttendance(request , id):
         total_lectures = faculty.total_lectures
         attendance = []
         for student_data in request.data:
-            if isinstance(student_data, dict):
-                date = student_data.get('Date', None)
-            else:
-                date = None
+            date = student_data.get('Date', None)
             # Set date to current date if not provided or empty
-            if not date:
+            if date is None or date == '':
                 date = timezone.now().date()
             student = Attendance.objects.filter(EnrollmentNumber=student_data['EnrollmentNumber'], SubjectID=student_data['SubjectID'], Date = date)
             if student:
                 return Response({"message":"Attendance already marked"}, status=status.HTTP_200_OK)
             student_percentage = Student.objects.get(EnrollmentNumber=student_data['EnrollmentNumber'])
+            print(student_percentage)
             subject_instance = Subjects.objects.get(SubjectID=student_data['SubjectID'])
-            student, created = StudentSubjectAttendance.objects.get_or_create(EnrollmentNumber=student_percentage, SubjectID = subject_instance, defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0 , 'percentage':0.0})
+            Students, created = StudentSubjectAttendance.objects.get_or_create(EnrollmentNumber=student_percentage, SubjectID = subject_instance, defaults={'total_lectures': total_lectures , 'attended_lectures': 0, 'notAttended_lectures': 0 , 'percentage':0.0})
+            print(student)
             if student_data['AttendanceStatus'] == 'present':
-                student.attended_lectures += 1
+                Students.attended_lectures += 1
                 student_percentage.totalAttended += 1
                 student_percentage.totalHeld += 1
                 student_percentage.totalPercentage = round((student_percentage.totalAttended / student_percentage.totalHeld) * 100,2)
 
             elif student_data['AttendanceStatus'] == 'absent':
-                student.notAttended_lectures += 1
+                Students.notAttended_lectures += 1
                 student_percentage.totalHeld += 1
                 student_percentage.totalPercentage = round((student_percentage.totalAttended / student_percentage.totalHeld) * 100,2)
             
-            student.percentage = round((student.attended_lectures / total_lectures) * 100, 2)
-            student.total_lectures = total_lectures 
+            Students.percentage = round((Students.attended_lectures / total_lectures) * 100, 2)
+            Students.total_lectures = total_lectures 
             date = datetime.strptime(str(date), '%Y-%m-%d').date()
-            if student.Date < date:
-                student.Date = date
-            student.save()
+            if isinstance(Students.Date, datetime):
+                student_date = Students.Date.date()
+            else:
+                student_date = Students.Date
+
+            if student_date < date:
+                Students.Date = date
+
+            Students.save()
             student_percentage.save()
             
 
@@ -297,7 +302,7 @@ def MarkAttendance(request , id):
             "AttendanceStatus" : student_data['AttendanceStatus'],
             "room" : student_data['room'],
             "total_lectures" : total_lectures,
-            "attended_lectures" : student.attended_lectures,
+            "attended_lectures" : Students.attended_lectures,
             "Date": date
             }
             attendance.append(attendanceObject)

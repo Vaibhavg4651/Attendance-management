@@ -406,5 +406,357 @@
     "SubjectType": "Lecture",
     "year": 1,
     "Subjectcode": "MP"
+  },
+  {
+    "SubjectID": 47,
+    "SubjectName": "Computational-Methods",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "CM"
+  },
+  {
+    "SubjectID": 48,
+    "SubjectName": "Indian-Knowledge-System",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "IKS"
+  },
+  {
+    "SubjectID": 49,
+    "SubjectName": "Discrete-Mathematics",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "DM"
+  },
+  {
+    "SubjectID": 50,
+    "SubjectName": "Digital-Logic-And-Computer-Design",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "DLCD"
+  },
+  {
+    "SubjectID": 51,
+    "SubjectName": "Data-Structures",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "DS"
+  },
+  {
+    "SubjectID": 52,
+    "SubjectName": "Object-Oriented-Programming",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "OOPS"
+  },
+  {
+    "SubjectID": 53,
+    "SubjectName": "Theory-of-Computation",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "TOC"
+  },
+  {
+    "SubjectID": 54,
+    "SubjectName": "Probability-Statistics-and-Linear-Programming",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "PSLP"
+  },
+  {
+    "SubjectID": 55,
+    "SubjectName": "Technical-Writing",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "TW"
+  },
+  {
+    "SubjectID": 56,
+    "SubjectName": "Circuits-and-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "CNS"
+  },
+  {
+    "SubjectID": 57,
+    "SubjectName": "Database-Management-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "DBMS"
+  },
+  {
+    "SubjectID": 58,
+    "SubjectName": "Programming-in-Java",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 2,
+    "Subjectcode": "JAVA"
+  },
+  {
+    "SubjectID": 59,
+    "SubjectName": "Computational-Methods",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "CM"
+  },
+  {
+    "SubjectID": 60,
+    "SubjectName": "Digital-Logic-And-Computer-Design",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "DLCD"
+  },
+  {
+    "SubjectID": 61,
+    "SubjectName": "Data-Structures",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "DS"
+  },
+  {
+    "SubjectID": 62,
+    "SubjectName": "Object-Oriented-Programming",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "OOPS"
+  },
+  {
+    "SubjectID": 63,
+    "SubjectName": "Probability-Statistics-and-Linear-Programming",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "PSLP"
+  },
+  {
+    "SubjectID": 64,
+    "SubjectName": "Circuits-and-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "CNS"
+  },
+  {
+    "SubjectID": 65,
+    "SubjectName": "Database-Management-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "DBMS"
+  },
+  {
+    "SubjectID": 66,
+    "SubjectName": "Programming-in-Java",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 2,
+    "Subjectcode": "JAVA"
+  },
+  {
+    "SubjectID": 67,
+    "SubjectName": "Economics-for-Engineers",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "EE"
+  },
+  {
+    "SubjectID": 68,
+    "SubjectName": "Compiler-Design",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "CD"
+  },
+  {
+    "SubjectID": 69,
+    "SubjectName": "Operating-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "OS"
+  },
+  {
+    "SubjectID": 70,
+    "SubjectName": "Computer-Networks",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "CN"
+  },
+  {
+    "SubjectID": 71,
+    "SubjectName": "Software-Engineering",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "SE"
+  },
+  {
+    "SubjectID": 72,
+    "SubjectName": "Design-and-Analysis-of-Algorithms",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "ADA"
+  },
+  {
+    "SubjectID": 73,
+    "SubjectName": "Programming-In-Python",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "PY"
+  },
+  {
+    "SubjectID": 74,
+    "SubjectName": "Principle-Of-Management-For-Engineers",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "PME"
+  },
+  {
+    "SubjectID": 75,
+    "SubjectName": "Principles-Of-Programming-Languages",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "PPL"
+  },
+  {
+    "SubjectID": 76,
+    "SubjectName": "Artificial-Inteliigence",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "AI"
+  },
+  {
+    "SubjectID": 77,
+    "SubjectName": "Statistics-Statistical-Modelling-And-Data-Analysis",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "SSDMA"
+  },
+  {
+    "SubjectID": 78,
+    "SubjectName": "Universal-Human-Values",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "UHE"
+  },
+  {
+    "SubjectID": 79,
+    "SubjectName": "Web-Technologies",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "WT"
+  },
+  {
+    "SubjectID": 80,
+    "SubjectName": "Software-Project-Management",
+    "BranchName": "CSE",
+    "SubjectType": "Lecture",
+    "year": 3,
+    "Subjectcode": "SPM"
+  },
+  {
+    "SubjectID": 81,
+    "SubjectName": "Compiler-Design",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "CD"
+  },
+  {
+    "SubjectID": 82,
+    "SubjectName": "Operating-Systems",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "OS"
+  },
+  {
+    "SubjectID": 83,
+    "SubjectName": "Computer-Networks",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "CN"
+  },
+  {
+    "SubjectID": 84,
+    "SubjectName": "Software-Engineering",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "SE"
+  },
+  {
+    "SubjectID": 85,
+    "SubjectName": "Design-and-Analysis-of-Algorithms",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "ADA"
+  },
+  {
+    "SubjectID": 86,
+    "SubjectName": "Programming-In-Python",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "PY"
+  },
+  {
+    "SubjectID": 87,
+    "SubjectName": "Software-Project-Management",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "SPM"
+  },
+  {
+    "SubjectID": 88,
+    "SubjectName": "Artificial-Inteliigence",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "AI"
+  },
+  {
+    "SubjectID": 89,
+    "SubjectName": "Statistics-Statistical-Modelling-And-Data-Analysis",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "SSDMA"
+  },
+  {
+    "SubjectID": 90,
+    "SubjectName": "Web-Technologies",
+    "BranchName": "CSE",
+    "SubjectType": "Lab",
+    "year": 3,
+    "Subjectcode": "WT"
   }
 ]

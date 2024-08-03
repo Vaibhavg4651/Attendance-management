@@ -94,7 +94,7 @@ let dateOnly = `${curr_year}-${month}-${day}`;
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.year}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{subjectMap[faculty.SubjectID] || faculty.SubjectID}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.room}</td>
-                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.total_lectures}</td>
+                                    <td style={{ border: '1px solid black', padding: '10px' }}>{faculty.total_lectures - 1}</td>
                                     <td style={{ border: '1px solid black', padding: '10px' }}>
                                         <div>
                                             <button  className='btn btn-primary flex mt-auto' onClick={handleGetStudent(faculty ,"")}>Mark Attendance</button>

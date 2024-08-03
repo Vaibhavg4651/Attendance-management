@@ -62,7 +62,7 @@ const GetStudent = () => {
       const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${faculty.FacultyID}`, studarray);
       console.log('Attendance marked successfully', res.data);
       setAttendanceMarked(true);
-      toast.success('Attendance marked successfully');
+      toast.success(res.data.message);
     } catch (error) {
       console.log('Error in marking attendance', error);
       toast.error('Error in marking attendance');
