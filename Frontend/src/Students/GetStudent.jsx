@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as XLSX from 'xlsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-
+import { setStudents } from '../reducers/userSlice';
 const GetStudent = () => {
   const userid = useSelector((state) => state.user.userid);
   const faculty=useSelector((state)=>state.user.Faculty);
@@ -18,8 +18,10 @@ const GetStudent = () => {
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
   const [attendanceMarked, setAttendanceMarked] = useState(false);
+  const dispatch=useDispatch();
+  const studs=useSelector((state)=>state.user.Students)
  
-  console.log(faculty);
+  // console.log(faculty);
   useEffect(()=>{
     handleGetStudentChange();
   },[faculty]);
@@ -103,7 +105,7 @@ const GetStudent = () => {
   };
 
   useEffect(() => {
-    const storedAttendance = JSON.parse(localStorage.getItem('attendance'));
+    const storedAttendance = studs;
     if (storedAttendance) {
       setAttendance(storedAttendance);
     }
@@ -111,7 +113,8 @@ const GetStudent = () => {
 
   useEffect(() => {
     updateCounts(attendance);
-    localStorage.setItem('attendance', JSON.stringify(attendance));
+    //localStorage.setItem('attendance', JSON.stringify(attendance));
+    dispatch(setStudents(attendance));
   }, [attendance]);
 
   const downloadExcel = () => {
@@ -133,7 +136,10 @@ const GetStudent = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Attendance');
     XLSX.writeFile(workbook, 'Student_Attendance.xlsx');
   };
-
+  const ClearStudents=()=>{
+    dispatch(setStudents([]));
+    setAttendance({});
+  }
   return (
    
  <div>
@@ -151,6 +157,9 @@ const GetStudent = () => {
   {" "}
      {faculty.Class} {" "} {faculty.year} year
     </h2>
+        <div>
+          <button className='btn btn-danger' onClick={ClearStudents}>Clear All</button>
+        </div>
             <h5>Total Students Present: {presentCount}</h5>
             <h5>Total Students Absent: {absentCount}</h5>
             <div></div>
