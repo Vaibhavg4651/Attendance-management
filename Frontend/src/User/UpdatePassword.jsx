@@ -3,6 +3,8 @@ import './UpdatePassword.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../ConfigUrl/Configurl';
+
 const UpdatePassword = () => {
   const [EID, setEID] = useState('');
   const [userType, setUserType] = useState('');
@@ -13,7 +15,7 @@ const UpdatePassword = () => {
 
   const handleUpdatePassword = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/user/updatepassword', {
+      const response = await fetch(`${API_URL}api/user/updatepassword`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

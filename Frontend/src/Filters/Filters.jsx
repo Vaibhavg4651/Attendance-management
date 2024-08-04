@@ -7,6 +7,7 @@ import branchData from "../Branch.json";
 import Subjects from "../subject.json";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
+import API_URL from "../ConfigUrl/Configurl";
 
 const getYearFromSemester = (semester) => {
   if (semester === 1 || semester === 2) {
@@ -119,7 +120,7 @@ const Filters = () => {
     try {
       console.log("Sending request", requestdetails);
       const response = await axios.post(
-        "http://127.0.0.1:8000/filters/allfilter",
+        `${API_URL}filters/allfilter`,
         requestdetails
       );
       console.log("Filtered students response:", response.data);
@@ -209,7 +210,7 @@ const Filters = () => {
         return;
       }
       const response = await axios.post(
-        "http://127.0.0.1:8000/filters/proctorFilter",
+        `${API_URL}filters/proctorFilter`,
         proctorRequestDetails
       );
       console.log("Filtered proctor students response:", response.data);

@@ -6,6 +6,7 @@ import branches from "../Branch.json";
 import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { setStudents } from "../reducers/userSlice";
+import API_URL from "../ConfigUrl/Configurl";
 
 const getYearFromSemester = (semester) => {
   if (semester === 1 || semester === 2) {
@@ -72,7 +73,7 @@ const AddStudent = () => {
     try {
       console.log("Sending Add Students Bulk request", studentDetails);
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/user/addStudents",
+        `${API_URL}api/user/addStudents`,
         studentDetails
       );
       console.log("Students added successfully", response.data);
@@ -92,7 +93,7 @@ const AddStudent = () => {
   const getStudents = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/user/getStudents",
+        `${API_URL}api/user/getStudents`,
         { params: getStudentDetails }
       );
       setStudentDetailsList(response.data);

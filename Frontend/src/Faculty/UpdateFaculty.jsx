@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import API_URL from '../ConfigUrl/Configurl';
 
 const UpdateFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
@@ -16,7 +17,7 @@ const UpdateFaculty = () => {
     const navigate=useNavigate();
     const fetchFacultyDetails = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
+            const response = await axios.get(`${API_URL}api/user/getFacultyDetails/${userid}`);
             const data = response.data;
             
             setSubjectId(data[0].SubjectID);

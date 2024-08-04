@@ -3,6 +3,8 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import Navbar from '../Navbar/Navbar';
 import SubjectData from '../subject.json';
+import API_URL from '../ConfigUrl/Configurl';
+
 const Subjects = (e) => {
   // const [subjectid, setSubjectId] = useState(0);
   const [branchname, setBranchName] = useState();
@@ -34,7 +36,7 @@ const Subjects = (e) => {
 
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/api/user/addSubjects',
+        `${API_URL}api/user/addSubjects`,
         AddSubject
       );
       console.log('Add Subject successful. Response:', response.data);

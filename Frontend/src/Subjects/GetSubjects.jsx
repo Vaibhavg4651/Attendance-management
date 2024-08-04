@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import API_URL from '../ConfigUrl/Configurl';
+
 const GetSubjects = () => {
   const [BranchName,setBranchName]=useState('');
   const [year ,setYear]=useState(0);
@@ -16,7 +18,7 @@ const GetSubjects = () => {
   }
   try {
     console.log('Sending Get Subject request',subRequest);
-    const response=await axios.get('http://127.0.0.1:8000/api/user/getSubjects',{BranchName: BranchName,
+    const response=await axios.get(`${API_URL}api/user/getSubjects`,{BranchName: BranchName,
       "year":parseInt(year)});
     console.log('Get Subject response',response.data);
     toast.success('Subjects Fetched Successfully');

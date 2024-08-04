@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import { setStudents } from '../reducers/userSlice';
+import API_URL from '../ConfigUrl/Configurl';
+
 const GetStudent = () => {
   const faculty=useSelector((state)=>state.user.Faculty);
   const location=useLocation();
@@ -34,7 +36,7 @@ const GetStudent = () => {
       setLoading(true);
       console.log('Sending request',getStudentDetails);
      
-      const response = await axios.get('http://127.0.0.1:8000/api/user/getStudents', { params: getStudentDetails });
+      const response = await axios.get(`${API_URL}api/user/getStudents`, { params: getStudentDetails });
       console.log(response.data);
       setStudentData(response.data);
       setLoading(false);
@@ -60,7 +62,7 @@ const GetStudent = () => {
    
     try {
       console.log('Sending request', studarray);
-      const res = await axios.post(`http://127.0.0.1:8000/api/user/markAttendance/${faculty.FacultyID}`, studarray);
+      const res = await axios.post(`${API_URL}api/user/markAttendance/${faculty.FacultyID}`, studarray);
       console.log('Attendance marked successfully', res.data);
       setAttendanceMarked(true);
       toast.success(res.data.message);

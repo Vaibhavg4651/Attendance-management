@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast,ToastContainer } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
-
+import API_URL from "../ConfigUrl/Configurl";
 
 
 const AddProctor = () => {
@@ -20,7 +20,7 @@ const AddProctor = () => {
 
     console.log("Sending Add proctor request", proctordetails);
     const res = await axios
-      .post(`http://127.0.0.1:8000/api/user/addProctor`, proctordetails)
+      .post(`${API_URL}api/user/addProctor`, proctordetails)
       .then((response) => {
         console.log("Add Proctor successful. Response:", response.data);
         toast.success("Proctor added successfully");

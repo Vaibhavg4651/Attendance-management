@@ -7,6 +7,7 @@ import { setBranchId } from "../reducers/userSlice";
 import branches from "../Branch.json";
 import { useSelector, useDispatch } from "react-redux";
 import AddProctor from "./AddProctor";
+import API_URL from "../ConfigUrl/Configurl";
 
 const Proctor = () => {
   const id = useSelector((state) => state.user.userid);
@@ -18,7 +19,7 @@ const Proctor = () => {
   const dispatch = useDispatch();
   
   const getProctor = () => {
-    axios.get(`http://127.0.0.1:8000/api/user/getProctor/${id}`)
+    axios.get(`${API_URL}api/user/getProctor/${id}`)
       .then((response) => {
         console.log("Get Proctor successful. Response:", response.data);
         if (response.status === 404) {

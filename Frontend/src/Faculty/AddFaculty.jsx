@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import subjectData from '../subject.json';
+import API_URL from '../ConfigUrl/Configurl';
 
 const AddFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
@@ -46,7 +47,7 @@ useEffect(() => {
         };
         console.log('Sending add faculty request', facultyDetails);
         try {
-            const res = await axios.post('http://127.0.0.1:8000/api/user/addFaculty', facultyDetails);
+            const res = await axios.post(`${API_URL}api/user/addFaculty`, facultyDetails);
             console.log('Add Faculty successful. Response:', res.data);
             toast.success('Faculty added successfully');
             // navigate(-1);

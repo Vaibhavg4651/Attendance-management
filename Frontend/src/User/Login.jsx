@@ -9,6 +9,7 @@ import "./Login.css";
 import {useDispatch} from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../reducers/userSlice";
+import API_URL from "../ConfigUrl/Configurl";
 
 
 const Login = () => {
@@ -35,7 +36,7 @@ const Login = () => {
     };
 
     axios
-      .post(`http://127.0.0.1:8000/api/user/login`, loginData)
+      .post(`${API_URL}api/user/login`, loginData)
       .then((response) => {
         toast.success('Login Successful');
         console.log("Login successful. Response:", response.data);

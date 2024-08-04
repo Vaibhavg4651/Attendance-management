@@ -8,12 +8,12 @@ class StudentAttendanceDetails(models.Model):
     EnrollmentNumber = models.CharField(max_length=255)
     from_date = models.DateField(default=0)
     to_date = models.DateField(default=0)
-    Class = models.CharField(default=False)
+    Class = models.CharField(default=False, max_length=255)
     year = models.IntegerField()
-    room = models.CharField(default='')
+    room = models.CharField(default='', max_length=255)
     lessThanPercentage = models.FloatField(default=0.0)
     greaterThanPercentage = models.FloatField(default=0.0)
-    group = models.CharField()
+    group = models.CharField(max_length=255)
     type_choices = (
         ('lecture','Lecture'),
         ('lab','Lab'),

@@ -15,7 +15,7 @@ const AutoClearReduxState = () => {
     useEffect(() => {
       const timer = setTimeout(() => {
         Logout();
-      }, 5 * 60 * 1000); // 60 minutes
+      }, 60 * 60 * 1000); // 60 minutes
   
       return () => clearTimeout(timer);
     }, [dispatch]);

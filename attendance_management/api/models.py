@@ -115,7 +115,7 @@ class Subjects(models.Model):
         ('Lab','Lab'),
         ('Tutorial','Tutorial'),
     )
-    SubjectType = models.CharField(choices=type_choices)
+    SubjectType = models.CharField(choices=type_choices, max_length=255)
     year = models.IntegerField()
     Subjectcode = models.CharField(max_length=255)                                             
     
@@ -125,9 +125,9 @@ class FacultyTeachingAssignment(models.Model):
     id = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     SubjectID = models.ForeignKey(Subjects, on_delete=models.CASCADE)                           
     SemesterNumber = models.IntegerField()
-    Class = models.CharField()
+    Class = models.CharField(max_length=255)
     year = models.IntegerField()
-    room = models.CharField()
+    room = models.CharField(max_length=255)
     total_lectures = models.IntegerField(default=1)
 
 
@@ -135,7 +135,7 @@ class Student(models.Model):
     EnrollmentNumber = models.BigIntegerField(primary_key=True)
     BranchID = models.ForeignKey(Branch, on_delete=models.CASCADE)
     ClassSerialNumber = models.IntegerField()
-    Group = models.CharField()
+    Group = models.CharField(max_length=255)
     StudentName = models.CharField(max_length=255)
     Batch = models.IntegerField()
     year = models.IntegerField()
@@ -161,6 +161,6 @@ class Attendance(models.Model):
     EnrollmentNumber = models.ForeignKey(Student, on_delete=models.CASCADE)
     Date = models.DateField(default= timezone.now)
     AttendanceStatus = models.CharField(max_length=255) # Present or Absent
-    room = models.CharField()
+    room = models.CharField(max_length=255)
     total_lectures = models.IntegerField(default=0)
     attended_lectures = models.IntegerField(default=0)

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import API_URL from '../ConfigUrl/Configurl';
 
 // const djangoBackendURL = 'http://127.0.0.1:8000/';
 
@@ -39,7 +40,7 @@ const Register = () => {
     console.log('Sending registration request:', userData);
 
     const res = await axios
-      .post(`http://127.0.0.1:8000/api/user/signup`, userData)
+      .post(`${API_URL}api/user/signup`, userData)
       .then((response) => {
         toast.success('Register Successfully');
         console.log('Registration successful. Response:', response.data);

@@ -11,6 +11,7 @@ import subjectData from '../subject.json';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setBranchId ,setFaculty} from '../reducers/userSlice';
+import API_URL from '../ConfigUrl/Configurl';
 
 const GetFaculty = () => {
     const userid = useSelector((state) => state.user.userid);
@@ -31,7 +32,7 @@ const GetFaculty = () => {
     },{});
     const fetchIds = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/user/getFacultyDetails/${userid}`);
+            const response = await axios.get(`${API_URL}api/user/getFacultyDetails/${userid}`);
             const data = response.data;
             setDetails(data);
             setSubjectId(data[0].SubjectID);
