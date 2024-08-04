@@ -257,6 +257,8 @@ def MarkAttendance(request , id):
         total_lectures = faculty.total_lectures
         attendance = []
         for student_data in request.data:
+            if student_data['AttendanceStatus'] not in ['present', 'absent']:
+                return Response({"message":"Mark Attendance Properly"}, status=status.HTTP_400_BAD_REQUEST)
             date = student_data.get('Date', None)
             # Set date to current date if not provided or empty
             if date is None or date == '':

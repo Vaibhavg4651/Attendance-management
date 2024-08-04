@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import { setStudents } from '../reducers/userSlice';
 const GetStudent = () => {
-  const userid = useSelector((state) => state.user.userid);
   const faculty=useSelector((state)=>state.user.Faculty);
   const location=useLocation();
   const {date}=location.state ||({date:""});
